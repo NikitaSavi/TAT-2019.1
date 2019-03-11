@@ -2,7 +2,7 @@
 
 namespace DEV_1
 {
-    class Subseq_search
+    class UniqueSymbolsSearcher
     {
         public void Search(string line)
         {

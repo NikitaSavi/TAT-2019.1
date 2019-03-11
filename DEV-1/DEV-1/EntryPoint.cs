@@ -23,15 +23,8 @@ namespace DEV_1
                 {
                     throw new FormatException();
                 }
-                string line = string.Empty;
-                foreach (string i in args)
-                {
-                    line += i + " ";
-                }
-                line = line.TrimEnd();
-                Console.WriteLine("Your line is: " + line);
-                Subseq_search subseq_search = new Subseq_search();
-                subseq_search.Search(line);
+                UniqueSymbolsSearcher subseq_search = new UniqueSymbolsSearcher();
+                subseq_search.Search(args[0]);
                 return 0;
             }
             catch (FormatException)
@@ -41,7 +34,8 @@ namespace DEV_1
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Unknown error, exit code: " + ex.Message);
+                Console.WriteLine("Unknown error");
+                Console.WriteLine(ex.Message);
                 return 2;
             }
         }
