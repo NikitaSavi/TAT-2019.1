@@ -38,26 +38,18 @@ namespace DEV_1
                 {
                     sequence.Append(inputLine[indexLast]);
                     if (inputLine[indexLast] != inputLine[indexLast - 1])
-                    {//add sequences until we either reach the end of the string or encounter two identical symbols
+                    {//add sequences to the list until we either reach the end of the string or encounter two identical symbols
                         sequenceList.Add(sequence.ToString());
                     }
-                    else break;
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 sequence.Clear();
             }
             return sequenceList;
-        }
-        /// <summary>
-        /// Print method - prints a recieved list
-        /// </summary>
-        /// <param name="sequenceList">List of strings to print</param>
-        public void Print(List<string> sequenceList)
-        {
-            foreach (string i in sequenceList)
-            {
-                Console.WriteLine(i);
-            }
         }
     }
 }
