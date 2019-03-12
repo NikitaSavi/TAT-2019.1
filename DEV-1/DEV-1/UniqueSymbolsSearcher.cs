@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-//TODO change "string" to "stringBuilder
 //TODO consider moving Console.WriteLine in Print(...) to EntryPoint
 
 namespace DEV_1
@@ -10,15 +9,15 @@ namespace DEV_1
 /// </summary>
     class UniqueSymbolsSearcher
     {
-        private string inputLine=string.Empty;
+        private StringBuilder inputLine = new StringBuilder();
         /// <summary>
-        /// Constructor, validates recieved string
+        /// Constructor, validates recieved StringBuilder
         /// </summary>
         /// <param name="recievedArgument">String recieved as an console argument</param>
         public UniqueSymbolsSearcher(string recievedArgument)
         {
             if (recievedArgument.Length < 2) throw new FormatException();
-            inputLine = recievedArgument;
+            inputLine.Append(recievedArgument);
         }
         /// <summary>
         /// Search method. Looks for necessary sequences.
@@ -26,26 +25,25 @@ namespace DEV_1
         /// <returns>sequenceList - list that contains all required sequences</returns>
         public List<string> Search()
         {
-            var sequenceList = new List<string>();  //list for sequences
-            string sequence = string.Empty;
+            List<string> sequenceList = new List<string>();  //list for sequences
+            StringBuilder sequence = new StringBuilder();
 
             for (int indexFirst = 0; indexFirst < inputLine.Length - 1; indexFirst++)
             {//pick each symbol and look for all sequences staring with it 
-                sequence += inputLine[indexFirst];
+                sequence.Append(inputLine[indexFirst]);
 
                 for (int indexLast = indexFirst + 1; indexLast < inputLine.Length; indexLast++)
                 {
-                    sequence+=inputLine[indexLast];
+                    sequence.Append(inputLine[indexLast]);
                     if (inputLine[indexLast] != inputLine[indexLast - 1])
                     {//add sequences until we either reach the end of the string or encounter two identical symbols
-                        sequenceList.Add(sequence);
+                        sequenceList.Add(sequence.ToString());
                     }
                     else break;
                 }
 
-                sequence=string.Empty;
+                sequence.Clear();
             }
-
             return sequenceList;
         }
         /// <summary>
