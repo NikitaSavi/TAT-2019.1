@@ -8,11 +8,11 @@ namespace DEV_1
     {/// <summary>
      /// The entry point to the program
      /// </summary>
-     /// <param name="args"></param>
+     /// <param name="args">Program recieves a string as an console argument</param>
      /// <returns>
      /// Exit codes:
      /// 0 - OK
-     /// 1 - no arguments recieved
+     /// 1 - issue with the recieved argument
      /// 2 - unknown error
      /// </returns>
         static int Main(string[] args)
@@ -23,13 +23,13 @@ namespace DEV_1
                 {
                     throw new FormatException();
                 }
-                UniqueSymbolsSearcher subseq_search = new UniqueSymbolsSearcher();
-                subseq_search.Search(args[0]);
+                UniqueSymbolsSearcher uniqueSymbolsSearcher = new UniqueSymbolsSearcher(args[0]);
+                uniqueSymbolsSearcher.Print(uniqueSymbolsSearcher.Search());
                 return 0;
             }
             catch (FormatException)
             {
-                Console.WriteLine("Error - no arguments recieved");
+                Console.WriteLine("Error - issue with the recieved argument\nMake sure to send a string with 2 characters at least");
                 return 1;
             }
             catch (Exception ex)
