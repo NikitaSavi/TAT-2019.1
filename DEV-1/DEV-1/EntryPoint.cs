@@ -23,6 +23,7 @@ namespace DEV_1
                 {
                     throw new FormatException();
                 }
+                Console.WriteLine("Recieved line: "+args[0]);
                 UniqueSymbolsSearcher uniqueSymbolsSearcher = new UniqueSymbolsSearcher(args[0]);
                 uniqueSymbolsSearcher.Print(uniqueSymbolsSearcher.Search());
                 return 0;
