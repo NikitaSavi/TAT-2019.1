@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-//TODO consider moving Console.WriteLine in Print(...) to EntryPoint
 
 namespace DEV_1
 {/// <summary>
@@ -16,14 +15,17 @@ namespace DEV_1
         /// <param name="recievedArgument">String recieved as an console argument</param>
         public UniqueSymbolsSearcher(string recievedArgument)
         {
-            if (recievedArgument.Length < 2) throw new FormatException();
+            if (recievedArgument.Length < 2)
+            {
+                throw new FormatException();
+            }
             inputLine.Append(recievedArgument);
         }
         /// <summary>
-        /// Search method. Looks for necessary sequences.
+        /// Search method to add necessary sequences to a list
         /// </summary>
-        /// <returns>sequenceList - list that contains all required sequences</returns>
-        public List<string> Search()
+        /// <returns>List that contains all required sequences</returns>
+        public List<string> CompileList()
         {
             List<string> sequenceList = new List<string>();  //list for sequences
             StringBuilder sequence = new StringBuilder();
@@ -53,7 +55,9 @@ namespace DEV_1
         public void Print(List<string> sequenceList)
         {
             foreach (string i in sequenceList)
+            {
                 Console.WriteLine(i);
+            }
         }
     }
 }

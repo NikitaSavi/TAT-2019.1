@@ -13,7 +13,7 @@ namespace DEV_1
      /// Exit codes:
      /// 0 - OK
      /// 1 - issue with the recieved argument
-     /// 2 - unknown error
+     /// 2 - other errors
      /// </returns>
         static int Main(string[] args)
         {
@@ -23,14 +23,21 @@ namespace DEV_1
                 {
                     throw new FormatException();
                 }
-                Console.WriteLine("Recieved line: " + args[0]);
-                UniqueSymbolsSearcher uniqueSymbolsSearcher = new UniqueSymbolsSearcher(args[0]);
-                uniqueSymbolsSearcher.Print(uniqueSymbolsSearcher.Search());
+                foreach (var argument in args)
+                {
+                    Console.WriteLine("Argument: " + argument);
+                    UniqueSymbolsSearcher uniqueSymbolsSearcher = new UniqueSymbolsSearcher(argument);
+                    foreach (var sequence in uniqueSymbolsSearcher.CompileList())
+                    {
+                        Console.WriteLine(sequence);
+                    }
+                    Console.WriteLine();
+                }
                 return 0;
             }
             catch (FormatException)
             {
-                Console.WriteLine("Error - issue with the recieved argument\nMake sure to send a string with 2 characters at least");
+                Console.WriteLine("Error - issue with the recieved argument(s)\nMake sure to send a string with at least 2 characters");
                 return 1;
             }
             catch (Exception ex)
