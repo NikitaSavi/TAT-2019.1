@@ -51,10 +51,10 @@ namespace DEV_1
         /// <summary>
         /// Print method - prints a recieved list
         /// </summary>
-        /// <param name="sequenceList"></param>
+        /// <param name="sequenceList">List of strings to print</param>
         public void Print(List<string> sequenceList)
         {
-            foreach (var i in sequenceList)
+            foreach (string i in sequenceList)
                 Console.WriteLine(i);
         }
     }

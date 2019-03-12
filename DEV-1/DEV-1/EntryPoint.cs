@@ -23,7 +23,7 @@ namespace DEV_1
                 {
                     throw new FormatException();
                 }
-                Console.WriteLine("Recieved line: "+args[0]);
+                Console.WriteLine("Recieved line: " + args[0]);
                 UniqueSymbolsSearcher uniqueSymbolsSearcher = new UniqueSymbolsSearcher(args[0]);
                 uniqueSymbolsSearcher.Print(uniqueSymbolsSearcher.Search());
                 return 0;
@@ -35,8 +35,7 @@ namespace DEV_1
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Unknown error");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Error - " + ex.Message);
                 return 2;
             }
         }
