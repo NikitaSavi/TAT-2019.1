@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DEV_2
 {/// <summary>
@@ -31,18 +27,13 @@ namespace DEV_2
                 foreach (var argument in args)
                 {
                     Transcription transcription = new Transcription(argument);
-                    Console.WriteLine(argument + " -> " + transcription.Transcribe());
+                    Console.WriteLine(argument.ToLower() + " -> " + transcription.Transcribe());
                 }
                 return 0;
             }
             catch (ArgumentException)
             {
                 Console.WriteLine("Error - No arguments recieved");
-                return 1;
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("TODO write smth here");
                 return 1;
             }
             catch (Exception error)

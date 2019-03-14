@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DEV_2
 {/// <summary>
@@ -12,6 +10,7 @@ namespace DEV_2
     {
         private StringBuilder word = new StringBuilder();
         private readonly string[] typeOfLetter = { "аоэуыи", "яёею", "бвгджзйклмнпрстфхцчшщ", "ьъ+" };
+        private byte syllableCounter; //used for checking the necessity of '+' and for letter 'о'
         /*vowels: 0 - nonioated, 1 - ioated;
         2 - consonants; (TODO additional types for cons. might be necessary)
         3 - special letters*/
@@ -21,12 +20,22 @@ namespace DEV_2
         /// <param name="recievedArgument">String recieved as an console argument</param>
         public Transcription(string recievedArgument)
         {
+            recievedArgument = recievedArgument.ToLower();
             foreach (char letter in recievedArgument)
             {
-                if (!((letter >= 'А' && letter <= 'я') || letter == 'ё' || letter == 'Ё' || letter == '+'))
-                {//TODO checks for +
-                    throw new FormatException();
+                if (!((letter >= 'а' && letter <= 'я') || letter == 'ё' || letter == '+'))
+                {
+                    throw new Exception("Only russian letters and '+' sign are allowed");
                 }
+                //check for the necessity of + being present
+                if (typeOfLetter[0].Contains(letter) || typeOfLetter[1].Contains(letter))
+                {
+                    syllableCounter++;
+                }
+            }
+            if (syllableCounter > 1 && !recievedArgument.Contains('+') && !recievedArgument.Contains('ё'))
+            {
+                throw new Exception("A '+' sign is needed after a stressed vowel");
             }
             word.Append(recievedArgument);
         }
@@ -38,22 +47,22 @@ namespace DEV_2
             {
                 switch (GetLetterType(index))
                 {
-                    case 0: //hard vowel
-                        if (word[index] == 'о' && (index == word.Length - 1 || word[index + 1] != '+'))
+                    case 0: //nonioated vowel
+                        if (word[index] == 'о' && syllableCounter > 1 && (index == word.Length - 1 || word[index + 1] != '+'))
                         {//1. The unstressed 'о' reads as 'а'
                             transcription.Append('а');
                             break;
                         }
-                        if (word[index] == 'и' && index != 0) 
+                        if (word[index] == 'и' && index != 0)
                         {//2. Soft vowels soften the previous consonant sound
                             transcription.Append('\'');
                         }
                         transcription.Append(word[index]);
                         break;
-                    case 1: //soft vowel
+                    case 1: //ioated vowel
                         if (index == 0 || GetLetterType(index - 1) <= 1 || GetLetterType(index - 1) == 3)
                         {//3. Ioated vowels at the beginning of a word, after other vowels or after "ь", "ъ" are converted into 'й'+'their hard vowel equivalent'
-                            transcription.Append('й');         
+                            transcription.Append('й');
                         }
                         else
                         {//2. Ioated vowels soften the previous consonant sound and are converted to their hard vowel equivalent
