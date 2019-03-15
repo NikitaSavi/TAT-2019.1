@@ -4,59 +4,41 @@ using System.Linq;
 using System.Text;
 
 namespace DEV_2
-{
-
+{/// <summary>
+/// Main operating class. Handles transcription of words
+/// </summary>
     class Transcription
     {
-        private readonly StringBuilder word = new StringBuilder();
-        private StringBuilder transcription = new StringBuilder();
-        private readonly byte syllableCounter; //used for checking the necessity of '+' and for letter 'о'
-        List<Letter> letters;
+        private readonly StringBuilder enteredWord = new StringBuilder();
+        private readonly StringBuilder transcription = new StringBuilder(); //stores final transcription as a string
+        private List<Letter> listOfLetters; //stores all letter features
 
-        public Transcription(string receivedArgument)
+        public Transcription(string enteredWord)
         {
-            char[] vowels = {'а', 'о', 'у', 'ы', 'э', 'я', 'е', 'ё', 'ю', 'и'};
-            receivedArgument = receivedArgument.ToLower();
-            foreach (var letter in receivedArgument)
-            {
-                if (!((letter >= 'а' && letter <= 'я') || letter == 'ё' || letter == '+'))
-                {
-                    throw new Exception("Only russian letters and '+' sign are allowed");
-                }
-
-                if (vowels.Contains(letter) || vowels.Contains(letter))
-                {
-                    //check for the necessity of + being present
-                    syllableCounter++;
-                }
-            }
-
-            if (syllableCounter > 1 && !receivedArgument.Contains('+') && !receivedArgument.Contains('ё'))
-            {
-                throw new Exception("A '+' sign is needed after a stressed vowel");
-            }
-
-            word.Append(receivedArgument);
+            this.enteredWord.Append(enteredWord);
         }
-
+        /// <summary>
+        /// Core method of the class
+        /// </summary>
+        /// <returns>Returns transcription as a string</returns>
         public StringBuilder Transcribe()
         {
-            letters = new List<Letter> { };
-            for (int i = 0; i < word.Length; i++)
+            listOfLetters = new List<Letter> { };
+            for (int i = 0; i < enteredWord.Length; i++)
             {
-                letters.Add(new Letter(word[i]));
+                listOfLetters.Add(new Letter(enteredWord[i]));
             }
 
-            for (int i = 1; i < letters.Count; i++)
-            {
+            for (int i = 1; i < listOfLetters.Count; i++)
+            {//going by each letters, checking if changes are necessary
                 CheckForUnstressedO(i);
                 WorkWithIoatedVowels(i);
                 CheckVoiceLevel(i);
             }
 
-            foreach (var letter in letters)
+            foreach (var letter in listOfLetters)
             {
-                letter.Update();
+                letter.Update(); //updates all changes that were made
                 transcription.Append(letter.sound);
             }
 
@@ -64,44 +46,44 @@ namespace DEV_2
         }
 
         private void CheckForUnstressedO(int i)
-        {
-            if (word[i] == '+')
+        {//if 'о' is unstressed, it's pronounced as 'а'. + sign after a vowel shows the stress
+            if (enteredWord[i] == '+')
             {
-                letters[i - 1].VowelStruct.isStressed = true;
+                listOfLetters[i - 1].VowelStruct.isStressed = true;
             }
         }
 
         private void WorkWithIoatedVowels(int i)
-        {
-            if (letters[i].VowelStruct.isIoated)
-                if (letters[i - 1].isConsonant)
+        {//see if adding 'й' sound is necessary
+            if (listOfLetters[i].VowelStruct.isIoated)
+                if (listOfLetters[i - 1].isConsonant)
                 {
-                    letters[i].VowelStruct.addJSound = false;
+                    listOfLetters[i].VowelStruct.addJSound = false;
                 }
-
-            if (letters[i].sound == "и" && letters[i - 1].isConsonant)
+            //additional check for soft consonant before 'и' TODO add soft/hard as a cons.feature maybe?
+            if (listOfLetters[i].sound == "и" && listOfLetters[i - 1].isConsonant)
             {
-                letters[i].VowelStruct.sound = "'и";
+                listOfLetters[i].VowelStruct.sound = "'и";
             }
         }
 
         private void CheckVoiceLevel(int i)
         {
-            if (letters[i].isConsonant && letters[i].ConsonantStruct.haveVoicePair)
-            {
-                if ((letters[i].ConsonantStruct.isVoiced &&
-                     (i == letters.Count - 1 ||
-                      (letters[i + 1].isConsonant && !letters[i + 1].ConsonantStruct.isVoiced))))
+            if (listOfLetters[i].isConsonant && listOfLetters[i].ConsonantStruct.haveVoicePair)
+            {//voiced sounds become unvoiced after unvoiced sounds or at the word's end
+                if ((listOfLetters[i].ConsonantStruct.isVoiced &&
+                     (i == listOfLetters.Count - 1 ||
+                      (listOfLetters[i + 1].isConsonant && !listOfLetters[i + 1].ConsonantStruct.isVoiced))))
                 {
-                    letters[i].ConsonantStruct.PhonationChanged = true;
+                    listOfLetters[i].ConsonantStruct.PhonationChanged = true;
                 }
 
-                if (i < letters.Count - 1)
-                {
-                    if (!letters[i - 1].ConsonantStruct.isVoiced && letters[i].ConsonantStruct.isVoiced &&
-                        (letters[i + 1].ConsonantStruct.isVoiced || letters[i + 1].isVowel))
+                if (i < listOfLetters.Count - 1)
+                {//unvoiced sounds become voiced before double voiced sounds
+                    if (!listOfLetters[i - 1].ConsonantStruct.isVoiced && listOfLetters[i].ConsonantStruct.isVoiced &&
+                        (listOfLetters[i + 1].ConsonantStruct.isVoiced || listOfLetters[i + 1].isVowel))
                     {
-                        letters[i - 1].ConsonantStruct.PhonationChanged = true;
+                        listOfLetters[i - 1].ConsonantStruct.PhonationChanged = true;
                     }
                 }
             }

@@ -2,14 +2,13 @@
 
 namespace DEV_2
 {/// <summary>
-/// DEV-2 Task: Transcription of the receives console argument
+/// DEV-2 Task: Transcription of the received console argument
 /// </summary>
     class EntryPoint
     {/// <summary>
      /// The entry point to the program
      /// </summary>
-     /// <param name="args">Program receives a string as an console argument
-     /// String must contain a '+' sign to show the stressed vowel, unless there is only one syllable, or 'ё' is present</param>
+     /// <param name="args">Program receives a string as an console argument</param>
      /// <returns>
      /// Exit codes:
      /// 0 - OK

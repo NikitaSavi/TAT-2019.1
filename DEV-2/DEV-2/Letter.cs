@@ -10,7 +10,10 @@ namespace DEV_2
     {
         public string sound;
         public bool isStressed, isIoated, addJSound;
-
+        /// <summary>
+        /// Fills the fields with default characteristics 
+        /// </summary>
+        /// <param name="letter">Letter from the received word</param>
         public Vowel(char letter)
         {
             isStressed = letter == 'ё';
@@ -19,7 +22,7 @@ namespace DEV_2
             sound = isIoated ? Letter.vowelIonationEquivalents[letter].ToString() : letter.ToString();
         }
         public void Update()
-        {
+        {//updates with necessary changes
             if (sound == "о" && !isStressed)
             {
                 sound = "а";
@@ -35,6 +38,10 @@ namespace DEV_2
     {
         public string sound;
         public bool haveVoicePair, isVoiced, PhonationChanged;
+        /// <summary>
+        /// Fills the fields with default characteristics 
+        /// </summary>
+        /// <param name="letter">Letter from the received word</param>
         public Consonant(char letter)
         {
             sound=letter.ToString();
@@ -49,7 +56,7 @@ namespace DEV_2
         }
 
         public void Update()
-        {
+        {//updates with necessary changes
             if (PhonationChanged)
             {
                 char temp = sound.ToCharArray()[0];
@@ -63,15 +70,21 @@ namespace DEV_2
     struct Special
     {
         public string sound;
+        /// <summary>
+        /// Fills the fields with default characteristics 
+        /// </summary>
+        /// <param name="letter">Letter from the received word</param>
         public Special(char letter)
         {
             sound = letter == 'ь' ? "'" : string.Empty;
         }
     }
-
+    /// <summary>
+    /// Additional class for storing the features of the letters
+    /// </summary>
     class Letter
     {
-        public string sound;
+        public string sound; //for quick access when displaying transcription
         public Vowel VowelStruct;
         public Consonant ConsonantStruct;
         public Special SpecialStruct;
@@ -84,7 +97,6 @@ namespace DEV_2
             {'б', 'в', 'г', 'д', 'й', 'ж', 'з', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ'};
 
         public static readonly char[] alwaysVoiced = {'й', 'л', 'м', 'н', 'р'};
-
         static char[] special = {'ь', 'ъ', '+'};
 
         internal static readonly Dictionary<char, char> vowelIonationEquivalents = new Dictionary<char, char>
@@ -104,7 +116,10 @@ namespace DEV_2
             ['ж'] = 'ш',
             ['з'] = 'с'
         };
-
+        /// <summary>
+        /// Constructor: checks the type of the letter
+        /// </summary>
+        /// <param name="letter">Letter from the received word</param>
         public Letter(char letter)
         {
             if (vowels.Contains(letter))
@@ -126,7 +141,7 @@ namespace DEV_2
             }
         }
         public void Update()
-        {
+        {//calls appropriate update functions
             if (isVowel)
             {
                 VowelStruct.Update();
