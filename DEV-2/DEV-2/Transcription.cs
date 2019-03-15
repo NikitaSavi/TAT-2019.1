@@ -1,95 +1,159 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace DEV_2
 {/// <summary>
-/// Class that transcribes the recieved word
+/// Class that transcribes the received word
 /// </summary>
     class Transcription
     {
-        private StringBuilder word = new StringBuilder();
-        private readonly string[] typeOfLetter = { "аоэуыи", "яёею", "бвгджзйклмнпрстфхцчшщ", "ьъ+" };
-        private byte syllableCounter; //used for checking the necessity of '+' and for letter 'о'
-        /*vowels: 0 - nonioated, 1 - ioated;
-        2 - consonants; (TODO additional types for cons. might be necessary)
-        3 - special letters*/
-        /// <summary>
-        /// Constructor, validates recieved StringBuilder
-        /// </summary>
-        /// <param name="recievedArgument">String recieved as an console argument</param>
-        public Transcription(string recievedArgument)
+        private readonly StringBuilder word = new StringBuilder();
+        private StringBuilder transcription = new StringBuilder();
+        private readonly char[] vowels = { 'а', 'о', 'у', 'ы', 'э', 'я', 'е', 'ё', 'ю', 'и' };
+        private readonly char[] consonants = { 'б', 'в', 'г', 'д', 'й', 'ж', 'з', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ' };
+        private readonly byte syllableCounter; //used for checking the necessity of '+' and for letter 'о'
+
+        private readonly Dictionary<char, char> vowelIonationEquivalents = new Dictionary<char, char>
         {
-            recievedArgument = recievedArgument.ToLower();
-            foreach (char letter in recievedArgument)
+            ['е'] = 'э',
+            ['ё'] = 'о',
+            ['ю'] = 'у',
+            ['я'] = 'а'
+        };
+        private readonly Dictionary<char, char> consonantPhonationEquivalents = new Dictionary<char, char>
+        {
+            ['б'] = 'п',
+            ['в'] = 'ф',
+            ['г'] = 'к',
+            ['д'] = 'т',
+            ['ж'] = 'ш',
+            ['з'] = 'с'
+        };
+        /// <summary>
+        /// Constructor, validates received StringBuilder
+        /// </summary>
+        /// <param name="receivedArgument">String received as an console argument</param>
+        public Transcription(string receivedArgument)
+        {
+            receivedArgument = receivedArgument.ToLower();
+            foreach (char letter in receivedArgument)
             {
                 if (!((letter >= 'а' && letter <= 'я') || letter == 'ё' || letter == '+'))
                 {
                     throw new Exception("Only russian letters and '+' sign are allowed");
                 }
                 //check for the necessity of + being present
-                if (typeOfLetter[0].Contains(letter) || typeOfLetter[1].Contains(letter))
+                if (vowels.Contains(letter) || vowels.Contains(letter))
                 {
                     syllableCounter++;
                 }
             }
-            if (syllableCounter > 1 && !recievedArgument.Contains('+') && !recievedArgument.Contains('ё'))
+            if (syllableCounter > 1 && !receivedArgument.Contains('+') && !receivedArgument.Contains('ё'))
             {
                 throw new Exception("A '+' sign is needed after a stressed vowel");
             }
-            word.Append(recievedArgument);
+            word.Append(receivedArgument);
         }
 
         public StringBuilder Transcribe()
         {
-            StringBuilder transcription = new StringBuilder();
-            for (int index = 0; index < word.Length; index++)
+            for (var index = 0; index < word.Length; index++)
             {
                 switch (GetLetterType(index))
                 {
-                    case 0: //nonioated vowel
-                        if (word[index] == 'о' && syllableCounter > 1 && (index == word.Length - 1 || word[index + 1] != '+'))
-                        {//1. The unstressed 'о' reads as 'а'
-                            transcription.Append('а');
-                            break;
+                    case 0:
+                        if (vowelIonationEquivalents.ContainsKey(word[index]))
+                        {
+                            transcription.Append(CheckVowelIonation(index));
                         }
-                        if (word[index] == 'и' && index != 0)
-                        {//2. Soft vowels soften the previous consonant sound
-                            transcription.Append('\'');
-                        }
-                        transcription.Append(word[index]);
-                        break;
-                    case 1: //ioated vowel
-                        if (index == 0 || GetLetterType(index - 1) <= 1 || GetLetterType(index - 1) == 3)
-                        {//3. Ioated vowels at the beginning of a word, after other vowels or after "ь", "ъ" are converted into 'й'+'their hard vowel equivalent'
-                            transcription.Append('й');
+                        else if (word[index] == 'о')
+                        {
+                            transcription.Append(Check_O_ForStress(index));
                         }
                         else
-                        {//2. Ioated vowels soften the previous consonant sound and are converted to their hard vowel equivalent
-                            transcription.Append('\'');
+                        {
+                            transcription.Append(word[index]);
                         }
-                        transcription.Append(typeOfLetter[0][typeOfLetter[1].IndexOf(word[index])]);
+
                         break;
-                    case 2: //consonant 
-                        transcription.Append(word[index]);
+                    case 1:
+                        if (consonantPhonationEquivalents.ContainsKey(word[index]) || consonantPhonationEquivalents.ContainsValue(word[index]))
+                        {
+                            transcription.Append(CheckConsonantPhonation(index));
+                        }
+                        else
+                        {
+                            transcription.Append(word[index]);
+                        }
+
                         break;
-                    case 3: //special
+                    case 2:
+                        if (word[index] == 'ь')
+                        {
+                            transcription.Append('\''); 
+                        }
+
                         break;
                 }
             }
             return transcription;
         }
-
-        public int GetLetterType(int index)
+        /// <summary>
+        /// Returns corresponding index for the type of the letter
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>0 - vowel, 1 - consonant, 3 - other symbols</returns>
+        private int GetLetterType(int index)
         {
-            for (int i = 0; i < typeOfLetter.Length; i++)
+            return vowels.Contains(word[index]) ? 0 : (consonants.Contains(word[index]) ? 1 : 2);
+        }
+
+        private char Check_O_ForStress(int index)
+        {
+            if (syllableCounter > 1 && word[index] == 'о' && (index == word.Length - 1 || word[index + 1] != '+'))
             {
-                if (typeOfLetter[i].Contains(word[index]))
-                {
-                    return i;
-                }
+                return 'а';
             }
-            return 3;//TODO this is here to fix "not all code paths return a value" error, need a better fix
+            return 'о';
+        }
+
+        private char CheckVowelIonation(int index)
+        {
+            if (index != 0 && consonants.Contains(word[index - 1]))
+            {
+                transcription.Append("\'");
+            }
+            else
+            {
+                transcription.Append("й");
+            }
+            return vowelIonationEquivalents[word[index]];
+        }
+
+        private char CheckConsonantPhonation(int index)
+        {
+            switch (consonantPhonationEquivalents.ContainsKey(word[index]))
+            {
+                case true:
+                    if ((index == word.Length - 1) ||
+                        (index != 0) &&
+                        (consonantPhonationEquivalents.ContainsValue(word[index - 1]) ||
+                         vowels.Contains(word[index - 1]) || word[index - 1] == '+'))
+                    {
+                        return consonantPhonationEquivalents[word[index]];
+                    }
+
+                    break;
+                case false:
+                    if (index != word.Length - 1 && consonantPhonationEquivalents.ContainsKey(word[index + 1]))
+                    {
+                        return consonantPhonationEquivalents.First(x => x.Value == word[index]).Key;
+                    }
+                    break;
+            }
+            return word[index];
         }
     }
 }
