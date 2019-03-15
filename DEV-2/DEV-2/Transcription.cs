@@ -4,156 +4,107 @@ using System.Linq;
 using System.Text;
 
 namespace DEV_2
-{/// <summary>
-/// Class that transcribes the received word
-/// </summary>
+{
+
     class Transcription
     {
         private readonly StringBuilder word = new StringBuilder();
         private StringBuilder transcription = new StringBuilder();
-        private readonly char[] vowels = { 'а', 'о', 'у', 'ы', 'э', 'я', 'е', 'ё', 'ю', 'и' };
-        private readonly char[] consonants = { 'б', 'в', 'г', 'д', 'й', 'ж', 'з', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ' };
         private readonly byte syllableCounter; //used for checking the necessity of '+' and for letter 'о'
+        List<Letter> letters;
 
-        private readonly Dictionary<char, char> vowelIonationEquivalents = new Dictionary<char, char>
-        {
-            ['е'] = 'э',
-            ['ё'] = 'о',
-            ['ю'] = 'у',
-            ['я'] = 'а'
-        };
-        private readonly Dictionary<char, char> consonantPhonationEquivalents = new Dictionary<char, char>
-        {
-            ['б'] = 'п',
-            ['в'] = 'ф',
-            ['г'] = 'к',
-            ['д'] = 'т',
-            ['ж'] = 'ш',
-            ['з'] = 'с'
-        };
-        /// <summary>
-        /// Constructor, validates received StringBuilder
-        /// </summary>
-        /// <param name="receivedArgument">String received as an console argument</param>
         public Transcription(string receivedArgument)
         {
+            char[] vowels = {'а', 'о', 'у', 'ы', 'э', 'я', 'е', 'ё', 'ю', 'и'};
             receivedArgument = receivedArgument.ToLower();
-            foreach (char letter in receivedArgument)
+            foreach (var letter in receivedArgument)
             {
                 if (!((letter >= 'а' && letter <= 'я') || letter == 'ё' || letter == '+'))
                 {
                     throw new Exception("Only russian letters and '+' sign are allowed");
                 }
-                //check for the necessity of + being present
+
                 if (vowels.Contains(letter) || vowels.Contains(letter))
                 {
+                    //check for the necessity of + being present
                     syllableCounter++;
                 }
             }
+
             if (syllableCounter > 1 && !receivedArgument.Contains('+') && !receivedArgument.Contains('ё'))
             {
                 throw new Exception("A '+' sign is needed after a stressed vowel");
             }
+
             word.Append(receivedArgument);
         }
 
         public StringBuilder Transcribe()
         {
-            for (var index = 0; index < word.Length; index++)
+            letters = new List<Letter> { };
+            for (int i = 0; i < word.Length; i++)
             {
-                switch (GetLetterType(index))
-                {
-                    case 0:
-                        if (vowelIonationEquivalents.ContainsKey(word[index]))
-                        {
-                            transcription.Append(CheckVowelIonation(index));
-                        }
-                        else if (word[index] == 'о')
-                        {
-                            transcription.Append(Check_O_ForStress(index));
-                        }
-                        else
-                        {
-                            transcription.Append(word[index]);
-                        }
-
-                        break;
-                    case 1:
-                        if (consonantPhonationEquivalents.ContainsKey(word[index]) || consonantPhonationEquivalents.ContainsValue(word[index]))
-                        {
-                            transcription.Append(CheckConsonantPhonation(index));
-                        }
-                        else
-                        {
-                            transcription.Append(word[index]);
-                        }
-
-                        break;
-                    case 2:
-                        if (word[index] == 'ь')
-                        {
-                            transcription.Append('\''); 
-                        }
-
-                        break;
-                }
+                letters.Add(new Letter(word[i]));
             }
+
+            for (int i = 1; i < letters.Count; i++)
+            {
+                CheckForUnstressedO(i);
+                WorkWithIoatedVowels(i);
+                CheckVoiceLevel(i);
+            }
+
+            foreach (var letter in letters)
+            {
+                letter.Update();
+                transcription.Append(letter.sound);
+            }
+
             return transcription;
         }
-        /// <summary>
-        /// Returns corresponding index for the type of the letter
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns>0 - vowel, 1 - consonant, 3 - other symbols</returns>
-        private int GetLetterType(int index)
+
+        private void CheckForUnstressedO(int i)
         {
-            return vowels.Contains(word[index]) ? 0 : (consonants.Contains(word[index]) ? 1 : 2);
+            if (word[i] == '+')
+            {
+                letters[i - 1].VowelStruct.isStressed = true;
+            }
         }
 
-        private char Check_O_ForStress(int index)
+        private void WorkWithIoatedVowels(int i)
         {
-            if (syllableCounter > 1 && word[index] == 'о' && (index == word.Length - 1 || word[index + 1] != '+'))
+            if (letters[i].VowelStruct.isIoated)
+                if (letters[i - 1].isConsonant)
+                {
+                    letters[i].VowelStruct.addJSound = false;
+                }
+
+            if (letters[i].sound == "и" && letters[i - 1].isConsonant)
             {
-                return 'а';
+                letters[i].VowelStruct.sound = "'и";
             }
-            return 'о';
         }
 
-        private char CheckVowelIonation(int index)
+        private void CheckVoiceLevel(int i)
         {
-            if (index != 0 && consonants.Contains(word[index - 1]))
+            if (letters[i].isConsonant && letters[i].ConsonantStruct.haveVoicePair)
             {
-                transcription.Append("\'");
-            }
-            else
-            {
-                transcription.Append("й");
-            }
-            return vowelIonationEquivalents[word[index]];
-        }
+                if ((letters[i].ConsonantStruct.isVoiced &&
+                     (i == letters.Count - 1 ||
+                      (letters[i + 1].isConsonant && !letters[i + 1].ConsonantStruct.isVoiced))))
+                {
+                    letters[i].ConsonantStruct.PhonationChanged = true;
+                }
 
-        private char CheckConsonantPhonation(int index)
-        {
-            switch (consonantPhonationEquivalents.ContainsKey(word[index]))
-            {
-                case true:
-                    if ((index == word.Length - 1) ||
-                        (index != 0) &&
-                        (consonantPhonationEquivalents.ContainsValue(word[index - 1]) ||
-                         vowels.Contains(word[index - 1]) || word[index - 1] == '+'))
+                if (i < letters.Count - 1)
+                {
+                    if (!letters[i - 1].ConsonantStruct.isVoiced && letters[i].ConsonantStruct.isVoiced &&
+                        (letters[i + 1].ConsonantStruct.isVoiced || letters[i + 1].isVowel))
                     {
-                        return consonantPhonationEquivalents[word[index]];
+                        letters[i - 1].ConsonantStruct.PhonationChanged = true;
                     }
-
-                    break;
-                case false:
-                    if (index != word.Length - 1 && consonantPhonationEquivalents.ContainsKey(word[index + 1]))
-                    {
-                        return consonantPhonationEquivalents.First(x => x.Value == word[index]).Key;
-                    }
-                    break;
+                }
             }
-            return word[index];
         }
     }
 }
