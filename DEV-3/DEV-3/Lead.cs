@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DEV_3
+﻿namespace DEV_3
 {
-    class Lead
+    class Lead : Senior
     {
+        public Lead()
+        {
+            Salary = 1600;
+            Productivity = 90;
+        }
+
     }
 }

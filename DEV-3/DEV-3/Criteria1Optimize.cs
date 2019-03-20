@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DEV_3
 {
-    class Optimisation
+    class Criteria1Optimize : OptimalTeamCompiler
     {
     }
 }
