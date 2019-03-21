@@ -56,8 +56,6 @@ namespace DEV_3
         /// <param name="listOfFoundEmployees">List that contains the employees</param>
         public static void ShowNumberOfFoundEmployees(List<Employee> listOfFoundEmployees)
         {
-            if (listOfFoundEmployees.Count == 0)
-                throw new Exception("You don't have enough money to hire even the cheapest employee.");
             var counter = new int[4];
             foreach (var employee in listOfFoundEmployees)
             {
@@ -78,7 +76,7 @@ namespace DEV_3
                 }
             }
 
-            Console.WriteLine("\nThe number of employees you'll need:");
+            Console.WriteLine("The number of employees you'll need:");
             Console.WriteLine(
                 $"Junior: {counter[0]}\nMiddle: {counter[1]}\nSenior: {counter[2]}\nLead:   {counter[3]}");
         }
