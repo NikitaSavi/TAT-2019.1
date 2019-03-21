@@ -9,7 +9,8 @@ namespace DEV_3
     /// Criterion 3: Minimum number of staff higher than Junior for required productivity
     /// </summary>
     class Criterion3Optimize : OptimalTeamCompiler
-    {//TODO redetermine what Crit3 is actually supposed to do
+    {
+        //TODO redetermine what Crit3 is actually supposed to do
         private int RequiredProductivity { get; set; }
 
         public Criterion3Optimize(int requiredProductivity)
@@ -17,6 +18,11 @@ namespace DEV_3
             RequiredProductivity = requiredProductivity;
         }
 
+        /// <summary>
+        /// Sorts employees by their productivity, those with higher productivity go to the final list
+        /// </summary>
+        /// <param name="listOfEmployees">List of all employees</param>
+        /// <returns>Compiled list of employees</returns>
         public override List<Employee> Choose(List<Employee> listOfEmployees)
         {
             var sortedListOfEmployees =
@@ -25,7 +31,7 @@ namespace DEV_3
 
             foreach (var employee in sortedListOfEmployees)
             {
-                if (RequiredProductivity > employee.Productivity && employee.GetType()!=typeof(Junior))
+                if (RequiredProductivity > employee.Productivity && employee.GetType() != typeof(Junior))
                 {
                     listOfFoundEmployees.Add(employee);
                     RequiredProductivity -= employee.Productivity;

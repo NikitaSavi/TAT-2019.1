@@ -17,6 +17,11 @@ namespace DEV_3
             RequiredProductivity = requiredProductivity;
         }
 
+        /// <summary>
+        /// Sorts employees by their valuation (product./salary), those with higher valuation go to the final list
+        /// </summary>
+        /// <param name="listOfEmployees">List of all employees</param>
+        /// <returns>Compiled list of employees</returns>
         public override List<Employee> Choose(List<Employee> listOfEmployees)
         {
             var sortedListOfEmployees =
