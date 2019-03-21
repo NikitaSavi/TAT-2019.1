@@ -5,9 +5,8 @@
     /// </summary>
     abstract class Employee
     {
-        ///
-        public int Salary { get; set; }
-
-        public int Productivity { get; set; }
+        public int Salary { get; protected set; }
+        public int Productivity { get; protected set; }
+        public double Valuation { get; protected set; }
     }
 }

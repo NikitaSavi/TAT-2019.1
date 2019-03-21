@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DEV_3
 {
+    /// <inheritdoc />
     /// <summary>
     /// Criterion 1: Maximum productivity within the sum
     /// </summary>
@@ -17,37 +19,23 @@ namespace DEV_3
 
         public override List<Employee> Choose(List<Employee> listOfEmployees)
         {
-            //TODO consider using linear/integer programming
-            List<Employee> listOfFoundEmployees = new List<Employee>();
-            foreach (var employee in listOfEmployees)
+            var sortedListOfEmployees =
+                listOfEmployees.OrderByDescending(i => i.Valuation).ToList(); //list sorted by employees valuation
+            var listOfFoundEmployees = new List<Employee>();
+
+            foreach (var employee in sortedListOfEmployees)
             {
-                if (AvailableMoney < employee.Salary) continue;
-                switch (employee)
+                if (AvailableMoney > employee.Salary)
                 {
-                    case Lead _:
-                        listOfFoundEmployees.Add(employee);
-                        AvailableMoney -= employee.Salary;
-                        continue;
-                    case Senior _:
-                        listOfFoundEmployees.Add(employee);
-                        AvailableMoney -= employee.Salary;
-                        continue;
-                    case Middle _:
-                        listOfFoundEmployees.Add(employee);
-                        AvailableMoney -= employee.Salary;
-                        continue;
-                    case Junior _:
-                        listOfFoundEmployees.Add(employee);
-                        AvailableMoney -= employee.Salary;
-                        break;
+                    listOfFoundEmployees.Add(employee);
+                    AvailableMoney -= employee.Salary;
                 }
             }
 
-            if (listOfFoundEmployees.Count == listOfEmployees.Count &&
-                AvailableMoney >= listOfFoundEmployees[listOfFoundEmployees.Count - 1].Salary)
+            if (listOfFoundEmployees.Count == listOfEmployees.Count)
             {
                 Console.WriteLine(
-                    "Warning - company doesn't have any more employees other than those found. Full optimization that meets your requirements is not possible.");
+                    "Warning - all employees of the company are used");
             }
 
             if (listOfFoundEmployees.Count == 0)

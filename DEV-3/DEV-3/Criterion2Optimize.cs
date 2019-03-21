@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DEV_3
 {
+    /// <inheritdoc />
     /// <summary>
     /// Criterion 2: Minimum cost for required productivity
     /// </summary>
@@ -17,43 +19,28 @@ namespace DEV_3
 
         public override List<Employee> Choose(List<Employee> listOfEmployees)
         {
-            //TODO consider using linear/integer programming
+            var sortedListOfEmployees =
+                listOfEmployees.OrderByDescending(i => i.Valuation).ToList(); //list sorted by employees valuation
             var listOfFoundEmployees = new List<Employee>();
-            foreach (var employee in listOfEmployees)
+
+            foreach (var employee in sortedListOfEmployees)
             {
-                if (RequiredProductivity < listOfEmployees[listOfEmployees.Count - 1].Productivity) break;
-                if (RequiredProductivity < employee.Productivity) continue;
-                switch (employee)
+                if (RequiredProductivity > employee.Productivity)
                 {
-                    case Lead _:
-                        listOfFoundEmployees.Add(employee);
-                        RequiredProductivity -= employee.Productivity;
-                        continue;
-                    case Senior _:
-                        listOfFoundEmployees.Add(employee);
-                        RequiredProductivity -= employee.Productivity;
-                        continue;
-                    case Middle _:
-                        listOfFoundEmployees.Add(employee);
-                        RequiredProductivity -= employee.Productivity;
-                        continue;
-                    case Junior _:
-                        listOfFoundEmployees.Add(employee);
-                        RequiredProductivity -= employee.Productivity;
-                        break;
+                    listOfFoundEmployees.Add(employee);
+                    RequiredProductivity -= employee.Productivity;
                 }
             }
 
-            if (listOfFoundEmployees.Count == listOfEmployees.Count &&
-                RequiredProductivity >= listOfFoundEmployees[listOfFoundEmployees.Count - 1].Productivity)
+            if (listOfFoundEmployees.Count == listOfEmployees.Count)
             {
                 Console.WriteLine(
-                    "Warning - company doesn't have any more employees other than those found. Full optimization that meets your requirements is not possible.");
+                    "Warning - all employees of the company are used");
             }
 
             if (listOfFoundEmployees.Count == 0)
             {
-                throw new Exception("The productivity you require is lower than the one of our cheapest worker.");
+                throw new Exception("You don't have enough money to hire even the cheapest employee.");
             }
 
             return listOfFoundEmployees;

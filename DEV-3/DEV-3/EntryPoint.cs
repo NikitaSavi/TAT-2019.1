@@ -10,7 +10,11 @@ namespace DEV_3
         /// <summary>
         /// Entry point to the program
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">
+        /// args[0] - criteria
+        /// args[1] - money for crit.1
+        /// args[2] - productivity for crit.2 and 3
+        /// </param>
         /// <returns>
         /// 0 - OK
         /// 1 - error
@@ -19,13 +23,7 @@ namespace DEV_3
         {
             try
             {
-                //TODO Make console lines prettier, wordier, etc
-                Console.WriteLine(
-                    "Enter a criteria number, which you'd like us to use for optimizing your team:");
-                Console.Write(
-                    "1) Maximum productivity within the sum\n2) Minimum cost for required productivity.\n3) Minimum number of staff higher than Junior for required productivity.");
-                Console.Write("Your input: ");
-                int.TryParse(Console.ReadLine(), out var criterion);
+                int.TryParse(args[0], out var criterion);
 
                 var company = new Company();
                 OptimalTeamCompiler optimalTeamCompiler;
@@ -34,18 +32,17 @@ namespace DEV_3
                 {
                     //Call for appropriate method, depending on the criterion entered
                     case 1:
-                        Console.WriteLine("Enter the amount of money limit:");
-                        int.TryParse(Console.ReadLine(), out var availableMoney);
+                        int.TryParse(args[1], out var availableMoney);
                         optimalTeamCompiler = new Criterion1Optimize(availableMoney);
                         break;
                     case 2:
                         Console.WriteLine("Enter the required productivity:");
-                        int.TryParse(Console.ReadLine(), out var requiredProductivity);
+                        int.TryParse(args[2], out var requiredProductivity);
                         optimalTeamCompiler = new Criterion2Optimize(requiredProductivity);
                         break;
                     case 3:
                         Console.WriteLine("Enter the required productivity:");
-                        int.TryParse(Console.ReadLine(), out requiredProductivity);
+                        int.TryParse(args[2], out requiredProductivity);
                         optimalTeamCompiler = new Criterion3Optimize(requiredProductivity);
                         break;
                     default:
