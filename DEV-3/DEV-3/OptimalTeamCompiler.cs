@@ -1,11 +1,9 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace DEV_3
 {
     abstract class OptimalTeamCompiler
     {
-        public virtual void Choose()
-        {
-        }
+        public abstract List<Employee> Choose(List<Employee> listOfEmployees);
     }
 }
