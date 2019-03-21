@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DEV_3
 {
+    /// <summary>
+    /// Criterion 2: Minimum cost for required productivity
+    /// </summary>
     class Criterion2Optimize : OptimalTeamCompiler
     {
         private int RequiredProductivity { get; set; }
@@ -16,7 +16,8 @@ namespace DEV_3
         }
 
         public override List<Employee> Choose(List<Employee> listOfEmployees)
-        {//TODO consider using linear/integer programming
+        {
+            //TODO consider using linear/integer programming
             var listOfFoundEmployees = new List<Employee>();
             foreach (var employee in listOfEmployees)
             {
@@ -42,16 +43,19 @@ namespace DEV_3
                         break;
                 }
             }
+
             if (listOfFoundEmployees.Count == listOfEmployees.Count &&
                 RequiredProductivity >= listOfFoundEmployees[listOfFoundEmployees.Count - 1].Productivity)
             {
-                Console.WriteLine("Warning - company doesn't have any more employees other than those found. Full optimization that meets your requirements is not possible.");
+                Console.WriteLine(
+                    "Warning - company doesn't have any more employees other than those found. Full optimization that meets your requirements is not possible.");
             }
 
             if (listOfFoundEmployees.Count == 0)
             {
                 throw new Exception("The productivity you require is lower than the one of our cheapest worker.");
             }
+
             return listOfFoundEmployees;
         }
     }

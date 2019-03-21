@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 
 namespace DEV_3
-{
+{/// <summary>
+/// Class for keeping info about the employees and for calling methods for optimization
+/// </summary>
     class Company
     {
         private List<Employee> ListOfEmployees { get; } = new List<Employee>();
@@ -10,7 +12,9 @@ namespace DEV_3
         private const int NumOfMids = 30;
         private const int NumOfSeniors = 10;
         private const int NumOfLeads = 3;
-
+        /// <summary>
+        /// Constructor fills the list of all employees
+        /// </summary>
         public Company()
         {
             for (int i = 0; i < NumOfLeads; i++)
@@ -33,12 +37,19 @@ namespace DEV_3
                 ListOfEmployees.Add(new Junior());
             }
         }
-
+        /// <summary>
+        /// Calls for creation of the optimal list
+        /// </summary>
+        /// <param name="optimalTeamCompiler">Optimizer class, initialized with the necessary criterion</param>
+        /// <returns>List of found according to the criteria employees</returns>
         public List<Employee> GetEmployees(OptimalTeamCompiler optimalTeamCompiler)
         {
             return optimalTeamCompiler.Choose(ListOfEmployees);
         }
-
+        /// <summary>
+        /// Shows the number of employees in the provided list
+        /// </summary>
+        /// <param name="listOfFoundEmployees">List that contains the employees</param>
         public void ShowNumberOfFoundEmployees(List<Employee> listOfFoundEmployees)
         {
             if (listOfFoundEmployees.Count==0) throw new Exception("You don't have enough money to hire even the cheapest employee.");

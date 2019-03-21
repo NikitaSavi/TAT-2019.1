@@ -1,5 +1,8 @@
 ﻿namespace DEV_3
 {
+    /// <summary>
+    /// Class for Middle type employee
+    /// </summary>
     class Middle : Junior
     {
         public Middle()
