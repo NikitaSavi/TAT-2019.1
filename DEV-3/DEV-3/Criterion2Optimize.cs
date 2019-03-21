@@ -27,7 +27,7 @@ namespace DEV_3
             var sortedListOfEmployees =
                 listOfEmployees.OrderByDescending(i => i.Valuation).ToList(); //list sorted by employees valuation
             var listOfFoundEmployees = new List<Employee>();
-
+           
             foreach (var employee in sortedListOfEmployees)
             {
                 if (RequiredProductivity >= employee.Productivity)

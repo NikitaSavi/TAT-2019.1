@@ -41,12 +41,10 @@ namespace DEV_3
                         optimalTeamCompiler = new Criterion1Optimize(availableMoney);
                         break;
                     case 2:
-                        Console.WriteLine("Enter the required productivity:");
                         int.TryParse(args[2], out var requiredProductivity);
                         optimalTeamCompiler = new Criterion2Optimize(requiredProductivity);
                         break;
                     case 3:
-                        Console.WriteLine("Enter the required productivity:");
                         int.TryParse(args[2], out requiredProductivity);
                         optimalTeamCompiler = new Criterion3Optimize(requiredProductivity);
                         break;

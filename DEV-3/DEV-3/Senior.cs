@@ -8,7 +8,7 @@
         public Senior()
         {
             Salary = 1000;
-            Productivity = 55;
+            Productivity = 70;
             Valuation = (double)Productivity / Salary;
         }
     }
