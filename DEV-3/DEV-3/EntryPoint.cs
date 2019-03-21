@@ -23,6 +23,11 @@ namespace DEV_3
         {
             try
             {
+                if (args.Length < 3)
+                {
+                    throw new Exception("3 arguments are required: criterion, money, productivity");
+                }
+
                 int.TryParse(args[0], out var criterion);
 
                 var company = new Company();
