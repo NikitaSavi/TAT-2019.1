@@ -50,7 +50,7 @@ namespace DEV_3
                 }
 
                 var listOfFoundEmployees = company.GetEmployees(optimalTeamCompiler); //Found staff will be in this list
-                company.ShowNumberOfFoundEmployees(listOfFoundEmployees);
+                Company.ShowNumberOfFoundEmployees(listOfFoundEmployees);
                 return 0;
             }
             catch (Exception ex)

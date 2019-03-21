@@ -31,7 +31,7 @@ namespace DEV_3
 
             foreach (var employee in sortedListOfEmployees)
             {
-                if (RequiredProductivity > employee.Productivity && employee.GetType() != typeof(Junior))
+                if (RequiredProductivity >= employee.Productivity && employee.GetType() != typeof(Junior))
                 {
                     listOfFoundEmployees.Add(employee);
                     RequiredProductivity -= employee.Productivity;

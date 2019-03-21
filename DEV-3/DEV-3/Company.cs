@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 
 namespace DEV_3
-{/// <summary>
-/// Class for keeping info about the employees and for calling methods for optimization
-/// </summary>
+{
+    /// <summary>
+    /// Class for keeping info about the employees and for calling methods for optimization
+    /// </summary>
     class Company
     {
         private List<Employee> ListOfEmployees { get; } = new List<Employee>();
@@ -12,6 +13,7 @@ namespace DEV_3
         private const int NumOfMids = 30;
         private const int NumOfSeniors = 10;
         private const int NumOfLeads = 3;
+
         /// <summary>
         /// Constructor fills the list of all employees
         /// </summary>
@@ -37,6 +39,7 @@ namespace DEV_3
                 ListOfEmployees.Add(new Junior());
             }
         }
+
         /// <summary>
         /// Calls for creation of the optimal list
         /// </summary>
@@ -46,14 +49,16 @@ namespace DEV_3
         {
             return optimalTeamCompiler.Choose(ListOfEmployees);
         }
+
         /// <summary>
         /// Shows the number of employees in the provided list
         /// </summary>
         /// <param name="listOfFoundEmployees">List that contains the employees</param>
-        public void ShowNumberOfFoundEmployees(List<Employee> listOfFoundEmployees)
+        public static void ShowNumberOfFoundEmployees(List<Employee> listOfFoundEmployees)
         {
-            if (listOfFoundEmployees.Count==0) throw new Exception("You don't have enough money to hire even the cheapest employee.");
-            int[] counter = new int[4];
+            if (listOfFoundEmployees.Count == 0)
+                throw new Exception("You don't have enough money to hire even the cheapest employee.");
+            var counter = new int[4];
             foreach (var employee in listOfFoundEmployees)
             {
                 switch (employee)

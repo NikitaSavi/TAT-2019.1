@@ -30,7 +30,7 @@ namespace DEV_3
 
             foreach (var employee in sortedListOfEmployees)
             {
-                if (RequiredProductivity > employee.Productivity)
+                if (RequiredProductivity >= employee.Productivity)
                 {
                     listOfFoundEmployees.Add(employee);
                     RequiredProductivity -= employee.Productivity;

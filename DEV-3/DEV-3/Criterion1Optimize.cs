@@ -30,7 +30,7 @@ namespace DEV_3
 
             foreach (var employee in sortedListOfEmployees)
             {
-                if (AvailableMoney > employee.Salary)
+                if (AvailableMoney >= employee.Salary)
                 {
                     listOfFoundEmployees.Add(employee);
                     AvailableMoney -= employee.Salary;
