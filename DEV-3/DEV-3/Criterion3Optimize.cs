@@ -46,7 +46,7 @@ namespace DEV_3
 
             if (listOfFoundEmployees.Count == 0)
             {
-                throw new Exception("The productivity you require is lower than the one of our cheapest worker.");
+                throw new Exception("Entered productivity is too low");
             }
 
             return listOfFoundEmployees;
