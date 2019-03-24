@@ -1,18 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DEV_4
 {
     class Discipline
     {
-        public string Name { get; set; }
-        public string GUID { get; set; }
-        public string Description { get; set; }
-        private List<Material> listOfMaterials;//TODO get set how
+        private readonly EntityData Data;
+        public List<Material> ListOfMaterials { get; set; }
 
-        public Discipline(string name, string description) //TODO description: maybe a better way to set it exists?
+        public Discipline(string name, string description)
         {
-            Name = name;
-            Description = description;//TODO 256 symbols restriction, find how to implement (simple substring or better?)
+            Data=new EntityData(name, description);
+        }
+
+        public override string ToString()
+        {
+            return string.IsNullOrEmpty(Data.Description) ? "No description" : Data.Description;
+        }
+
+        public bool Equals(Discipline obj)
+        {
+            return Data.Guid.Equals(obj.Data.Guid);
         }
     }
-} 
+}

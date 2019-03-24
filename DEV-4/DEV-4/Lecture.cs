@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DEV_4
@@ -9,16 +10,13 @@ namespace DEV_4
         public string Text { get; set; } //TODO placeholder for now, char.limit figure out how
         public string URI { get; set; }
         public string PresentationType { get; set; }
+        private List<Seminar> seminarsList;
+        private List<Labwork> labworksList;
         private static readonly string[] presentationsAllTypes = {"Unknown", "PPT", "PDF"};
-        //TODO need to assign name+descr (base class) and text+uri+pres.type, need a better solution
-        //public Lecture(string text, string uri, string presentationType) 
-        //{
-        //    Text = text;
-        //    if (presentationsAllTypes.Contains(presentationType))
-        //    {
-        //        PresentationType = presentationType;
-        //    }
-        //    else throw new Exception("Wrong presentation type");
-        //}
+
+        public Lecture(string name, string description /*todo stuff here*/) : base(name, description)
+        {
+
+        }
     }
 }
