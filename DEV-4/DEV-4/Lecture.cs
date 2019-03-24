@@ -19,7 +19,7 @@ namespace DEV_4
         public Lecture(string text, string uri, string presentationType = "Unknown",
             string description = null) : base(description)
         {
-            //TODO constructor is a tad bit cumbersome, a better way to implement should exist, will keep this one until it's found
+            //TODO constructor is a tad bit cumbersome, a better way to implement might exist
             Text = text.WithMaxLength(TextMaxLength);
             Uri = uri;
             if (PresentationsAllTypes.Contains(presentationType))
