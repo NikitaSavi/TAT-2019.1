@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace DEV_4
@@ -7,16 +6,26 @@ namespace DEV_4
 
     class Lecture : Material
     {
-        public string Text { get; set; } //TODO placeholder for now, char.limit figure out how
-        public string URI { get; set; }
+        public string Text { get; set; }
+        private const int TextMaxLength = 100000;
+
+        public string Uri { get; set; } //TODO Uri set - similar way to Guid or...?
         public string PresentationType { get; set; }
-        private List<Seminar> seminarsList;
-        private List<Labwork> labworksList;
-        private static readonly string[] presentationsAllTypes = {"Unknown", "PPT", "PDF"};
 
-        public Lecture(string name, string description /*todo stuff here*/) : base(name, description)
+        public List<Seminar> ListOfSeminarsToThisLecture { get; set; }
+        public List<Labwork> ListOfLabworksToThisLecture { get; set; }
+        private static readonly string[] PresentationsAllTypes = {"PPT", "PDF"};
+
+        public Lecture(string text, string uri, string presentationType = "Unknown",
+            string description = null) : base(description)
         {
-
+            //TODO constructor is a tad bit cumbersome, a better way to implement should exist, will keep this one until it's found
+            Text = text.WithMaxLength(TextMaxLength);
+            Uri = uri;
+            if (PresentationsAllTypes.Contains(presentationType))
+            {
+                PresentationType = presentationType;
+            }
         }
     }
 }

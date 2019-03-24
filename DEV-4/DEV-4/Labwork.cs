@@ -2,9 +2,9 @@
 {
     class Labwork : Material
     {
-        public Labwork(string name, string description /*todo stuff here*/) : base(name, description)
+        //TODO ???
+        public Labwork(string description = null) : base(description)
         {
-
         }
     }
 }

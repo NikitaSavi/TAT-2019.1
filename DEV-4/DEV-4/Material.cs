@@ -4,9 +4,9 @@
     {
         private readonly EntityData _data;
 
-        protected Material(string name, string description = null)
+        protected Material(string description = null)
         {
-            _data = new EntityData(name, description);
+            _data = new EntityData(description);
         }
 
         public override string ToString()
