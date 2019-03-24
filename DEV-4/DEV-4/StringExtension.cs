@@ -4,7 +4,7 @@ namespace DEV_4
 {
     public static class StringExtension
     {
-        public static string GenerateGuid()
+        public static string GenerateGuid(this string str)
         {
             return Guid.NewGuid().ToString();
         }

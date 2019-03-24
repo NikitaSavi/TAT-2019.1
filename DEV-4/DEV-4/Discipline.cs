@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace DEV_4
 {
@@ -19,8 +18,7 @@ namespace DEV_4
         {
             get
             {
-                List<Material> materials=new List<Material>();
-                materials.Add(ListOfLectures[index]);
+                var materials = new List<Material> {ListOfLectures[index]};
                 materials.AddRange(ListOfMaterials[ListOfLectures[index]]);
                 return materials;
             }

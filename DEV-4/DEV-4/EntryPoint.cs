@@ -4,14 +4,11 @@ namespace DEV_4
 {
     class EntryPoint
     {
-        //TODO get better way to set descriptions. Or don't
+        //TODO Connect Seminars/Labs to Lectures and to discipline
         static int Main(string[] args)
         {
             try
             {
-                var a = new Discipline("a");
-                var b = new Discipline("c");
-                Console.WriteLine(a.ToString() + "\n" + a.Equals(b));
                 return 0;
             }
             catch (Exception ex)
