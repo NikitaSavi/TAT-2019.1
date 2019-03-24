@@ -4,7 +4,7 @@
     {
         public string EntityGuid { get; }
         public string Description { get; }
-        private const int DescriptionMaxLength = 250;
+        private const int DescriptionMaxLength = 256;
 
         public EntityData(string description = null)
         {
