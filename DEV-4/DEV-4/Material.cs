@@ -2,20 +2,21 @@
 {
     abstract class Material
     {
-        private readonly EntityData Data;
+        private readonly EntityData _data;
 
-        protected Material(string name, string description)
+        protected Material(string name, string description = null)
         {
-            Data = new EntityData(name, description);
+            _data = new EntityData(name, description);
         }
+
         public override string ToString()
         {
-            return string.IsNullOrEmpty(Data.Description) ? "No description" : Data.Description;
+            return string.IsNullOrEmpty(_data.Description) ? "No description" : _data.Description;
         }
 
         public bool Equals(Material obj)
         {
-            return Data.Guid.Equals(obj.Data.Guid);
+            return _data.EntityGuid.Equals(obj._data.EntityGuid);
         }
     }
 }

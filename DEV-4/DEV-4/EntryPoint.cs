@@ -8,9 +8,9 @@ namespace DEV_4
         {
             try
             {
-                var a =new Discipline("a", "b");
+                var a =new Discipline("a");
                 var b = new Discipline("b", "c");
-                Console.WriteLine(a.ToString()+"\n"+a.Equals(b));
+                Console.WriteLine(b.ToString()+"\n"+a.Equals(b));
                 return 0;
             }
             catch (Exception ex)
