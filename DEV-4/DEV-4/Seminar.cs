@@ -9,7 +9,7 @@ namespace DEV_4
 
         public Dictionary<string, string> Questions { get; set; } = new Dictionary<string, string>();
 
-        /*TODO how to send Q&A?*/
+        //TODO how to send Q&A?
         public Seminar(string[] tasksList, string description = null) : base(description)
         {
             TasksList = tasksList;

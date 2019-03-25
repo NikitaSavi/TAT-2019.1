@@ -6,7 +6,6 @@ namespace DEV_4
     {
         private readonly EntityData _data;
 
-        //TODO things below aren't final
         public List<Lecture> ListOfLectures = new List<Lecture>();
         public List<Seminar> ListOfSeminars = new List<Seminar>();
         public List<Labwork> ListOfLabworks = new List<Labwork>();
@@ -22,23 +21,40 @@ namespace DEV_4
             get
             {
                 var materials = new List<Material> {ListOfLectures[index]};
+                if (ListOfLectures[index].ListOfSeminarsToThisLecture.Count != 0)
+                {
+                    materials.AddRange(ListOfLectures[index].ListOfSeminarsToThisLecture);
+                }
+
+                if (ListOfLectures[index].ListOfLabworksToThisLecture.Count != 0)
+                {
+                    materials.AddRange(ListOfLectures[index].ListOfLabworksToThisLecture);
+                }
+
                 return materials;
             }
         }
+
         //TODO maybe some other way would be better?
         public void AddLecture(string text, string uri, string presentationType = "Unknown", string description = null)
         {
             ListOfLectures.Add(new Lecture(text, uri, presentationType, description));
         }
 
-        public void AddSeminar(string[] tasksList, string description = null)
+        //TODO really need to rewrite this
+        public void AddSeminar(string[] tasksList, string description = null, Lecture connectedLecture = null)
         {
-            ListOfSeminars.Add(new Seminar(tasksList, description));
+            var seminar = new Seminar(tasksList, description);
+            ListOfSeminars.Add(seminar);
+            ListOfLectures[ListOfLectures.IndexOf(connectedLecture)].ListOfSeminarsToThisLecture.Add(seminar);
         }
 
-        public void AddLabwork(string description = null)
+        //TODO really need to rewrite this
+        public void AddLabwork(string description = null, Labwork connectedLabwork = null)
         {
-            ListOfLabworks.Add(new Labwork(description));
+            var labwork = new Labwork(description);
+            ListOfLabworks.Add(labwork);
+            ListOfLectures[ListOfLabworks.IndexOf(connectedLabwork)].ListOfLabworksToThisLecture.Add(labwork);
         }
 
         public override string ToString()
