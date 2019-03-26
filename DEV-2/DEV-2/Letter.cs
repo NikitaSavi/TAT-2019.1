@@ -6,79 +6,6 @@ using System.Text;
 
 namespace DEV_2
 {
-    struct Vowel
-    {
-        public string sound;
-        public bool isStressed, isIoated, addJSound;
-        /// <summary>
-        /// Fills the fields with default characteristics 
-        /// </summary>
-        /// <param name="letter">Letter from the received word</param>
-        public Vowel(char letter)
-        {
-            isStressed = letter == 'ё';
-            isIoated = Letter.vowelIonationEquivalents.ContainsKey(letter);
-            addJSound = true;
-            sound = isIoated ? Letter.vowelIonationEquivalents[letter].ToString() : letter.ToString();
-        }
-        public void Update()
-        {//updates with necessary changes
-            if (sound == "о" && !isStressed)
-            {
-                sound = "а";
-            }
-            else if(isIoated)
-            {
-                sound = addJSound ? ("й" + sound) : ("'" + sound);
-            }
-        }
-    }
-
-    struct Consonant
-    {
-        public string sound;
-        public bool haveVoicePair, isVoiced, PhonationChanged;
-        /// <summary>
-        /// Fills the fields with default characteristics 
-        /// </summary>
-        /// <param name="letter">Letter from the received word</param>
-        public Consonant(char letter)
-        {
-            sound=letter.ToString();
-            haveVoicePair = Letter.consonantPhonationEquivalents.ContainsKey(letter) ||
-                            Letter.consonantPhonationEquivalents.ContainsValue(letter);
-            PhonationChanged = false;
-            isVoiced = haveVoicePair
-                ? Letter.consonantPhonationEquivalents.ContainsKey(letter)
-                : Letter.alwaysVoiced.Contains(letter);
-
-
-        }
-
-        public void Update()
-        {//updates with necessary changes
-            if (PhonationChanged)
-            {
-                char temp = sound.ToCharArray()[0];
-                sound = isVoiced
-                    ? Letter.consonantPhonationEquivalents[temp].ToString()
-                    : Letter.consonantPhonationEquivalents.FirstOrDefault(x => x.Value == temp).Key.ToString();
-            }
-        }
-    }
-
-    struct Special
-    {
-        public string sound;
-        /// <summary>
-        /// Fills the fields with default characteristics 
-        /// </summary>
-        /// <param name="letter">Letter from the received word</param>
-        public Special(char letter)
-        {
-            sound = letter == 'ь' ? "'" : string.Empty;
-        }
-    }
     /// <summary>
     /// Additional class for storing the features of the letters
     /// </summary>
@@ -116,6 +43,7 @@ namespace DEV_2
             ['ж'] = 'ш',
             ['з'] = 'с'
         };
+
         /// <summary>
         /// Constructor: checks the type of the letter
         /// </summary>
@@ -140,8 +68,10 @@ namespace DEV_2
                 sound = SpecialStruct.sound;
             }
         }
+
         public void Update()
-        {//calls appropriate update functions
+        {
+            //calls appropriate update functions
             if (isVowel)
             {
                 VowelStruct.Update();
