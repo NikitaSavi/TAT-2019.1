@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consonant.cs" />
+    <Compile Include="SpecialLetter.cs" />
+    <Compile Include="Vowel.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="Letter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
