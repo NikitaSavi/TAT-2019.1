@@ -1,10 +1,25 @@
 ﻿namespace DEV_4
 {
+    /// <summary>
+    /// Class for labworks
+    /// </summary>
     class Labwork : Material
     {
-        //TODO ???
+        /// <summary>
+        /// Constructor for labworks
+        /// </summary>
+        /// <param name="description">Description, null by default</param>
         public Labwork(string description = null) : base(description)
         {
+        }
+
+        /// <inheritdoc />
+        public override object Clone()
+        {
+            return new Labwork
+            {
+                Data = {Description = Data.Description, EntityGuid = Data.EntityGuid}
+            };
         }
     }
 }

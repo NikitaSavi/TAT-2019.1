@@ -1,70 +1,147 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DEV_4
 {
-    class Discipline
+    /// <summary>
+    /// Class for disciplines
+    /// </summary>
+    class Discipline : ICloneable
     {
-        private readonly EntityData _data;
+        public EntityData Data { get; set; }
 
         public List<Lecture> ListOfLectures = new List<Lecture>();
         public List<Seminar> ListOfSeminars = new List<Seminar>();
         public List<Labwork> ListOfLabworks = new List<Labwork>();
 
+        /// <summary>
+        /// Base constructor for materials, sets general data
+        /// </summary>
+        /// <param name="description">Description of an entity, null by default</param>
         public Discipline(string description = null)
         {
-            _data = new EntityData(description);
+            Data = new EntityData(description);
         }
 
-        //TODO elaborate on the task
-        public List<Material> this[int index]
+        /// <summary>
+        /// Indexer to get lectures and complementary materials of the discipline
+        /// </summary>
+        /// <param name="index">Index of the lecture in the ListOfLectures</param>
+        /// <returns>List containing the necessary lectures plus all seminars and labs for it</returns>
+        public IEnumerable<Material> this[int index]
         {
             get
             {
                 var materials = new List<Material> {ListOfLectures[index]};
-                if (ListOfLectures[index].ListOfSeminarsToThisLecture.Count != 0)
+                if (ListOfLectures[index].ListOfSeminarsForThisLecture.Count != 0)
                 {
-                    materials.AddRange(ListOfLectures[index].ListOfSeminarsToThisLecture);
+                    materials.AddRange(ListOfLectures[index].ListOfSeminarsForThisLecture);
                 }
 
-                if (ListOfLectures[index].ListOfLabworksToThisLecture.Count != 0)
+                if (ListOfLectures[index].ListOfLabworksForThisLecture.Count != 0)
                 {
-                    materials.AddRange(ListOfLectures[index].ListOfLabworksToThisLecture);
+                    materials.AddRange(ListOfLectures[index].ListOfLabworksForThisLecture);
                 }
 
                 return materials;
             }
         }
 
-        //TODO maybe some other way would be better?
-        public void AddLecture(string text, string uri, string presentationType = "Unknown", string description = null)
+        /// <summary>
+        /// Adds lecture to the discipline
+        /// </summary>
+        /// <param name="lecture">Lecture to add</param>
+        public void AddLecture(Lecture lecture)
         {
-            ListOfLectures.Add(new Lecture(text, uri, presentationType, description));
+            ListOfLectures.Add(lecture);
         }
 
-        //TODO really need to rewrite this
-        public void AddSeminar(string[] tasksList, string description = null, Lecture connectedLecture = null)
+        /// <summary>
+        /// Adds seminar to the discipline (and to a lecture if necessary)
+        /// </summary>
+        /// <param name="seminar">Seminar to add</param>
+        /// <param name="connectedLecture">Lecture to connect the seminar with</param>
+        public void AddSeminar(Seminar seminar, Lecture connectedLecture = null)
         {
-            var seminar = new Seminar(tasksList, description);
             ListOfSeminars.Add(seminar);
-            ListOfLectures[ListOfLectures.IndexOf(connectedLecture)].ListOfSeminarsToThisLecture.Add(seminar);
+            if (connectedLecture != null)
+            {
+                ListOfLectures[ListOfLectures.IndexOf(connectedLecture)].ListOfSeminarsForThisLecture.Add(seminar);
+            }
         }
 
-        //TODO really need to rewrite this
-        public void AddLabwork(string description = null, Labwork connectedLabwork = null)
+        /// <summary>
+        /// Adds labwork to the discipline (and to a lecture if necessary)
+        /// </summary>
+        /// <param name="seminar">Labwork to add</param>
+        /// <param name="connectedLecture">Lecture to connect the labwork with</param>
+        public void AddLabwork(Labwork labwork, Lecture connectedLecture = null)
         {
-            var labwork = new Labwork(description);
             ListOfLabworks.Add(labwork);
-            ListOfLectures[ListOfLabworks.IndexOf(connectedLabwork)].ListOfLabworksToThisLecture.Add(labwork);
+            if (connectedLecture != null)
+            {
+                ListOfLectures[ListOfLectures.IndexOf(connectedLecture)].ListOfLabworksForThisLecture.Add(labwork);
+            }
         }
 
+        /// <summary>
+        /// Override method to return description of an entity
+        /// </summary>
+        /// <returns>Description of an entity</returns>
         public override string ToString()
         {
-            return string.IsNullOrEmpty(_data.Description) ? "No description" : _data.Description;
+            return string.IsNullOrEmpty(Data.Description)
+                ? "No description available"
+                : $"Description: {Data.Description}";
         }
 
-        public bool Equals(Discipline obj)
+        /// <summary>
+        /// Override method for comparing entities. Entities are equal if their GUIDs are equal
+        /// </summary>
+        /// <param name="obj">An entity to check equality with</param>
+        /// <returns>True if received entity has the same GUID</returns>
+        public override bool Equals(object obj)
         {
-            return _data.EntityGuid.Equals(obj._data.EntityGuid);
+            if (obj is Discipline discipline)
+            {
+                return (Data.EntityGuid == discipline.Data.EntityGuid);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Performs deep cloning of an entity
+        /// </summary>
+        /// <returns>A clone of an entity</returns>
+        public object Clone()
+        {
+            var lecturesCopy = new List<Lecture>();
+            var seminarsCopy = new List<Seminar>();
+            var labworksCopy = new List<Labwork>();
+
+            foreach (var material in ListOfLectures)
+            {
+                lecturesCopy.Add(material);
+            }
+
+            foreach (var material in ListOfSeminars)
+            {
+                seminarsCopy.Add(material);
+            }
+
+            foreach (var material in ListOfLabworks)
+            {
+                labworksCopy.Add(material);
+            }
+
+            return new Discipline
+            {
+                Data = {Description = Data.Description, EntityGuid = Data.EntityGuid},
+                ListOfLectures = lecturesCopy,
+                ListOfSeminars = seminarsCopy,
+                ListOfLabworks = labworksCopy,
+            };
         }
     }
 }
