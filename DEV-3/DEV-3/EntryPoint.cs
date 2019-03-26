@@ -29,10 +29,8 @@ namespace DEV_3
                 }
 
                 int.TryParse(args[0], out var criterion);
-
                 var company = new Company();
                 OptimalTeamCompiler optimalTeamCompiler;
-
                 switch (criterion)
                 {
                     //Call for appropriate method, depending on the criterion entered

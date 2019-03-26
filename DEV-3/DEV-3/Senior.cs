@@ -9,7 +9,7 @@
         {
             Salary = 1000;
             Productivity = 70;
-            Valuation = (double)Productivity / Salary;
+            Valuation = (double) Productivity / Salary;
         }
     }
 }
