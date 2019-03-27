@@ -7,20 +7,9 @@ namespace DEV_4
     /// </summary>
     class Lecture : Material
     {
-        public string Text { get; set; }
-        private const int TextMaxLength = 100000;
-        public string Uri { get; set; }
         public List<Seminar> ListOfSeminarsForThisLecture = new List<Seminar>();
         public List<Labwork> ListOfLabworksForThisLecture = new List<Labwork>();
-
-        public enum PresentationAllTypes
-        {
-            Unknown,
-            PPT,
-            PDF
-        }
-
-        public PresentationAllTypes PresentationType;
+        private Presentation presentation;
 
         /// <summary>
         /// Constructor for lecture
@@ -29,12 +18,9 @@ namespace DEV_4
         /// <param name="uri">Uri for presentation</param>
         /// <param name="presentationType">Type of presentation</param>
         /// <param name="description">Description, null by default</param>
-        public Lecture(string text, string uri, PresentationAllTypes presentationType = PresentationAllTypes.Unknown,
-            string description = null) : base(description)
+        public Lecture(Presentation presentation, string description = null) : base(description)
         {
-            Text = text.WithMaxLength(TextMaxLength);
-            Uri = uri;
-            PresentationType = presentationType;
+
         }
 
         /// <inheritdoc />
@@ -52,11 +38,11 @@ namespace DEV_4
                 labworksListCopy.Add(material);
             }
 
-            return new Lecture(Text, Uri)
+            return new Lecture(presentation)
             {
                 ListOfSeminarsForThisLecture = seminarsListCopy,
                 ListOfLabworksForThisLecture = labworksListCopy,
-                PresentationType = PresentationType,
+                presentation = presentation,
                 Data = {Description = Data.Description, EntityGuid = Data.EntityGuid}
             };
         }

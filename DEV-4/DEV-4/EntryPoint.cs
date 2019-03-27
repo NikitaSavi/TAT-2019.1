@@ -31,10 +31,12 @@ namespace DEV_4
                 //Check req 4 (Equals)
                 Console.WriteLine("Math == Physics : " + math.Equals(physics));
                 Console.WriteLine("Math == BiggerMath : " + math.Equals(biggerMath));
+
                 //Check connection between entities
-                var mathAnalysis = new Lecture("don't", "uri.com", Lecture.PresentationAllTypes.PDF, "incomprehensible ramblings of a madman");
+                var mathAnalysis = new Lecture(new Presentation("don't", "uri.com"),
+                    "incomprehensible ramblings of a madman");
                 math.AddLecture(mathAnalysis);
-                math.AddLecture(new Lecture("Just google things", "uri1.com", description: "simple things"));
+                math.AddLecture(new Lecture(new Presentation("Just google things", "uri1.com"), "simple lecture"));
                 var mathSeminar = new Seminar(new List<string> {"task1", "task2"}, new Dictionary<string, string>());
                 var notMathSeminar = new Seminar(new List<string> {"task1", "task2"}, new Dictionary<string, string>(),
                     "some other seminar");
@@ -44,6 +46,7 @@ namespace DEV_4
                 //Additional check for req.6
                 var mathCopy = (Discipline) math.Clone();
                 math.ListOfSeminars.RemoveAt(1);
+
                 Console.WriteLine("\nAll seminars in Math:");
                 foreach (var seminar in math.ListOfSeminars)
                 {
@@ -55,6 +58,7 @@ namespace DEV_4
                 {
                     Console.WriteLine(seminar);
                 }
+
                 //Check req 5(Indexer)
                 Console.WriteLine("\nMathAnalysis lecture and everything connected to it");
                 foreach (var material in math[0])
