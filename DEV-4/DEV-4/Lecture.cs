@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace DEV_4
 {
@@ -10,30 +9,32 @@ namespace DEV_4
     {
         public string Text { get; set; }
         private const int TextMaxLength = 100000;
-
         public string Uri { get; set; }
-        public string PresentationType { get; set; }
-
         public List<Seminar> ListOfSeminarsForThisLecture = new List<Seminar>();
         public List<Labwork> ListOfLabworksForThisLecture = new List<Labwork>();
-        private static readonly string[] PresentationsAllTypes = {"PPT", "PDF"};
+
+        public enum PresentationAllTypes
+        {
+            Unknown,
+            PPT,
+            PDF
+        }
+
+        public PresentationAllTypes PresentationType;
 
         /// <summary>
-        /// Constructor for the lecture
+        /// Constructor for lecture
         /// </summary>
         /// <param name="text">Text of the lecture</param>
-        /// <param name="uri">Uri of the lecture</param>
-        /// <param name="presentationType">Presentation type of the lecture, "unknown" by default</param>
+        /// <param name="uri">Uri for presentation</param>
+        /// <param name="presentationType">Type of presentation</param>
         /// <param name="description">Description, null by default</param>
-        public Lecture(string text, string uri, string presentationType = "Unknown",
+        public Lecture(string text, string uri, PresentationAllTypes presentationType = PresentationAllTypes.Unknown,
             string description = null) : base(description)
         {
             Text = text.WithMaxLength(TextMaxLength);
             Uri = uri;
-            if (PresentationsAllTypes.Contains(presentationType))
-            {
-                PresentationType = presentationType;
-            }
+            PresentationType = presentationType;
         }
 
         /// <inheritdoc />

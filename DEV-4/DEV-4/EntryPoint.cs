@@ -24,15 +24,15 @@ namespace DEV_4
                 var math = new Discipline("School-level math");
                 var biggerMath = math.Clone();
                 var physics = new Discipline("");
-                //Check req.2 and req.6
+                //Check req.2 (toString) and req.6 (cloning)
                 Console.WriteLine(math + "\n" + physics + "\n" + biggerMath + "\n");
                 math.Data.Description = "Really easy school-level math";
                 Console.WriteLine(math + "\n" + biggerMath + "\n");
-                //Check req 4
+                //Check req 4 (Equals)
                 Console.WriteLine("Math == Physics : " + math.Equals(physics));
                 Console.WriteLine("Math == BiggerMath : " + math.Equals(biggerMath));
-                //Check req 5 and connection between entities
-                var mathAnalysis = new Lecture("don't", "uri.com", "PDF", "incomprehensible ramblings of a madman");
+                //Check connection between entities
+                var mathAnalysis = new Lecture("don't", "uri.com", Lecture.PresentationAllTypes.PDF, "incomprehensible ramblings of a madman");
                 math.AddLecture(mathAnalysis);
                 math.AddLecture(new Lecture("Just google things", "uri1.com", description: "simple things"));
                 var mathSeminar = new Seminar(new List<string> {"task1", "task2"}, new Dictionary<string, string>());
@@ -41,14 +41,22 @@ namespace DEV_4
                 math.AddSeminar(mathSeminar, mathAnalysis);
                 math.AddSeminar(notMathSeminar);
                 math.AddLabwork(new Labwork("lab for math"), mathAnalysis);
-
+                //Additional check for req.6
+                var mathCopy = (Discipline) math.Clone();
+                math.ListOfSeminars.RemoveAt(1);
                 Console.WriteLine("\nAll seminars in Math:");
                 foreach (var seminar in math.ListOfSeminars)
                 {
                     Console.WriteLine(seminar);
                 }
 
-                Console.WriteLine("\nMathAnalysis lecture and all connected to it");
+                Console.WriteLine("\nAll seminars in mathCopy:");
+                foreach (var seminar in mathCopy.ListOfSeminars)
+                {
+                    Console.WriteLine(seminar);
+                }
+                //Check req 5(Indexer)
+                Console.WriteLine("\nMathAnalysis lecture and everything connected to it");
                 foreach (var material in math[0])
                 {
                     Console.WriteLine(material);

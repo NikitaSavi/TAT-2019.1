@@ -73,7 +73,7 @@ namespace DEV_4
         /// <summary>
         /// Adds labwork to the discipline (and to a lecture if necessary)
         /// </summary>
-        /// <param name="seminar">Labwork to add</param>
+        /// <param name="labwork">Labwork to add</param>
         /// <param name="connectedLecture">Lecture to connect the labwork with</param>
         public void AddLabwork(Labwork labwork, Lecture connectedLecture = null)
         {
