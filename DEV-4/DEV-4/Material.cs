@@ -7,7 +7,7 @@ namespace DEV_4
     /// </summary>
     abstract class Material : ICloneable
     {
-        protected EntityData Data { get; set; }
+        public EntityData Data { get; set; }
 
         /// <summary>
         /// Base constructor for materials, sets general data
