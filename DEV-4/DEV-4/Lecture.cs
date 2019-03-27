@@ -42,7 +42,6 @@ namespace DEV_4
             {
                 ListOfSeminarsForThisLecture = seminarsListCopy,
                 ListOfLabworksForThisLecture = labworksListCopy,
-                presentation = presentation,
                 Data = {Description = Data.Description, EntityGuid = Data.EntityGuid}
             };
         }
