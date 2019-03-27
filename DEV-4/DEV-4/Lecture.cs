@@ -7,6 +7,8 @@ namespace DEV_4
     /// </summary>
     class Lecture : Material
     {
+        public string Text { get; set; }
+        private const int TextMaxLength = 100000;
         public List<Seminar> ListOfSeminarsForThisLecture = new List<Seminar>();
         public List<Labwork> ListOfLabworksForThisLecture = new List<Labwork>();
         private Presentation presentation;
@@ -18,9 +20,9 @@ namespace DEV_4
         /// <param name="uri">Uri for presentation</param>
         /// <param name="presentationType">Type of presentation</param>
         /// <param name="description">Description, null by default</param>
-        public Lecture(Presentation presentation, string description = null) : base(description)
+        public Lecture(string text, Presentation presentation, string description = null) : base(description)
         {
-
+            Text = text.WithMaxLength(TextMaxLength);
         }
 
         /// <inheritdoc />
@@ -38,7 +40,7 @@ namespace DEV_4
                 labworksListCopy.Add(material);
             }
 
-            return new Lecture(presentation)
+            return new Lecture(Text, presentation)
             {
                 ListOfSeminarsForThisLecture = seminarsListCopy,
                 ListOfLabworksForThisLecture = labworksListCopy,

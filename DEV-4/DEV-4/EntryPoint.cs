@@ -33,10 +33,10 @@ namespace DEV_4
                 Console.WriteLine("Math == BiggerMath : " + math.Equals(biggerMath));
 
                 //Check connection between entities
-                var mathAnalysis = new Lecture(new Presentation("don't", "uri.com"),
+                var mathAnalysis = new Lecture("Difficult math lecture", new Presentation("uri.com"),
                     "incomprehensible ramblings of a madman");
                 math.AddLecture(mathAnalysis);
-                math.AddLecture(new Lecture(new Presentation("Just google things", "uri1.com"), "simple lecture"));
+                math.AddLecture(new Lecture("Text of nameless lecture", new Presentation("uri1.com"), "simple lecture"));
                 var mathSeminar = new Seminar(new List<string> {"task1", "task2"}, new Dictionary<string, string>());
                 var notMathSeminar = new Seminar(new List<string> {"task1", "task2"}, new Dictionary<string, string>(),
                     "some other seminar");
