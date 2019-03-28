@@ -9,7 +9,6 @@
         {
             Salary = 250;
             Productivity = 10;
-            Valuation = Valuation;
         }
     }
 }
