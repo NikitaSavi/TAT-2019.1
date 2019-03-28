@@ -6,34 +6,35 @@ namespace DEV_3
 {
     /// <inheritdoc />
     /// <summary>
-    /// Criterion 1: Maximum productivity within the sum
+    /// Criterion 3: Minimum number of staff higher than Junior for required productivity
     /// </summary>
-    class Criterion1Optimize : OptimalTeamCompiler
+    class CriterionMinStaff : OptimalTeamCompiler
     {
-        private int AvailableMoney { get; set; }
+        //TODO redetermine what Crit3 is actually supposed to do
+        private int RequiredProductivity { get; set; }
 
-        public Criterion1Optimize(int availableMoney)
+        public CriterionMinStaff(int requiredProductivity)
         {
-            AvailableMoney = availableMoney;
+            RequiredProductivity = requiredProductivity;
         }
 
         /// <summary>
-        /// Sorts employees by their valuation (product./salary), those with higher valuation go to the final list
+        /// Sorts employees by their productivity, those with higher productivity go to the final list
         /// </summary>
         /// <param name="listOfEmployees">List of all employees</param>
         /// <returns>Compiled list of employees</returns>
         public override List<Employee> Choose(List<Employee> listOfEmployees)
         {
             var sortedListOfEmployees =
-                listOfEmployees.OrderByDescending(i => i.Valuation).ToList(); //list sorted by employees valuation
+                listOfEmployees.OrderByDescending(i => i.Productivity).ToList(); //list sorted by employees productivity
             var listOfFoundEmployees = new List<Employee>();
 
             foreach (var employee in sortedListOfEmployees)
             {
-                if (AvailableMoney >= employee.Salary)
+                if (RequiredProductivity >= employee.Productivity && employee.GetType() != typeof(Junior))
                 {
                     listOfFoundEmployees.Add(employee);
-                    AvailableMoney -= employee.Salary;
+                    RequiredProductivity -= employee.Productivity;
                 }
             }
 
@@ -45,7 +46,7 @@ namespace DEV_3
 
             if (listOfFoundEmployees.Count == 0)
             {
-                throw new Exception("Entered money sum is too low");
+                throw new Exception("Entered productivity is too low");
             }
 
             return listOfFoundEmployees;

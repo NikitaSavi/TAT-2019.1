@@ -6,15 +6,15 @@ namespace DEV_3
 {
     /// <inheritdoc />
     /// <summary>
-    /// Criterion 2: Minimum cost for required productivity
+    /// Criterion 1: Maximum productivity within the sum
     /// </summary>
-    class Criterion2Optimize : OptimalTeamCompiler
+    class CriterionMaxProductivity : OptimalTeamCompiler
     {
-        private int RequiredProductivity { get; set; }
+        private int AvailableMoney { get; set; }
 
-        public Criterion2Optimize(int requiredProductivity)
+        public CriterionMaxProductivity(int availableMoney)
         {
-            RequiredProductivity = requiredProductivity;
+            AvailableMoney = availableMoney;
         }
 
         /// <summary>
@@ -27,13 +27,13 @@ namespace DEV_3
             var sortedListOfEmployees =
                 listOfEmployees.OrderByDescending(i => i.Valuation).ToList(); //list sorted by employees valuation
             var listOfFoundEmployees = new List<Employee>();
-           
+
             foreach (var employee in sortedListOfEmployees)
             {
-                if (RequiredProductivity >= employee.Productivity)
+                if (AvailableMoney >= employee.Salary)
                 {
                     listOfFoundEmployees.Add(employee);
-                    RequiredProductivity -= employee.Productivity;
+                    AvailableMoney -= employee.Salary;
                 }
             }
 
@@ -45,7 +45,7 @@ namespace DEV_3
 
             if (listOfFoundEmployees.Count == 0)
             {
-                throw new Exception("Entered productivity is too low");
+                throw new Exception("Entered money sum is too low");
             }
 
             return listOfFoundEmployees;

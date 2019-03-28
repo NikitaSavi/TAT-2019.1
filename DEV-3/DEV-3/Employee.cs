@@ -7,6 +7,12 @@
     {
         public int Salary { get; protected set; }
         public int Productivity { get; protected set; }
-        public double Valuation { get; protected set; }
+        protected double _valuation;
+
+        public double Valuation
+        {
+            get => _valuation;
+            set => _valuation = (double)Productivity / Salary;
+        }
     }
 }

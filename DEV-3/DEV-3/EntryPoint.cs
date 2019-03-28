@@ -36,15 +36,15 @@ namespace DEV_3
                     //Call for appropriate method, depending on the criterion entered
                     case 1:
                         int.TryParse(args[1], out var availableMoney);
-                        optimalTeamCompiler = new Criterion1Optimize(availableMoney);
+                        optimalTeamCompiler = new CriterionMaxProductivity(availableMoney);
                         break;
                     case 2:
                         int.TryParse(args[2], out var requiredProductivity);
-                        optimalTeamCompiler = new Criterion2Optimize(requiredProductivity);
+                        optimalTeamCompiler = new CriterionMinCost(requiredProductivity);
                         break;
                     case 3:
                         int.TryParse(args[2], out requiredProductivity);
-                        optimalTeamCompiler = new Criterion3Optimize(requiredProductivity);
+                        optimalTeamCompiler = new CriterionMinStaff(requiredProductivity);
                         break;
                     default:
                         throw new Exception("Unknown criteria entered");

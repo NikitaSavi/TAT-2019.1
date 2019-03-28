@@ -44,9 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Company.cs" />
-    <Compile Include="Criterion3Optimize.cs" />
-    <Compile Include="Criterion2Optimize.cs" />
-    <Compile Include="Criterion1Optimize.cs" />
+    <Compile Include="CriterionMinStaff.cs" />
+    <Compile Include="CriterionMinCost.cs" />
+    <Compile Include="CriterionMaxProductivity.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="Junior.cs" />
