@@ -2,6 +2,9 @@
 
 namespace DEV_5
 {
+    /// <summary>
+    /// Struct for a 3D point
+    /// </summary>
     public struct Point
     {
         public int CoordinateX { get; set; }
@@ -15,6 +18,11 @@ namespace DEV_5
             CoordinateZ = z;
         }
 
+        /// <summary>
+        /// Calculates distance between this point and another
+        /// </summary>
+        /// <param name="anotherPoint">Another point to get distance to</param>
+        /// <returns>Distance between points</returns>
         public double GetDistanceToPoint(Point anotherPoint)
         {
             return Math.Sqrt(Math.Pow((anotherPoint.CoordinateX - CoordinateX), 2) +
