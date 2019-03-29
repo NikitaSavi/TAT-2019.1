@@ -2,6 +2,9 @@
 
 namespace DEV_5
 {
+    /// <summary>
+    /// Object Bird - random speed up to 20 km/h
+    /// </summary>
     public class Bird : IFlyable
     {
         public int Speed; // km/h

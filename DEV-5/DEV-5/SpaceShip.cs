@@ -1,5 +1,8 @@
 ﻿namespace DEV_5
 {
+    /// <summary>
+    /// Object SpaceShip - speed 8000 km/s
+    /// </summary>
     public class SpaceShip : IFlyable
     {
         public const int Speed = 8000 * 3600; // 8000 km/s
