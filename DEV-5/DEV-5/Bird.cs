@@ -20,10 +20,7 @@ namespace DEV_5
         /// <param name="x">Starting X coordinate</param>
         /// <param name="y">Starting Y coordinate</param>
         /// <param name="z">Starting Z coordinate</param>
-        public Bird(int x = 0, int y = 0, int z = 0)
-        {
-            CurrentPoint = new Point(x, y, z);
-        }
+        public Bird(int x = 0, int y = 0, int z = 0) => CurrentPoint = new Point(x, y, z);
 
         /// <inheritdoc />
         public void FlyTo(Point newPoint)
@@ -34,15 +31,9 @@ namespace DEV_5
         }
 
         /// <inheritdoc />
-        public double GetFlyTime()
-        {
-            return Mileage / Speed;
-        }
+        public double GetFlyTime() => Mileage / Speed;
 
         /// <inheritdoc />
-        public IFlyable WhoAmI()
-        {
-            return this;
-        }
+        public IFlyable WhoAmI() => this;
     }
 }

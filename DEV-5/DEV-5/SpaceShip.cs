@@ -34,15 +34,9 @@ namespace DEV_5
         }
 
         /// <inheritdoc />
-        public double GetFlyTime()
-        {
-            return Mileage / Speed;
-        }
+        public double GetFlyTime() => Mileage / Speed;
 
         /// <inheritdoc />
-        public IFlyable WhoAmI()
-        {
-            return this;
-        }
+        public IFlyable WhoAmI() => this;
     }
 }

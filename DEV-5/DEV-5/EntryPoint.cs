@@ -48,10 +48,9 @@ namespace DEV_5
         private static void GetFlyTime(object obj, ObjectFlewAwayEventArgs args)
         {
             Console.Write($"{obj.GetType().Name}'s time is ");
-            Console.Write(obj is SpaceShip
-                ? $"{Math.Round(args.Time * 3600, 3)} seconds, "
-                : $"{Math.Round(args.Time, 3)} hours, ");
-            Console.WriteLine($"reaching {args.Speed} km/h");
+            Console.WriteLine(obj is SpaceShip
+                ? $"{Math.Round(args.Time * 3600, 3)} seconds, reaching {args.Speed / 3600} km/s"
+                : $"{Math.Round(args.Time, 3)} hours, reaching {args.Speed} km/h");
         }
     }
 }

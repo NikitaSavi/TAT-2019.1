@@ -23,11 +23,9 @@ namespace DEV_5
         /// </summary>
         /// <param name="anotherPoint">Another point to get distance to</param>
         /// <returns>Distance between points</returns>
-        public double GetDistanceToPoint(Point anotherPoint)
-        {
-            return Math.Sqrt(Math.Pow(anotherPoint.CoordinateX - CoordinateX, 2) +
-                             Math.Pow(anotherPoint.CoordinateY - CoordinateY, 2) +
-                             Math.Pow(anotherPoint.CoordinateZ - CoordinateZ, 2));
-        }
+        public double GetDistanceToPoint(Point anotherPoint) =>
+            Math.Sqrt(Math.Pow(anotherPoint.CoordinateX - CoordinateX, 2) +
+                      Math.Pow(anotherPoint.CoordinateY - CoordinateY, 2) +
+                      Math.Pow(anotherPoint.CoordinateZ - CoordinateZ, 2));
     }
 }
