@@ -48,7 +48,7 @@ namespace DEV_5
             Console.Write(obj is SpaceShip
                 ? $"{Math.Round(args.Time * 3600, 3)} seconds, "
                 : $"{Math.Round(args.Time, 3)} hours, ");
-            Console.WriteLine($"reaching {args.Speed} km/h ");
+            Console.WriteLine($"reaching {args.Speed} km/h");
         }
     }
 }

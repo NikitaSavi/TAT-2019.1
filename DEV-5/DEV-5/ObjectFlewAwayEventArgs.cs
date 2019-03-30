@@ -13,7 +13,7 @@ namespace DEV_5
 
         /// <inheritdoc />
         /// <param name="time">Time of the flight</param>
-        /// <param name="speed">Speed of the flight</param>
+        /// <param name="speed">(Final, in case of a plane) Speed of the flight</param>
         public ObjectFlewAwayEventArgs(double time, int speed)
         {
             Time = time;
