@@ -25,9 +25,9 @@ namespace DEV_5
         /// <returns>Distance between points</returns>
         public double GetDistanceToPoint(Point anotherPoint)
         {
-            return Math.Sqrt(Math.Pow((anotherPoint.CoordinateX - CoordinateX), 2) +
-                             Math.Pow((anotherPoint.CoordinateY - CoordinateY), 2) +
-                             Math.Pow((anotherPoint.CoordinateZ - CoordinateZ), 2));
+            return Math.Sqrt(Math.Pow(anotherPoint.CoordinateX - CoordinateX, 2) +
+                             Math.Pow(anotherPoint.CoordinateY - CoordinateY, 2) +
+                             Math.Pow(anotherPoint.CoordinateZ - CoordinateZ, 2));
         }
     }
 }

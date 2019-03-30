@@ -5,16 +5,17 @@
     /// </summary>
     class Plane : IFlyable
     {
-        public readonly int Speed = 200; // km/h
+        public const int StartingSpeed = 200; // km/h
         public Point CurrentPoint { get; set; }
-        public event ObjectFlies ObjectFlewAway;
+        public double Mileage { get; set; }
+        public event ObjectChangesLocation ObjectFlewAway;
 
         /// <summary>
         /// Constructor for the class, initializes starting position
         /// </summary>
-        /// <param name="x">X coordinate</param>
-        /// <param name="y">Y coordinate</param>
-        /// <param name="z">Z coordinate</param>
+        /// <param name="x">Starting X coordinate</param>
+        /// <param name="y">Starting Y coordinate</param>
+        /// <param name="z">Starting Z coordinate</param>
         public Plane(int x = 0, int y = 0, int z = 0)
         {
             CurrentPoint = new Point(x, y, z);
@@ -23,16 +24,17 @@
         /// <inheritdoc />
         public void FlyTo(Point newPoint)
         {
-            ObjectFlewAway?.Invoke(WhoAmI(), CurrentPoint.GetDistanceToPoint(newPoint));
+            Mileage += CurrentPoint.GetDistanceToPoint(newPoint);
+            ObjectFlewAway?.Invoke(WhoAmI(), GetFlyTime());
             CurrentPoint = newPoint;
         }
 
         /// <inheritdoc />
-        public double GetFlyTime(double distance)
+        public double GetFlyTime()
         {
-            var finalSpeed =
-                Speed + (int) distance; //speed goes +10kmh for every 10 km : 10[km/h] * (int) (distance / 10[km])
-            return 2 * distance / (finalSpeed + Speed);
+            //speed goes +10kmh for every 10 km : finalspeed = 10[km/h] * (int) (distance / 10[km])
+            var finalSpeed = StartingSpeed + (int) Mileage;
+            return 2 * Mileage / (finalSpeed + StartingSpeed);
         }
 
         /// <inheritdoc />

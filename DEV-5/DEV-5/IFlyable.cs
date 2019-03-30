@@ -1,11 +1,11 @@
 ﻿namespace DEV_5
 {
     /// <summary>
-    /// Delegate for calling methods for flight time calculate
+    /// Delegate for calling methods when an object flies to a new point
     /// </summary>
     /// <param name="obj">Object that flew to a new point</param>
-    /// <param name="distance">Distance traversed</param>
-    public delegate void ObjectFlies(IFlyable obj, double distance);
+    /// <param name="time">Time of the flight</param>
+    public delegate void ObjectChangesLocation(IFlyable obj, double time);
 
     /// <summary>
     /// Interface for objects that can fly
@@ -15,7 +15,7 @@
         /// <summary>
         /// Event that notifies it's subscribers that an object changed it's location
         /// </summary>
-        event ObjectFlies ObjectFlewAway;
+        event ObjectChangesLocation ObjectFlewAway;
 
         /// <summary>
         /// Changes current coordinates of the object
@@ -26,9 +26,8 @@
         /// <summary>
         /// Calculates time that took the object to fly
         /// </summary>
-        /// <param name="distance">Distance traversed</param>
         /// <returns>Time of the flight</returns>
-        double GetFlyTime(double distance); //TODO parameters in reqs were not specified. Deliberately?
+        double GetFlyTime(); //TODO parameters in reqs were not specified. Deliberately? Is it allowed to send distance as a parameter?
 
         /// <summary>
         /// Returns a reference to the current object
