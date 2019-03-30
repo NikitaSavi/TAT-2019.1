@@ -41,7 +41,10 @@ namespace DEV_5
         /// Subscriber to the ObjectFlewAway Event. Receives and displays time of the flight
         /// </summary>
         /// <param name="obj">Object that flew to a new point</param>
-        /// <param name="args">Argument received from the event: Time - time of the flight</param>
+        /// <param name="args">Argument received from the event:
+        /// Time - time of the flight
+        /// Speed - (final, in case of a plane) speed of the flight
+        /// </param>
         private static void GetFlyTime(object obj, ObjectFlewAwayEventArgs args)
         {
             Console.Write($"{obj.GetType().Name}'s time is ");
