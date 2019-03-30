@@ -11,17 +11,17 @@ namespace DEV_4
         private const int TextMaxLength = 100000;
         public List<Seminar> ListOfSeminarsForThisLecture = new List<Seminar>();
         public List<Labwork> ListOfLabworksForThisLecture = new List<Labwork>();
-        private Presentation presentation;
+        private Presentation Presentation { get; set; }
 
         /// <summary>
         /// Constructor for lecture
         /// </summary>
         /// <param name="text">Text of the lecture</param>
-        /// <param name="uri">Uri for presentation</param>
-        /// <param name="presentationType">Type of presentation</param>
+        /// <param name="presentation">Presentation material for the lecture</param>
         /// <param name="description">Description, null by default</param>
         public Lecture(string text, Presentation presentation, string description = null) : base(description)
         {
+            Presentation = presentation;
             Text = text.WithMaxLength(TextMaxLength);
         }
 
@@ -40,7 +40,7 @@ namespace DEV_4
                 labworksListCopy.Add(material);
             }
 
-            return new Lecture(Text, presentation)
+            return new Lecture(Text, Presentation)
             {
                 ListOfSeminarsForThisLecture = seminarsListCopy,
                 ListOfLabworksForThisLecture = labworksListCopy,
