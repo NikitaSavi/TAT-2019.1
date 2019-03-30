@@ -41,13 +41,14 @@ namespace DEV_5
         /// Subscriber to the ObjectFlewAway Event. Receives and displays time of the flight
         /// </summary>
         /// <param name="obj">Object that flew to a new point</param>
-        /// <param name="time">Time of the flight</param>
-        private static void GetFlyTime(IFlyable obj, double time)
+        /// <param name="args">Argument received from the event: Time - time of the flight</param>
+        private static void GetFlyTime(object obj, ObjectFlewAwayEventArgs args)
         {
             Console.Write($"{obj.GetType().Name}'s time is ");
-            Console.WriteLine(obj is SpaceShip
-                ? $"{Math.Round(time * 3600, 3)} seconds"
-                : $"{Math.Round(time, 3)} hours");
+            Console.Write(obj is SpaceShip
+                ? $"{Math.Round(args.Time * 3600, 3)} seconds, "
+                : $"{Math.Round(args.Time, 3)} hours, ");
+            Console.WriteLine($"reaching {args.Speed} km/h ");
         }
     }
 }

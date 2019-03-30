@@ -10,7 +10,9 @@ namespace DEV_5
         public int Speed = new Random().Next(1, 20); // km/h
         public Point CurrentPoint { get; set; }
         public double Mileage { get; set; }
-        public event ObjectChangesLocation ObjectFlewAway;
+
+        /// <inheritdoc />
+        public event EventHandler<ObjectFlewAwayEventArgs> ObjectFlewAway;
 
         /// <summary>
         /// Constructor for the class, initializes starting position
@@ -27,7 +29,7 @@ namespace DEV_5
         public void FlyTo(Point newPoint)
         {
             Mileage += CurrentPoint.GetDistanceToPoint(newPoint);
-            ObjectFlewAway?.Invoke(WhoAmI(), GetFlyTime());
+            ObjectFlewAway?.Invoke(WhoAmI(), new ObjectFlewAwayEventArgs(GetFlyTime(), Speed));
             CurrentPoint = newPoint;
         }
 

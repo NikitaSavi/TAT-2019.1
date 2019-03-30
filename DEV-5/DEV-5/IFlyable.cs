@@ -1,12 +1,7 @@
-﻿namespace DEV_5
-{
-    /// <summary>
-    /// Delegate for calling methods when an object flies to a new point
-    /// </summary>
-    /// <param name="obj">Object that flew to a new point</param>
-    /// <param name="time">Time of the flight</param>
-    public delegate void ObjectChangesLocation(IFlyable obj, double time);
+﻿using System;
 
+namespace DEV_5
+{
     /// <summary>
     /// Interface for objects that can fly
     /// </summary>
@@ -15,7 +10,7 @@
         /// <summary>
         /// Event that notifies it's subscribers that an object changed it's location
         /// </summary>
-        event ObjectChangesLocation ObjectFlewAway;
+        event EventHandler<ObjectFlewAwayEventArgs> ObjectFlewAway;
 
         /// <summary>
         /// Changes current coordinates of the object
