@@ -24,7 +24,7 @@ namespace DEV_5
                 foreach (var flyable in flyables)
                 {
                     //Subscribe to the event - object changes coordinates -> get time of the flight
-                    flyable.ObjectFlewAway += GetFlyTime;
+                    flyable.ObjectFlewAway += FlightTimeLog.GetFlyTime;
                     flyable.FlyTo(new Point(100, 200, 800));
                 }
 
@@ -35,22 +35,6 @@ namespace DEV_5
                 Console.WriteLine($"Error: {ex.Message}");
                 return 1;
             }
-        }
-
-        /// <summary>
-        /// Subscriber to the ObjectFlewAway Event. Receives and displays time of the flight
-        /// </summary>
-        /// <param name="obj">Object that flew to a new point</param>
-        /// <param name="args">Argument received from the event:
-        /// Time - time of the flight
-        /// Speed - (final, in case of a plane) speed of the flight
-        /// </param>
-        private static void GetFlyTime(object obj, ObjectFlewAwayEventArgs args)
-        {
-            Console.Write($"{obj.GetType().Name}'s time is ");
-            Console.WriteLine(obj is SpaceShip
-                ? $"{Math.Round(args.Time * 3600, 3)} seconds, reaching {args.Speed / 3600} km/s"
-                : $"{Math.Round(args.Time, 3)} hours, reaching {args.Speed} km/h");
         }
     }
 }

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Bird.cs" />
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="FlightTimeLog.cs" />
     <Compile Include="IFlyable.cs" />
     <Compile Include="ObjectFlewAwayEventArgs.cs" />
     <Compile Include="Plane.cs" />
