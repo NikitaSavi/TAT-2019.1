@@ -21,8 +21,8 @@ namespace DEV_4
         /// <param name="description">Description, null by default</param>
         public Lecture(string text, Presentation presentation, string description = null) : base(description)
         {
-            Presentation = presentation;
-            Text = text.WithMaxLength(TextMaxLength);
+            this.Presentation = presentation;
+            this.Text = text.WithMaxLength(TextMaxLength);
         }
 
         /// <inheritdoc />

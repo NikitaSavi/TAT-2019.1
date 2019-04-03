@@ -13,21 +13,15 @@ namespace DEV_4
         /// Base constructor for materials, sets general data
         /// </summary>
         /// <param name="description">Description of an entity, null by default</param>
-        protected Material(string description = null)
-        {
-            Data = new EntityData(description);
-        }
+        protected Material(string description = null) => Data = new EntityData(description);
 
         /// <summary>
         /// Override method to return description of an entity
         /// </summary>
         /// <returns>Description of an entity</returns>
-        public override string ToString()
-        {
-            return string.IsNullOrEmpty(Data.Description)
-                ? "No description available"
-                : $"Description: {Data.Description}";
-        }
+        public override string ToString() => string.IsNullOrEmpty(Data.Description)
+            ? "No description available"
+            : $"Description: {Data.Description}";
 
         /// <summary>
         /// Override method for comparing entities. Entities are equal if their GUIDs are equal
@@ -48,9 +42,6 @@ namespace DEV_4
         /// Performs deep cloning of an entity
         /// </summary>
         /// <returns>A clone of an entity</returns>
-        public virtual object Clone()
-        {
-            throw new NotImplementedException();
-        }
+        public virtual object Clone() => throw new NotImplementedException();
     }
 }

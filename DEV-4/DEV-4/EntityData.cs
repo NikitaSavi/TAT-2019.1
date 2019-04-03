@@ -11,7 +11,7 @@
 
         public EntityData(string description = null)
         {
-            Description = description.WithMaxLength(DescriptionMaxLength);
+            this.Description = description.WithMaxLength(DescriptionMaxLength);
             EntityGuid = EntityGuid.GenerateGuid();
         }
     }

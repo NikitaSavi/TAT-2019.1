@@ -1,21 +1,17 @@
 ﻿namespace DEV_4
 {
+    /// <summary>
+    /// Struct for presentation for lectures
+    /// </summary>
     struct Presentation
     {
         public string Uri { get; set; }
         public PresentationAllTypes Type;
 
-        public enum PresentationAllTypes
-        {
-            Unknown,
-            PPT,
-            PDF
-        }
-
         public Presentation(string uri, PresentationAllTypes type = PresentationAllTypes.Unknown)
         {
-            Uri = uri;
-            Type = type;
+            this.Uri = uri;
+            this.Type = type;
         }
     }
 }

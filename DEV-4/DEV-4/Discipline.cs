@@ -18,10 +18,7 @@ namespace DEV_4
         /// Base constructor for materials, sets general data
         /// </summary>
         /// <param name="description">Description of an entity, null by default</param>
-        public Discipline(string description = null)
-        {
-            Data = new EntityData(description);
-        }
+        public Discipline(string description = null) => Data = new EntityData(description);
 
         /// <summary>
         /// Indexer to get lectures and complementary materials of the discipline
@@ -51,10 +48,7 @@ namespace DEV_4
         /// Adds lecture to the discipline
         /// </summary>
         /// <param name="lecture">Lecture to add</param>
-        public void AddLecture(Lecture lecture)
-        {
-            ListOfLectures.Add(lecture);
-        }
+        public void AddLecture(Lecture lecture) => ListOfLectures.Add(lecture);
 
         /// <summary>
         /// Adds seminar to the discipline (and to a lecture if necessary)
@@ -88,12 +82,9 @@ namespace DEV_4
         /// Override method to return description of an entity
         /// </summary>
         /// <returns>Description of an entity</returns>
-        public override string ToString()
-        {
-            return string.IsNullOrEmpty(Data.Description)
-                ? "No description available"
-                : $"Description: {Data.Description}";
-        }
+        public override string ToString() => string.IsNullOrEmpty(Data.Description)
+            ? "No description available"
+            : $"Description: {Data.Description}";
 
         /// <summary>
         /// Override method for comparing entities. Entities are equal if their GUIDs are equal

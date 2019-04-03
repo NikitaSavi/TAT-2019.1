@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DEV_4
 {
@@ -10,6 +9,7 @@ namespace DEV_4
     {
         public List<string> TasksList { get; set; }
         public Dictionary<string, string> Questions { get; set; }
+
         /// <summary>
         /// Constructor for seminars
         /// </summary>
