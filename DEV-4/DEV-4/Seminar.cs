@@ -19,8 +19,8 @@ namespace DEV_4
         public Seminar(List<string> tasksList, Dictionary<string, string> questions, string description = null) :
             base(description)
         {
-            TasksList = tasksList;
-            Questions = questions;
+            this.TasksList = tasksList;
+            this.Questions = questions;
         }
 
         /// <inheritdoc />
