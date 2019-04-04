@@ -24,12 +24,12 @@ namespace CW3
         public override Triangle Build(Point a, Point b, Point c)
         {
             if ((Math.Abs(a.X - b.X) > Tolerance && Math.Abs(b.X - c.X) > Tolerance)
-                || (Math.Abs(a.Y - b.Y) > Tolerance && Math.Abs(b.Y - c.Y) > Tolerance))
+                && (Math.Abs(a.Y - b.Y) > Tolerance && Math.Abs(b.Y - c.Y) > Tolerance))
             {
                 return new NormalTriangle(a, b, c);
             }
 
-            throw new Exception("Not a triangle");
+            throw new ArgumentException("Not a triangle");
         }
     }
 }

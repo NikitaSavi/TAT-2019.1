@@ -2,8 +2,6 @@
 
 namespace CW3
 {
-    using System.Collections.Specialized;
-
     /// <summary>
     /// The right triangle builder.
     /// </summary>
