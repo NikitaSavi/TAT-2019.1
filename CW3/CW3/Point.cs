@@ -21,8 +21,8 @@ namespace CW3
         /// </param>
         public Point(double x = 0, double y = 0)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
 
         /// <summary>

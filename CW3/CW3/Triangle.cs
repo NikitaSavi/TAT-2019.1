@@ -31,7 +31,7 @@
         /// <param name="c">
         /// Point c
         /// </param>
-        public Triangle(Point a, Point b, Point c)
+        protected Triangle(Point a, Point b, Point c)
         {
             A = a;
             B = b;
