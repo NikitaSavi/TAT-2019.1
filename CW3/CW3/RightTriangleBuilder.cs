@@ -21,6 +21,7 @@ namespace CW3
         public override Triangle Build(Point a, Point b, Point c)
         {
             // While vectors are not exactly "points", they can be identified by coordinates just like points
+            //TODO Fix math here
             var vectorAB = new Point(Math.Abs(a.X - b.X), Math.Abs(a.Y - b.Y));
             var vectorBC = new Point(Math.Abs(b.X - c.X), Math.Abs(b.Y - c.Y));
             var vectorAC = new Point(Math.Abs(a.X - c.X), Math.Abs(a.Y - c.Y));
