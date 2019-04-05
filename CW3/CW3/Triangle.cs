@@ -32,7 +32,7 @@
         /// <summary>
         /// Tolerance for float numbers comparison
         /// </summary>
-        public const double Tolerance = 0.000001;
+        public const double Tolerance = 1E-6;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Triangle"/> class.

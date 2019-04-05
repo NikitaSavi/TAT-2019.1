@@ -29,13 +29,9 @@ namespace CW3
                 // any
                 var triangleC = mainBuilder.Build(new Point(), new Point(0, 17), new Point(5, 6));
 
-                // wrong
-                var triangleD = mainBuilder.Build(new Point(0, 23), new Point(0, 34), new Point(0, 1));
-
-                Console.WriteLine(triangleA.GetSquare());
-                Console.WriteLine(triangleB.GetSquare());
-                Console.WriteLine(triangleC.GetSquare());
-                Console.WriteLine(triangleD.GetSquare());
+                Console.WriteLine($"Square of {triangleA.GetType().Name} is {triangleA.GetSquare()}");
+                Console.WriteLine($"Square of {triangleB.GetType().Name} is {triangleB.GetSquare()}");
+                Console.WriteLine($"Square of {triangleC.GetType().Name} is {triangleC.GetSquare()}");
 
                 return 0;
             }

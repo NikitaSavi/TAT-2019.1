@@ -8,7 +8,7 @@
         /// <summary>
         /// Tolerance for float numbers comparison
         /// </summary>
-        public const double Tolerance = 0.000001;
+        public const double Tolerance = 1E-6;
 
         /// <summary>
         /// The successor for chain of responsibility
