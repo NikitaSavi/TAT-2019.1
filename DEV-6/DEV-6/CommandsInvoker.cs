@@ -24,15 +24,19 @@ namespace DEV_6
             Console.WriteLine("Input a chain of commands, then enter \"execute\"");
             while (true)
             {
-                var commandKeyWords = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                var commandType = commandKeyWords[0];
+                var commandKeyWords = Console.ReadLine().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+                const int commandTypeIndex = 0;
+                const int commandVehicleIndex = 1;
+                const int commandBrandStartIndex = 2;
+                const int minimumAmountOfArgs = 2;
+                var commandType = commandKeyWords[commandTypeIndex];
 
                 if (commandType == "execute")
                 {
                     break;
                 }
 
-                if (commandKeyWords.Length < 2)
+                if (commandKeyWords.Length < minimumAmountOfArgs)
                 {
                     Console.WriteLine(
                         "A command must contain at least two arguments: type of command, type of vehicle, (optional for average_price) brand of vehicle");
@@ -40,7 +44,7 @@ namespace DEV_6
                 }
 
                 // Determine the type of vehicle to process
-                var commandVehicle = commandKeyWords[1];
+                var commandVehicle = commandKeyWords[commandVehicleIndex];
                 List<VehicleInfoStruct> listToProcess;
                 switch (commandVehicle)
                 {
@@ -67,10 +71,12 @@ namespace DEV_6
                     case "average_price":
 
                         // If a brand is entered, run the necessary command
-                        if (commandKeyWords.Length > 2)
+                        if (commandKeyWords.Length > minimumAmountOfArgs)
                         {
                             // Create a joined string in case of brand having multiple words
-                            var commandBrand = commandKeyWords.Length > 3 ? string.Join(" ", commandKeyWords, 2) : commandKeyWords[2];
+                            var commandBrand = commandKeyWords.Length > minimumAmountOfArgs + 1
+                                ? string.Join(" ", commandKeyWords, commandBrandStartIndex)
+                                : commandKeyWords[commandBrandStartIndex];
 
                             //Check if the brand exists in the database 
                             if (listToProcess.Any(vehicle => vehicle.Brand == commandBrand))
