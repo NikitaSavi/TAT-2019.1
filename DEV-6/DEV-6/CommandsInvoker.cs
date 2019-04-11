@@ -24,7 +24,7 @@ namespace DEV_6
             Console.WriteLine("Input a chain of commands, then enter \"execute\"");
             while (true)
             {
-                var commandKeyWords = Console.ReadLine().Split(' ');
+                var commandKeyWords = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 var commandType = commandKeyWords[0];
 
                 if (commandType == "execute")
@@ -69,7 +69,8 @@ namespace DEV_6
                         // If a brand is entered, run the necessary command
                         if (commandKeyWords.Length > 2)
                         {
-                            var commandBrand = commandKeyWords[2];
+                            // Create a joined string in case of brand having multiple words
+                            var commandBrand = commandKeyWords.Length > 3 ? string.Join(" ", commandKeyWords, 2) : commandKeyWords[2];
 
                             //Check if the brand exists in the database 
                             if (listToProcess.Any(vehicle => vehicle.Brand == commandBrand))
