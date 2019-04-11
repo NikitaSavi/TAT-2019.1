@@ -5,13 +5,13 @@ namespace DEV_6
     /// <summary>
     /// DEV-6: get information about cars by parsing XML document.
     /// </summary>
-    internal class EntryPoint
+    public class EntryPoint
     {
         /// <summary>
         /// The entry point.
         /// </summary>
         /// <param name="args">
-        /// Name of the XML document to parse.
+        /// Name of the XML documents to parse.
         /// </param>
         /// <returns>Operation codes: 0 - OK, 1 - Error.</returns>
         private static int Main(string[] args)
@@ -23,9 +23,7 @@ namespace DEV_6
                     throw new ArgumentNullException();
                 }
 
-                var listOfCars = XmlParser.ParseCarInfo(args[0]);
-                var invokeCommands = new CommandsInvoker();
-                invokeCommands.InvokeCommands(listOfCars);
+                CommandsInvoker.InvokeCommands(args[0], args[1]);
 
                 return 0;
             }

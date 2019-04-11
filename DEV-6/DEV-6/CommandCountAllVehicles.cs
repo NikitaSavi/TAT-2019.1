@@ -3,14 +3,14 @@
 namespace DEV_6
 {
     /// <summary>
-    /// The command to count marks.
+    /// The command to count all vehicles.
     /// </summary>
-    public class CommandCountMarks : ICommand
+    public class CommandCountAllVehicles : ICommand
     {
         /// <summary>
         /// The receiver.
         /// </summary>
-        private CounterMarks counter;
+        private CounterAllVehicles counter;
 
         /// <summary>
         /// The list of vehicles with their info.
@@ -18,7 +18,7 @@ namespace DEV_6
         private List<VehicleInfoStruct> listOfVehicles;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommandCountMarks"/> class.
+        /// Initializes a new instance of the <see cref="CommandCountAllVehicles"/> class.
         /// </summary>
         /// <param name="receiver">
         /// The receiver.
@@ -26,13 +26,13 @@ namespace DEV_6
         /// <param name="listOfVehicles">
         /// The list of vehicles with their info.
         /// </param>
-        public CommandCountMarks(CounterMarks receiver, List<VehicleInfoStruct> listOfVehicles)
+        public CommandCountAllVehicles(CounterAllVehicles receiver, List<VehicleInfoStruct> listOfVehicles)
         {
             this.counter = receiver;
             this.listOfVehicles = listOfVehicles;
         }
 
         /// <inheritdoc />
-        public double Execute() => this.counter.CountMarks(this.listOfVehicles);
+        public double Execute() => this.counter.CountAllVehicles(this.listOfVehicles);
     }
 }

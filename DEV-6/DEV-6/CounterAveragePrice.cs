@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace DEV_6
-{ 
+{
     /// <summary>
-    /// Counts the average price of cars.
+    /// Counts the average price of vehicles.
     /// </summary>
-    internal class CounterAveragePrice
+    public class CounterAveragePrice
     {
         /// <summary>
-        /// Counts the average price of cars.
+        /// Counts the average price of vehicles.
         /// </summary>
-        /// <param name="listOfCars">
-        /// The list of cars with their info.
+        /// <param name="listOfVehicles">
+        /// The list of vehicles with their info.
         /// </param>
         /// <returns>
         /// The average price.
         /// </returns>
-        public double CountAveragePrice(List<CarInfoStruct> listOfCars) => Math.Round((double)listOfCars.Sum(x => x.Price) / listOfCars.Count, 2);
+        public double CountAveragePrice(List<VehicleInfoStruct> listOfVehicles) => Math.Round((double)listOfVehicles.Sum(x => x.Price) / listOfVehicles.Count, 2);
     }
 }

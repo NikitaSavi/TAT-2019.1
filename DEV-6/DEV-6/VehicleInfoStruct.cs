@@ -1,12 +1,12 @@
 ﻿namespace DEV_6
 {
     /// <summary>
-    /// Struct for car information.
+    /// Struct for vehicle information.
     /// </summary>
-    internal struct CarInfoStruct
+    public struct VehicleInfoStruct
     {
         /// <summary>
-        /// Mark of the car.
+        /// Mark of the vehicle.
         /// </summary>
         public string Mark { get; set; }
 
@@ -16,12 +16,12 @@
         public string Model { get; set; }
 
         /// <summary>
-        /// Quantity of cars of this model.
+        /// Quantity of vehicles of this model.
         /// </summary>
         public int Quantity { get; set; }
 
         /// <summary>
-        /// Price of an individual car
+        /// Price of an individual vehicle
         /// </summary>
         public int Price { get; set; }
     }

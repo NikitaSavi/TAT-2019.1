@@ -43,14 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarInfoStruct.cs" />
-    <Compile Include="CommandCountAllCars.cs" />
+    <Compile Include="DatabaseCars.cs" />
+    <Compile Include="DatabaseTrucks.cs" />
+    <Compile Include="VehicleInfoStruct.cs" />
+    <Compile Include="CommandCountAllVehicles.cs" />
     <Compile Include="CommandCountAveragePrice.cs" />
     <Compile Include="CommandsInvoker.cs" />
     <Compile Include="CounterAveragePrice.cs" />
     <Compile Include="CommandCountAveragePriceOfMark.cs" />
     <Compile Include="CounterAveragePriceOfMark.cs" />
-    <Compile Include="CounterAllCars.cs" />
+    <Compile Include="CounterAllVehicles.cs" />
     <Compile Include="CommandCountMarks.cs" />
     <Compile Include="CounterMarks.cs" />
     <Compile Include="EntryPoint.cs" />

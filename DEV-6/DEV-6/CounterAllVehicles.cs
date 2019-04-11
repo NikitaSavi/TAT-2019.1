@@ -1,23 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace DEV_6
 {
-    using System.Linq;
-
     /// <summary>
-    /// Counts the amount of marks.
+    /// Counts the amount of vehicles.
     /// </summary>
-    public class CounterMarks
+    public class CounterAllVehicles
     {
         /// <summary>
-        /// Counts the amount of marks.
+        /// Counts the amount of vehicles.
         /// </summary>
         /// <param name="listOfVehicles">
         /// The list of vehicles with their info.
         /// </param>
         /// <returns>
-        /// The amount of marks.
+        /// The amount of vehicles.
         /// </returns>
-        public double CountMarks(List<VehicleInfoStruct> listOfVehicles) => listOfVehicles.Select(x => x.Mark).Distinct().Count();
+        public double CountAllVehicles(List<VehicleInfoStruct> listOfVehicles) => listOfVehicles.Sum(x => x.Quantity);
     }
 }

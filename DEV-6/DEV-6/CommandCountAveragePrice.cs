@@ -5,7 +5,7 @@ namespace DEV_6
     /// <summary>
     /// The command to count average price.
     /// </summary>
-    internal class CommandCountAveragePrice : ICommand
+    public class CommandCountAveragePrice : ICommand
     {
         /// <summary>
         /// The receiver.
@@ -13,9 +13,9 @@ namespace DEV_6
         private CounterAveragePrice counter;
 
         /// <summary>
-        /// The list of cars with their info.
+        /// The list of vehicles with their info.
         /// </summary>
-        private List<CarInfoStruct> listOfCars;
+        private List<VehicleInfoStruct> listOfVehicles;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandCountAveragePrice"/> class.
@@ -23,19 +23,16 @@ namespace DEV_6
         /// <param name="receiver">
         /// The receiver.
         /// </param>
-        /// <param name="listOfCars">
-        /// The list of cars with their info.
+        /// <param name="listOfVehicles">
+        /// The list of vehicles with their info.
         /// </param>
-        public CommandCountAveragePrice(CounterAveragePrice receiver, List<CarInfoStruct> listOfCars)
+        public CommandCountAveragePrice(CounterAveragePrice receiver, List<VehicleInfoStruct> listOfVehicles)
         {
             this.counter = receiver;
-            this.listOfCars = listOfCars;
+            this.listOfVehicles = listOfVehicles;
         }
 
         /// <inheritdoc />
-        public double Execute()
-        {
-            return this.counter.CountAveragePrice(this.listOfCars);
-        }
+        public double Execute() => this.counter.CountAveragePrice(this.listOfVehicles);
     }
 }

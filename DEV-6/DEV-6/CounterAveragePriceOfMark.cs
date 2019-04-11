@@ -8,24 +8,24 @@ namespace DEV_6
     /// <summary>
     /// Counts the average price of certain mark.
     /// </summary>
-    internal class CounterAveragePriceOfMark
+    public class CounterAveragePriceOfMark
     {
         /// <summary>
         /// Counts the average price of a mark.
         /// </summary>
-        /// <param name="listOfCars">
-        /// The list of cars with their info.
+        /// <param name="listOfVehicles">
+        /// The list of vehicles with their info.
         /// </param>
         /// <param name="mark">
-        /// Mark of the car
+        /// Mark of the vehicle
         /// </param>
         /// <returns>
         /// The average price of the mark.
         /// </returns>
-        public double CountAveragePrice(List<CarInfoStruct> listOfCars, string mark) =>
+        public double CountAveragePrice(List<VehicleInfoStruct> listOfVehicles, string mark) =>
             Math.Round(
-                (double)listOfCars.Where(x => x.Mark == mark).Sum(x => x.Price)
-                / listOfCars.Count(x => x.Mark == mark),
-                2);
+                (double)listOfVehicles.Where(x => x.Mark == mark).Sum(x => x.Price)
+                / listOfVehicles.Count(x => x.Mark == mark),
+                3);
     }
 }

@@ -7,56 +7,86 @@ namespace DEV_6
     /// <summary>
     /// The commands invoker.
     /// </summary>
-    internal class CommandsInvoker
+    public static class CommandsInvoker
     {
         /// <summary>
         /// Invokes the commands, based on user's input.
         /// </summary>
-        /// <param name="listOfCars">
-        /// The list of cars with their info.
+        /// <param name="carsDocName">
+        /// Name of XML doc with cars information.
         /// </param>
-        public void InvokeCommands(List<CarInfoStruct> listOfCars)
+        /// <param name="trucksDocName">
+        /// Name of XML doc with trucks information.
+        /// </param>
+        public static void InvokeCommands(string carsDocName, string trucksDocName)
         {
+            var commandsQueue = new List<ICommand>();
+            Console.WriteLine("Input a chain of commands, then enter \"execute\"");
             while (true)
             {
-                Console.WriteLine("Input a command:");
                 var command = Console.ReadLine();
-                if (!command.Equals("exit"))
-                {
-                    switch (command)
-                    {
-                        case "count types":
-                            Console.WriteLine(
-                                $"The amount of marks is {new CommandCountMarks(new CounterMarks(), listOfCars).Execute()}\n");
-                            break;
-                        case "count all":
-                            Console.WriteLine(
-                                $"The amount of cars is {new CommandCountAllCars(new CounterAllCars(), listOfCars).Execute()}\n");
-                            break;
-                        case "average price":
-                            Console.WriteLine(
-                                $"The average price is {new CommandCountAveragePrice(new CounterAveragePrice(), listOfCars).Execute()}\n");
-                            break;
-                        default:
-                            if (command.Contains("average price")
-                                && listOfCars.Any(car => car.Mark == command.Split(' ')[2]))
-                            {
-                                Console.WriteLine(
-                                    $"The average price of {command.Split(' ')[2]} is " +
-                                    $"{new CommandCountAveragePriceOfMark(new CounterAveragePriceOfMark(), listOfCars, command.Split(' ')[2]).Execute()}\n");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Unknown input.\n");
-                            }
-
-                            break;
-                    }
-                }
-                else
+                if (command == "execute")
                 {
                     break;
                 }
+
+                if (command.Split(' ').Length < 2)
+                {
+                    Console.WriteLine(
+                        "A command must contain at least two arguments: type of command, type of vehicle, (optional for average_price) mark of vehicle");
+                    continue;
+                }
+
+                List<VehicleInfoStruct> listToProcess;
+                switch (command.Split(' ')[1])
+                {
+                    case "car":
+                        listToProcess = DatabaseCars.GetDatabaseCars(carsDocName).ListOfCars;
+                        break;
+
+                    case "truck":
+                        listToProcess = DatabaseTrucks.GetDatabaseTrucks(trucksDocName).ListOfTrucks;
+                        break;
+
+                    default:
+                        Console.WriteLine("Unknown vehicle type");
+                        continue;
+                }
+
+                switch (command.Split(' ')[0])
+                {
+                    case "count_types":
+                        commandsQueue.Add(new CommandCountMarks(new CounterMarks(), listToProcess));
+                        break;
+
+                    case "count_all":
+                        commandsQueue.Add(new CommandCountAllVehicles(new CounterAllVehicles(), listToProcess));
+                        break;
+
+                    case "average_price":
+                        commandsQueue.Add(new CommandCountAveragePrice(new CounterAveragePrice(), listToProcess));
+                        break;
+
+                    default:
+                        if (command.Contains("average_price") && command.Split(' ').Length > 2)
+                        {
+                            if (listToProcess.Any(vehicle => vehicle.Mark == command.Split(' ')[2]))
+                            {
+                                commandsQueue.Add(new CommandCountAveragePriceOfMark(new CounterAveragePriceOfMark(), listToProcess, command.Split(' ')[2]));
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Unknown command");
+                        }
+
+                        break;
+                }
+            }
+
+            foreach (var command in commandsQueue)
+            {
+                Console.WriteLine(command.Execute());
             }
         }
     }

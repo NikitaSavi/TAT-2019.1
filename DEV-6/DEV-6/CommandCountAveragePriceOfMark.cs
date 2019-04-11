@@ -5,7 +5,7 @@ namespace DEV_6
     /// <summary>
     /// The command to count average price of a certain type.
     /// </summary>
-    internal class CommandCountAveragePriceOfMark : ICommand
+    public class CommandCountAveragePriceOfMark : ICommand
     {
         /// <summary>
         /// The receiver.
@@ -13,14 +13,14 @@ namespace DEV_6
         private CounterAveragePriceOfMark counter;
 
         /// <summary>
-        /// The type of a car.
+        /// The type of a vehicle.
         /// </summary>
         private string mark;
 
         /// <summary>
-        /// The list of cars with their info.
+        /// The list of vehicles with their info.
         /// </summary>
-        private List<CarInfoStruct> listOfCars;
+        private List<VehicleInfoStruct> listOfVehicles;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandCountAveragePriceOfMark"/> class.
@@ -28,23 +28,20 @@ namespace DEV_6
         /// <param name="receiver">
         /// The receiver.
         /// </param>
-        /// <param name="listOfCars">
-        /// The list of cars with their info.
+        /// <param name="listOfVehicles">
+        /// The list of vehicles with their info.
         /// </param>
         /// <param name="mark">
-        /// The mark of a car.
+        /// The mark of a vehicle.
         /// </param>
-        public CommandCountAveragePriceOfMark(CounterAveragePriceOfMark receiver, List<CarInfoStruct> listOfCars, string mark)
+        public CommandCountAveragePriceOfMark(CounterAveragePriceOfMark receiver, List<VehicleInfoStruct> listOfVehicles, string mark)
         {
             this.counter = receiver;
             this.mark = mark;
-            this.listOfCars = listOfCars;
+            this.listOfVehicles = listOfVehicles;
         }
 
         /// <inheritdoc />
-        public double Execute()
-        {
-           return this.counter.CountAveragePrice(this.listOfCars, this.mark);
-        }
+        public double Execute() => this.counter.CountAveragePrice(this.listOfVehicles, this.mark);
     }
 }
