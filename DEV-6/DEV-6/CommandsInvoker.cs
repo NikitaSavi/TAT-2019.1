@@ -24,13 +24,15 @@ namespace DEV_6
             Console.WriteLine("Input a chain of commands, then enter \"execute\"");
             while (true)
             {
-                var command = Console.ReadLine();
-                if (command == "execute")
+                var commandKeyWords = Console.ReadLine().Split(' ');
+                var commandType = commandKeyWords[0];
+
+                if (commandType == "execute")
                 {
                     break;
                 }
 
-                if (command.Split(' ').Length < 2)
+                if (commandKeyWords.Length < 2)
                 {
                     Console.WriteLine(
                         "A command must contain at least two arguments: type of command, type of vehicle, (optional for average_price) brand of vehicle");
@@ -38,43 +40,42 @@ namespace DEV_6
                 }
 
                 // Determine the type of vehicle to process
+                var commandVehicle = commandKeyWords[1];
                 List<VehicleInfoStruct> listToProcess;
-                switch (command.Split(' ')[1])
+                switch (commandVehicle)
                 {
                     case "car":
                         listToProcess = DatabaseCars.GetDatabaseCars(carsDocName).ListOfCars;
                         break;
-
                     case "truck":
                         listToProcess = DatabaseTrucks.GetDatabaseTrucks(trucksDocName).ListOfTrucks;
                         break;
-
                     default:
                         Console.WriteLine("Unknown vehicle type");
                         continue;
                 }
 
                 // Determine the action to perform
-                switch (command.Split(' ')[0])
+                switch (commandType)
                 {
                     case "count_types":
                         commandsQueue.Add(new CommandCountBrands(new CounterBrands(), listToProcess));
                         break;
-
                     case "count_all":
                         commandsQueue.Add(new CommandCountAllVehicles(new CounterAllVehicles(), listToProcess));
                         break;
-
                     case "average_price":
 
                         // If a brand is entered, run the necessary command
-                        if (command.Split(' ').Length > 2)
+                        if (commandKeyWords.Length > 2)
                         {
+                            var commandBrand = commandKeyWords[2];
+
                             //Check if the brand exists in the database 
-                            if (listToProcess.Any(vehicle => vehicle.Brand == command.Split(' ')[2]))
+                            if (listToProcess.Any(vehicle => vehicle.Brand == commandBrand))
                             {
                                 commandsQueue.Add(new CommandCountAveragePriceOfBrand(new CounterAveragePriceOfBrand(),
-                                    listToProcess, command.Split(' ')[2]));
+                                    listToProcess, commandBrand));
                             }
                             else
                             {
