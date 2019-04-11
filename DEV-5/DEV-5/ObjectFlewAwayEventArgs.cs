@@ -16,8 +16,8 @@ namespace DEV_5
         /// <param name="speed">(Final, in case of a plane) Speed of the flight</param>
         public ObjectFlewAwayEventArgs(double time, int speed)
         {
-            Time = time;
-            Speed = speed;
+            this.Time = time;
+            this.Speed = speed;
         }
     }
 }

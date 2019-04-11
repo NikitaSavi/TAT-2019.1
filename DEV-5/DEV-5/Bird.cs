@@ -7,7 +7,9 @@ namespace DEV_5
     /// </summary>
     public class Bird : IFlyable
     {
-        public int Speed = new Random().Next(1, 20); // km/h
+        public const int MinSpeed = 1;
+        public const int MaxSpeed = 20;
+        public int Speed = new Random().Next(MinSpeed, MaxSpeed); // km/h
         public Point CurrentPoint { get; set; }
         public double Mileage { get; set; }
 

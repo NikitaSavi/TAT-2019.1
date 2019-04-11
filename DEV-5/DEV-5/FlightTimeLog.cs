@@ -7,6 +7,8 @@ namespace DEV_5
     /// </summary>
     class FlightTimeLog
     {
+        private static int secondsToHoursConvertTime = 3600;
+
         /// <summary>
         /// Subscriber to the ObjectFlewAway Event. Receives and displays time of the flight
         /// </summary>
@@ -17,11 +19,12 @@ namespace DEV_5
         /// </param>
         public static void GetFlyTime(object obj, ObjectFlewAwayEventArgs args)
         {
+
             if (obj is IFlyable)
             {
                 Console.Write($"{obj.GetType().Name}'s time is ");
                 Console.WriteLine(obj is SpaceShip
-                    ? $"{Math.Round(args.Time * 3600, 3)} seconds, reaching {args.Speed / 3600} km/s"
+                    ? $"{Math.Round(args.Time * secondsToHoursConvertTime, 3)} seconds, reaching {args.Speed / secondsToHoursConvertTime} km/s"
                     : $"{Math.Round(args.Time, 3)} hours, reaching {args.Speed} km/h");
             }
         }
