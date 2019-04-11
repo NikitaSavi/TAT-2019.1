@@ -37,6 +37,7 @@ namespace DEV_6
                     continue;
                 }
 
+                // Determine the type of vehicle to process
                 List<VehicleInfoStruct> listToProcess;
                 switch (command.Split(' ')[1])
                 {
@@ -53,6 +54,7 @@ namespace DEV_6
                         continue;
                 }
 
+                // Determine the action to perform
                 switch (command.Split(' ')[0])
                 {
                     case "count_types":
@@ -64,8 +66,11 @@ namespace DEV_6
                         break;
 
                     case "average_price":
+
+                        // If a brand is entered, run the necessary command
                         if (command.Split(' ').Length > 2)
                         {
+                            //Check if the brand exists in the database 
                             if (listToProcess.Any(vehicle => vehicle.Brand == command.Split(' ')[2]))
                             {
                                 commandsQueue.Add(new CommandCountAveragePriceOfBrand(new CounterAveragePriceOfBrand(),
@@ -73,9 +78,11 @@ namespace DEV_6
                             }
                             else
                             {
-                                Console.WriteLine("Brand is not found");
+                                Console.WriteLine("Unknown brand");
                             }
                         }
+
+                        // If no brand is entered, run the usual command
                         else
                         {
                             commandsQueue.Add(new CommandCountAveragePrice(new CounterAveragePrice(), listToProcess));
