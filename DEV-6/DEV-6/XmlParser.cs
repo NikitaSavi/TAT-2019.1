@@ -25,7 +25,7 @@ namespace DEV_6
             var listOfVehicles = from xe in xdoc.Element("cars").Elements("car")
                                  select new VehicleInfoStruct
                                  {
-                                     Mark = xe.Element("mark").Value,
+                                     Brand = xe.Element("brand").Value,
                                      Model = xe.Element("model").Value,
                                      Quantity = Convert.ToInt32(xe.Element("quantity").Value),
                                      Price = Convert.ToInt32(xe.Element("price").Value)

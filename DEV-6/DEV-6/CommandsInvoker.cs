@@ -33,7 +33,7 @@ namespace DEV_6
                 if (command.Split(' ').Length < 2)
                 {
                     Console.WriteLine(
-                        "A command must contain at least two arguments: type of command, type of vehicle, (optional for average_price) mark of vehicle");
+                        "A command must contain at least two arguments: type of command, type of vehicle, (optional for average_price) brand of vehicle");
                     continue;
                 }
 
@@ -56,7 +56,7 @@ namespace DEV_6
                 switch (command.Split(' ')[0])
                 {
                     case "count_types":
-                        commandsQueue.Add(new CommandCountMarks(new CounterMarks(), listToProcess));
+                        commandsQueue.Add(new CommandCountBrands(new CounterBrands(), listToProcess));
                         break;
 
                     case "count_all":
@@ -64,22 +64,27 @@ namespace DEV_6
                         break;
 
                     case "average_price":
-                        commandsQueue.Add(new CommandCountAveragePrice(new CounterAveragePrice(), listToProcess));
-                        break;
-
-                    default:
-                        if (command.Contains("average_price") && command.Split(' ').Length > 2)
+                        if (command.Split(' ').Length > 2)
                         {
-                            if (listToProcess.Any(vehicle => vehicle.Mark == command.Split(' ')[2]))
+                            if (listToProcess.Any(vehicle => vehicle.Brand == command.Split(' ')[2]))
                             {
-                                commandsQueue.Add(new CommandCountAveragePriceOfMark(new CounterAveragePriceOfMark(), listToProcess, command.Split(' ')[2]));
+                                commandsQueue.Add(new CommandCountAveragePriceOfBrand(new CounterAveragePriceOfBrand(),
+                                    listToProcess, command.Split(' ')[2]));
+                            }
+                            else
+                            {
+                                Console.WriteLine("Brand is not found");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Unknown command");
+                            commandsQueue.Add(new CommandCountAveragePrice(new CounterAveragePrice(), listToProcess));
                         }
 
+                        break;
+
+                    default:
+                        Console.WriteLine("Unknown command");
                         break;
                 }
             }

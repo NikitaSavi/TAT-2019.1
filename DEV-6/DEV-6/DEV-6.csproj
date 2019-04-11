@@ -50,11 +50,11 @@
     <Compile Include="CommandCountAveragePrice.cs" />
     <Compile Include="CommandsInvoker.cs" />
     <Compile Include="CounterAveragePrice.cs" />
-    <Compile Include="CommandCountAveragePriceOfMark.cs" />
-    <Compile Include="CounterAveragePriceOfMark.cs" />
+    <Compile Include="CommandCountAveragePriceOfBrand.cs" />
+    <Compile Include="CounterAveragePriceOfBrand.cs" />
     <Compile Include="CounterAllVehicles.cs" />
-    <Compile Include="CommandCountMarks.cs" />
-    <Compile Include="CounterMarks.cs" />
+    <Compile Include="CommandCountBrands.cs" />
+    <Compile Include="CounterBrands.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,12 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="cars.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

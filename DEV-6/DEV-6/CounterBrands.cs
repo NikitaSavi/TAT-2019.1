@@ -5,19 +5,19 @@ namespace DEV_6
     using System.Linq;
 
     /// <summary>
-    /// Counts the amount of marks.
+    /// Counts the amount of brands.
     /// </summary>
-    public class CounterMarks
+    public class CounterBrands
     {
         /// <summary>
-        /// Counts the amount of marks.
+        /// Counts the amount of brands.
         /// </summary>
         /// <param name="listOfVehicles">
         /// The list of vehicles with their info.
         /// </param>
         /// <returns>
-        /// The amount of marks.
+        /// The amount of brands.
         /// </returns>
-        public double CountMarks(List<VehicleInfoStruct> listOfVehicles) => listOfVehicles.Select(x => x.Mark).Distinct().Count();
+        public double CountBrands(List<VehicleInfoStruct> listOfVehicles) => listOfVehicles.Select(x => x.Brand).Distinct().Count();
     }
 }

@@ -5,17 +5,17 @@ namespace DEV_6
     /// <summary>
     /// The command to count average price of a certain type.
     /// </summary>
-    public class CommandCountAveragePriceOfMark : ICommand
+    public class CommandCountAveragePriceOfBrand : ICommand
     {
         /// <summary>
         /// The receiver.
         /// </summary>
-        private CounterAveragePriceOfMark counter;
+        private CounterAveragePriceOfBrand counter;
 
         /// <summary>
         /// The type of a vehicle.
         /// </summary>
-        private string mark;
+        private string brand;
 
         /// <summary>
         /// The list of vehicles with their info.
@@ -23,7 +23,7 @@ namespace DEV_6
         private List<VehicleInfoStruct> listOfVehicles;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommandCountAveragePriceOfMark"/> class.
+        /// Initializes a new instance of the <see cref="CommandCountAveragePriceOfBrand"/> class.
         /// </summary>
         /// <param name="receiver">
         /// The receiver.
@@ -31,17 +31,17 @@ namespace DEV_6
         /// <param name="listOfVehicles">
         /// The list of vehicles with their info.
         /// </param>
-        /// <param name="mark">
-        /// The mark of a vehicle.
+        /// <param name="brand">
+        /// The brand of a vehicle.
         /// </param>
-        public CommandCountAveragePriceOfMark(CounterAveragePriceOfMark receiver, List<VehicleInfoStruct> listOfVehicles, string mark)
+        public CommandCountAveragePriceOfBrand(CounterAveragePriceOfBrand receiver, List<VehicleInfoStruct> listOfVehicles, string brand)
         {
             this.counter = receiver;
-            this.mark = mark;
+            this.brand = brand;
             this.listOfVehicles = listOfVehicles;
         }
 
         /// <inheritdoc />
-        public double Execute() => this.counter.CountAveragePrice(this.listOfVehicles, this.mark);
+        public double Execute() => this.counter.CountAveragePrice(this.listOfVehicles, this.brand);
     }
 }

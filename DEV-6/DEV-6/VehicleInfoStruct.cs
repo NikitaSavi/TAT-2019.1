@@ -6,12 +6,12 @@
     public struct VehicleInfoStruct
     {
         /// <summary>
-        /// Mark of the vehicle.
+        /// Brand of the vehicle.
         /// </summary>
-        public string Mark { get; set; }
+        public string Brand { get; set; }
 
         /// <summary>
-        /// Model of the mark.
+        /// Model of the brand.
         /// </summary>
         public string Model { get; set; }
 
