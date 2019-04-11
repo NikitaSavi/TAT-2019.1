@@ -75,9 +75,11 @@ namespace DEV_6
                         {
                             // Create a joined string in case of brand having multiple words
                             var commandBrand = commandKeyWords.Length > minimumAmountOfArgs + 1
-                                ? string.Join(" ", commandKeyWords, commandBrandStartIndex)
+                                ? string.Join(" ", commandKeyWords, commandBrandStartIndex, commandKeyWords.Length-minimumAmountOfArgs)
                                 : commandKeyWords[commandBrandStartIndex];
-
+                            Console.Write(commandBrand);
+                            Console.Write(commandBrand);
+                            Console.WriteLine(commandBrand);
                             //Check if the brand exists in the database 
                             if (listToProcess.Any(vehicle => vehicle.Brand == commandBrand))
                             {
