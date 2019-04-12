@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using DEV_6.Commands;
+using DEV_6.CommandsReceivers;
+using DEV_6.Database;
 
 namespace DEV_6
 {
@@ -25,7 +28,7 @@ namespace DEV_6
             Console.WriteLine("Input a chain of commands, then enter \"execute\"");
             while (true)
             {
-                var commandKeyWords = Console.ReadLine().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+                var commandKeyWords = Console.ReadLine().ToLower().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
                 const int commandTypeIndex = 0;
                 const int commandVehicleIndex = 1;
                 const int commandBrandStartIndex = 2;

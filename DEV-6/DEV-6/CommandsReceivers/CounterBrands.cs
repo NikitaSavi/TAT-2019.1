@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using DEV_6.Database;
 
-namespace DEV_6
+namespace DEV_6.CommandsReceivers
 {
-    using System.Linq;
-
     /// <summary>
     /// Counts the amount of brands.
     /// </summary>

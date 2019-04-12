@@ -1,4 +1,4 @@
-﻿namespace DEV_6
+﻿namespace DEV_6.Commands
 {
     /// <summary>
     /// The Command interface.

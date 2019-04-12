@@ -43,22 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseCars.cs" />
-    <Compile Include="DatabaseTrucks.cs" />
-    <Compile Include="VehicleInfoStruct.cs" />
-    <Compile Include="CommandCountAllVehicles.cs" />
-    <Compile Include="CommandCountAveragePrice.cs" />
+    <Compile Include="Database\DatabaseCars.cs" />
+    <Compile Include="Database\DatabaseTrucks.cs" />
+    <Compile Include="Database\VehicleInfoStruct.cs" />
+    <Compile Include="Commands\CommandCountAllVehicles.cs" />
+    <Compile Include="Commands\CommandCountAveragePrice.cs" />
     <Compile Include="CommandsInvoker.cs" />
-    <Compile Include="CounterAveragePrice.cs" />
-    <Compile Include="CommandCountAveragePriceOfBrand.cs" />
-    <Compile Include="CounterAveragePriceOfBrand.cs" />
-    <Compile Include="CounterAllVehicles.cs" />
-    <Compile Include="CommandCountBrands.cs" />
-    <Compile Include="CounterBrands.cs" />
+    <Compile Include="CommandsReceivers\CounterAveragePrice.cs" />
+    <Compile Include="Commands\CommandCountAveragePriceOfBrand.cs" />
+    <Compile Include="CommandsReceivers\CounterAveragePriceOfBrand.cs" />
+    <Compile Include="CommandsReceivers\CounterAllVehicles.cs" />
+    <Compile Include="Commands\CommandCountBrands.cs" />
+    <Compile Include="CommandsReceivers\CounterBrands.cs" />
     <Compile Include="EntryPoint.cs" />
-    <Compile Include="ICommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XmlParser.cs" />
+    <Compile Include="Database\XmlParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

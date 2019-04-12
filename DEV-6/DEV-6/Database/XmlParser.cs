@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace DEV_6
+namespace DEV_6.Database
 {
     /// <summary>
     /// XML Parser for car information.
@@ -24,8 +24,8 @@ namespace DEV_6
             var listOfVehicles = from xe in xDoc.Element("cars").Elements("car")
                                  select new VehicleInfoStruct
                                  {
-                                     Brand = xe.Element("brand").Value,
-                                     Model = xe.Element("model").Value,
+                                     Brand = xe.Element("brand").Value.ToLower(),
+                                     Model = xe.Element("model").Value.ToLower(),
                                      Quantity = Convert.ToInt32(xe.Element("quantity").Value),
                                      Price = Convert.ToInt32(xe.Element("price").Value)
                                  };

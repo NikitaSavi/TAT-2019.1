@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
+using DEV_6.CommandsReceivers;
+using DEV_6.Database;
 
-namespace DEV_6
+namespace DEV_6.Commands
 {
     /// <summary>
-    /// The command to count average price.
+    /// The command to count brands.
     /// </summary>
-    public class CommandCountAveragePrice : ICommand
+    public class CommandCountBrands : ICommand
     {
         /// <summary>
         /// The receiver.
         /// </summary>
-        private CounterAveragePrice counter;
+        private CounterBrands counter;
 
         /// <summary>
         /// The list of vehicles with their info.
@@ -18,7 +20,7 @@ namespace DEV_6
         private List<VehicleInfoStruct> listOfVehicles;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommandCountAveragePrice"/> class.
+        /// Initializes a new instance of the <see cref="CommandCountBrands"/> class.
         /// </summary>
         /// <param name="receiver">
         /// The receiver.
@@ -26,13 +28,13 @@ namespace DEV_6
         /// <param name="listOfVehicles">
         /// The list of vehicles with their info.
         /// </param>
-        public CommandCountAveragePrice(CounterAveragePrice receiver, List<VehicleInfoStruct> listOfVehicles)
+        public CommandCountBrands(CounterBrands receiver, List<VehicleInfoStruct> listOfVehicles)
         {
             this.counter = receiver;
             this.listOfVehicles = listOfVehicles;
         }
 
         /// <inheritdoc />
-        public double Execute() => this.counter.CountAveragePrice(this.listOfVehicles);
+        public double Execute() => this.counter.CountBrands(this.listOfVehicles);
     }
 }
