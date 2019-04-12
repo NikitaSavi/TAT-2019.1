@@ -13,16 +13,15 @@ namespace DEV_6
         /// <summary>
         /// Parse info about cars from the XML doc to a list.
         /// </summary>
-        /// <param name="xDocName">
-        /// The XML doc name.
+        /// <param name="xDoc">
+        /// XML doc.
         /// </param>
         /// <returns>
         /// List of cars with their info.
         /// </returns>
-        public static List<VehicleInfoStruct> ParseVehicleInfo(string xDocName)
+        public static List<VehicleInfoStruct> ParseVehicleInfo(XDocument xDoc)
         {
-            var xdoc = XDocument.Load($"../../{xDocName}");
-            var listOfVehicles = from xe in xdoc.Element("cars").Elements("car")
+            var listOfVehicles = from xe in xDoc.Element("cars").Elements("car")
                                  select new VehicleInfoStruct
                                  {
                                      Brand = xe.Element("brand").Value,

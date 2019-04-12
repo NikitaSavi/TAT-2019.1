@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 
 namespace DEV_6
 {
@@ -25,7 +26,9 @@ namespace DEV_6
                     throw new ArgumentOutOfRangeException();
                 }
 
-                CommandsInvoker.InvokeCommands(args[0], args[1]);
+                var xDocCars = XDocument.Load($"../../{args[0]}");
+                var xDocTruck = XDocument.Load($"../../{args[1]}");
+                CommandsInvoker.InvokeCommands(xDocCars, xDocTruck);
 
                 return 0;
             }

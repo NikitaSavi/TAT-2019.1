@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace DEV_6
 {
@@ -12,13 +13,13 @@ namespace DEV_6
         /// <summary>
         /// Invokes the commands, based on user's input.
         /// </summary>
-        /// <param name="carsDocName">
-        /// Name of XML doc with cars information.
+        /// <param name="carsXDoc">
+        /// XML doc with cars information.
         /// </param>
-        /// <param name="trucksDocName">
-        /// Name of XML doc with trucks information.
+        /// <param name="trucksXDoc">
+        /// XML doc with trucks information.
         /// </param>
-        public static void InvokeCommands(string carsDocName, string trucksDocName)
+        public static void InvokeCommands(XDocument carsXDoc, XDocument trucksXDoc)
         {
             var commandsQueue = new List<ICommand>();
             Console.WriteLine("Input a chain of commands, then enter \"execute\"");
@@ -49,10 +50,10 @@ namespace DEV_6
                 switch (commandVehicle)
                 {
                     case "car":
-                        listToProcess = DatabaseCars.GetDatabaseCars(carsDocName).ListOfCars;
+                        listToProcess = DatabaseCars.GetDatabaseCars(carsXDoc).ListOfCars;
                         break;
                     case "truck":
-                        listToProcess = DatabaseTrucks.GetDatabaseTrucks(trucksDocName).ListOfTrucks;
+                        listToProcess = DatabaseTrucks.GetDatabaseTrucks(trucksXDoc).ListOfTrucks;
                         break;
                     default:
                         Console.WriteLine("Unknown vehicle type");

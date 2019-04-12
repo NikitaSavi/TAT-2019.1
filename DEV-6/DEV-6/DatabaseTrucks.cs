@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace DEV_6
 {
@@ -20,23 +21,23 @@ namespace DEV_6
         /// <summary>
         /// Initializes a new instance of the <see cref="DatabaseTrucks"/> class. 
         /// </summary>
-        /// <param name="xDocName">
-        /// Name of XML doc with trucks info.
+        /// <param name="xDoc">
+        /// XML doc with trucks info.
         /// </param>
-        private DatabaseTrucks(string xDocName)
+        private DatabaseTrucks(XDocument xDoc)
         {
-            this.ListOfTrucks = XmlParser.ParseVehicleInfo(xDocName);
+            this.ListOfTrucks = XmlParser.ParseVehicleInfo(xDoc);
         }
 
         /// <summary>
         /// Returns the instance of the class, or creates it if it doesn't exist
         /// </summary>
-        /// <param name="xDocName">
-        /// Name of XML doc with trucks info.
+        /// <param name="xDoc">
+        /// XML doc with trucks info.
         /// </param>
         /// <returns>
         /// The <see cref="DatabaseTrucks"/>.
         /// </returns>
-        public static DatabaseTrucks GetDatabaseTrucks(string xDocName) => instance ?? (instance = new DatabaseTrucks(xDocName));
+        public static DatabaseTrucks GetDatabaseTrucks(XDocument xDoc) => instance ?? (instance = new DatabaseTrucks(xDoc));
     }
 }
