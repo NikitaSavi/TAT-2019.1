@@ -104,7 +104,7 @@ namespace DEV_2.Tests
         public void CheckForUnstressedO_WordsWithOLetter_OisAWhereNecessary(string input, string expected)
         {
             var transcriber = new WordTranscription(input);
-            var actual = transcriber.Transcription;
+            var actual = transcriber.Transcribe();
             Assert.AreEqual(expected, actual.ToString());
         }
 
@@ -117,7 +117,7 @@ namespace DEV_2.Tests
         public void WorkWithIoatedVowels_IoatedAfterConsonants_PairChanged()
         {
             var transcriber = new WordTranscription("бибябебёбю");
-            var actual = transcriber.Transcription;
+            var actual = transcriber.Transcribe();
             Assert.AreEqual("б'иб'аб'эб'об'у", actual.ToString());
         }
 
@@ -129,7 +129,7 @@ namespace DEV_2.Tests
         public void WorkWithIoatedVowels_NonIoatedVowelsAfterConsonants_NothingChanges()
         {
             var transcriber = new WordTranscription("быбабэбо+бу");
-            var actual = transcriber.Transcription;
+            var actual = transcriber.Transcribe();
             Assert.AreEqual("быбабэбобу", actual.ToString());
         }
 
@@ -149,7 +149,7 @@ namespace DEV_2.Tests
         public void WorkWithIoatedVowels_IoatedWhereJIsNeeded_JAddedPairChanged(string input, string expected)
         {
             var transcriber = new WordTranscription(input);
-            var actual = transcriber.Transcription;
+            var actual = transcriber.Transcribe();
             Assert.AreEqual(expected, actual.ToString());
         }
 
@@ -161,7 +161,7 @@ namespace DEV_2.Tests
         public void CheckVoiceLevelUp_Consonants_VoiceLevelChanges()
         {
             var transcriber = new WordTranscription("кнн");
-            var actual = transcriber.Transcription;
+            var actual = transcriber.Transcribe();
             Assert.AreEqual("гнн", actual.ToString());
         }
 
@@ -173,7 +173,7 @@ namespace DEV_2.Tests
         public void CheckVoiceLevelDown_Consonants_VoiceLevelChanges()
         {
             var transcriber = new WordTranscription("зпг");
-            var actual = transcriber.Transcription;
+            var actual = transcriber.Transcribe();
             Assert.AreEqual("спк", actual.ToString());
         }
     }

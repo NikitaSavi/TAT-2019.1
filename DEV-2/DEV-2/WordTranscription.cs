@@ -107,7 +107,7 @@ namespace DEV_2
         /// <returns>
         /// Transcription as a string.
         /// </returns>
-        private StringBuilder Transcribe()
+        public StringBuilder Transcribe()
         {
             this.Transcription = new StringBuilder();
             this.listOfLetters = new List<Letter>();
