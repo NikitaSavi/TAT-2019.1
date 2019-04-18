@@ -1,39 +1,66 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace DEV_2
 {
-
-    struct Consonant
+    /// <summary>
+    /// Struct for consonant letters.
+    /// </summary>
+    public struct Consonant
     {
-        public string sound;
-        public bool haveVoicePair, isVoiced, PhonationChanged;
+        /// <summary>
+        /// The sound of the letter.
+        /// </summary>
+        public string Sound { get; set; }
 
         /// <summary>
-        /// Fills the fields with default characteristics 
+        /// Indicates whether the letter have a voice pair.
         /// </summary>
-        /// <param name="letter">Letter from the received word</param>
+        public bool HaveVoicePair { get; }
+
+        /// <summary>
+        /// Indicates whether the letter is voiced.
+        /// </summary>
+        public bool IsVoiced { get; }
+
+        /// <summary>
+        /// Indicates whether the phonation is changed from default.
+        /// </summary>
+        public bool PhonationChanged { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Consonant"/> struct. 
+        /// </summary>
+        /// <param name="letter">
+        /// Letter from the received word.
+        /// </param>
         public Consonant(char letter)
         {
-            sound = letter.ToString();
-            haveVoicePair = Letter.consonantPhonationEquivalents.ContainsKey(letter) ||
-                            Letter.consonantPhonationEquivalents.ContainsValue(letter);
-            PhonationChanged = false;
-            isVoiced = haveVoicePair
-                ? Letter.consonantPhonationEquivalents.ContainsKey(letter)
-                : Letter.alwaysVoiced.Contains(letter);
+            if (!Letter.AllConsonants.Contains(letter))
+            {
+                throw new Exception("Wrong char received.");
+            }
 
-
+            this.Sound = letter.ToString();
+            this.HaveVoicePair = Letter.ConsonantPhonationEquivalents.ContainsKey(letter) ||
+                            Letter.ConsonantPhonationEquivalents.ContainsValue(letter);
+            this.PhonationChanged = false;
+            this.IsVoiced = this.HaveVoicePair
+                ? Letter.ConsonantPhonationEquivalents.ContainsKey(letter)
+                : Letter.AlwaysVoiced.Contains(letter);
         }
 
+        /// <summary>
+        /// Updates the sound with necessary changes.
+        /// </summary>
         public void Update()
         {
-            //updates with necessary changes
-            if (PhonationChanged)
+            if (this.PhonationChanged)
             {
-                char temp = sound.ToCharArray()[0];
-                sound = isVoiced
-                    ? Letter.consonantPhonationEquivalents[temp].ToString()
-                    : Letter.consonantPhonationEquivalents.FirstOrDefault(x => x.Value == temp).Key.ToString();
+                var temp = this.Sound.ToCharArray()[0];
+                this.Sound = this.IsVoiced
+                    ? Letter.ConsonantPhonationEquivalents[temp].ToString()
+                    : Letter.ConsonantPhonationEquivalents.FirstOrDefault(x => x.Value == temp).Key.ToString();
             }
         }
     }

@@ -1,16 +1,32 @@
-﻿namespace DEV_2
+﻿using System;
+using System.Linq;
+
+namespace DEV_2
 {
-    struct Special
+    /// <summary>
+    /// The struct for special letters.
+    /// </summary>
+    public struct SpecialLetter
     {
-        public string sound;
+        /// <summary>
+        /// The "sound" of the letter.
+        /// </summary>
+        public string Sound { get; set; }
 
         /// <summary>
-        /// Fills the fields with default characteristics 
+        /// Initializes a new instance of the <see cref="Special"/> struct. 
         /// </summary>
-        /// <param name="letter">Letter from the received word</param>
-        public Special(char letter)
+        /// <param name="letter">
+        /// Letter from the received word
+        /// </param>
+        public SpecialLetter(char letter)
         {
-            sound = letter == 'ь' ? "'" : string.Empty;
+            if (!Letter.AllSpecials.Contains(letter))
+            {
+                throw new Exception("Wrong char received.");
+            }
+
+            this.Sound = letter == 'ь' ? "'" : string.Empty;
         }
     }
 }
