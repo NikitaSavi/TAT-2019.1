@@ -38,21 +38,18 @@ namespace DEV_2
         /// <param name="enteredWord">
         /// The entered word.
         /// </param>
-        /// <exception cref="Exception">
-        /// Thrown if the word's format is incorrect.
-        /// </exception>
         public WordTranscription(string enteredWord)
         {
             this.EnteredWord = enteredWord;
         }
 
         /// <summary>
-        /// The entered word.
+        /// Gets the entered word.
         /// </summary>
-        private string EnteredWord
+        public string EnteredWord
         {
             get => this.enteredWord;
-            set
+            private set
             {
                 if (value.Length == 0)
                 {
@@ -81,9 +78,17 @@ namespace DEV_2
                     for (var index = 1; index < value.Length; index++)
                     {
                         // Compound words can have multiple stresses
-                        if (value[index] == '+' && !Letter.AllVowels.Contains(value[index - 1]))
+                        if (value[index] == '+')
                         {
-                            throw new Exception("'+' must be after a stressed vowel");
+                            if (!Letter.AllVowels.Contains(value[index - 1]))
+                            {
+                                throw new Exception("'+' must be after a stressed vowel");
+                            }
+
+                            if (value.Contains('ё') && value[index - 1] != 'ё')
+                            {
+                                throw new Exception("'ё' is always stressed. '+' is in the wrong place");
+                            }
                         }
                     }
                 }
@@ -93,7 +98,7 @@ namespace DEV_2
         }
 
         /// <summary>
-        /// The transcription of the entered word.
+        /// Gets the transcription.
         /// </summary>
         public StringBuilder Transcription
         {

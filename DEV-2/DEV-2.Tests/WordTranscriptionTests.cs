@@ -54,6 +54,17 @@ namespace DEV_2.Tests
         }
 
         /// <summary>
+        /// Negative test for setting EnteredWord in the class. 
+        /// If 'ё' is present, other vowels cannot be stressed.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "'ё' is always stressed. '+' is in the wrong place")]
+        public void EnteredWordSet_WrongStressPlace_ThrowException()
+        {
+            var transctiber = new WordTranscription("ёжи+к");
+        }
+
+        /// <summary>
         /// Positive test for setting EnteredWord in the class. 
         /// '+' is unnecessary if: only one syllable, 'ё' is present.
         /// </summary>

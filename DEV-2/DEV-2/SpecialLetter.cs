@@ -14,7 +14,7 @@ namespace DEV_2
         public string Sound { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Special"/> struct. 
+        /// Initializes a new instance of the <see cref="SpecialLetter"/> struct. 
         /// </summary>
         /// <param name="letter">
         /// Letter from the received word
