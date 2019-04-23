@@ -22,33 +22,42 @@ namespace DEV_6
         public static void InvokeCommands(XDocument carsXDoc, XDocument trucksXDoc)
         {
             var commandsQueue = new List<ICommand>();
-            Console.WriteLine("Input a chain of commands, then enter \"execute\"");
+            Console.WriteLine(
+                "Input a chain of commands in the following format:\n<action> <vehicle_type>"
+                + "\nActions:\n  1) count_types\n  2) count_all\n  3) average_price truck\n  4) average_price truck <brand>"
+                + "\nVehicle types:\n  1) car\n  2) truck"
+                + "\nFinish with <execute> command.\n");
 
             while (true)
             {
-                var commandKeyWords = Console.ReadLine().ToLower().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                const int CommandTypeIndex = 0;
-                const int CommandVehicleIndex = 1;
-                const int CommandBrandStartIndex = 2;
-                const int MinimumAmountOfArgs = 2;
-                var commandType = commandKeyWords[CommandTypeIndex];
+                var command = Console.ReadLine().ToLower();
+                if (command == string.Empty)
+                {
+                    continue;
+                }
 
-                if (commandType == "execute")
+                if (command == "execute")
                 {
                     break;
                 }
 
+                var commandKeyWords = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                const int CommandActionKeyIndex = 0;
+                const int CommandVehicleKeyIndex = 1;
+                const int CommandBrandKeyStartIndex = 2;
+                const int MinimumAmountOfArgs = 2;
+                var commandActionKey = commandKeyWords[CommandActionKeyIndex];
+                
                 if (commandKeyWords.Length < MinimumAmountOfArgs)
                 {
-                    Console.WriteLine(
-                        "A command must contain at least two arguments: type of command, type of vehicle, (optional for average_price) brand of vehicle");
+                    Console.WriteLine("A command must contain at least two arguments: type of command, type of vehicle, (optional for average_price) brand of vehicle");
                     continue;
                 }
 
                 // Determine the type of vehicle to process
-                var commandVehicle = commandKeyWords[CommandVehicleIndex];
+                var commandVehicleKey = commandKeyWords[CommandVehicleKeyIndex];
                 List<VehicleInfoStruct> listToProcess;
-                switch (commandVehicle)
+                switch (commandVehicleKey)
                 {
                     case "car":
                         listToProcess = DatabaseCars.GetDatabaseCars(carsXDoc).ListOfCars;
@@ -62,7 +71,7 @@ namespace DEV_6
                 }
 
                 // Determine the action to perform
-                switch (commandType)
+                switch (commandActionKey)
                 {
                     case "count_types":
                         commandsQueue.Add(new CommandCountBrands(new CounterBrands(), listToProcess));
@@ -71,23 +80,21 @@ namespace DEV_6
                         commandsQueue.Add(new CommandCountAllVehicles(new CounterAllVehicles(), listToProcess));
                         break;
                     case "average_price":
-
                         // If a brand is entered, run the necessary command
                         if (commandKeyWords.Length > MinimumAmountOfArgs)
                         {
                             // Create a joined string in case of brand having multiple words
-                            var commandBrand = commandKeyWords.Length > MinimumAmountOfArgs + 1
-                                                   ? string.Join(" ", commandKeyWords, CommandBrandStartIndex, commandKeyWords.Length - MinimumAmountOfArgs)
-                                                   : commandKeyWords[CommandBrandStartIndex];
+                            var commandBrandKey = commandKeyWords.Length > MinimumAmountOfArgs + 1
+                                                   ? string.Join(" ", commandKeyWords, CommandBrandKeyStartIndex, commandKeyWords.Length - MinimumAmountOfArgs)
+                                                   : commandKeyWords[CommandBrandKeyStartIndex];
 
                             // Check if the brand exists in the database 
-                            if (listToProcess.Any(vehicle => vehicle.Brand == commandBrand))
+                            if (listToProcess.Any(vehicle => vehicle.Brand == commandBrandKey))
                             {
                                 commandsQueue.Add(
                                     new CommandCountAveragePriceOfBrand(
                                         new CounterAveragePriceOfBrand(),
-                                        listToProcess,
-                                        commandBrand));
+                                        listToProcess, commandBrandKey));
                             }
                             else
                             {
