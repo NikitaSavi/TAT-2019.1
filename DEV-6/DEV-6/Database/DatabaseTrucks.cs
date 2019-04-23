@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace DEV_6.Database
+namespace DEV_6
 {
     /// <summary>
     /// The trucks database.

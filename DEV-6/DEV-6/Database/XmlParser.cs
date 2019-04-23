@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace DEV_6.Database
+namespace DEV_6
 {
     /// <summary>
     /// XML Parser for car information.

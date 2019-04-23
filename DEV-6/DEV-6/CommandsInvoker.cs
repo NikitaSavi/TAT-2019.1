@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using DEV_6.Commands;
-using DEV_6.CommandsReceivers;
-using DEV_6.Database;
 
 namespace DEV_6
 {
@@ -26,21 +23,22 @@ namespace DEV_6
         {
             var commandsQueue = new List<ICommand>();
             Console.WriteLine("Input a chain of commands, then enter \"execute\"");
+
             while (true)
             {
-                var commandKeyWords = Console.ReadLine().ToLower().Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
-                const int commandTypeIndex = 0;
-                const int commandVehicleIndex = 1;
-                const int commandBrandStartIndex = 2;
-                const int minimumAmountOfArgs = 2;
-                var commandType = commandKeyWords[commandTypeIndex];
+                var commandKeyWords = Console.ReadLine().ToLower().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                const int CommandTypeIndex = 0;
+                const int CommandVehicleIndex = 1;
+                const int CommandBrandStartIndex = 2;
+                const int MinimumAmountOfArgs = 2;
+                var commandType = commandKeyWords[CommandTypeIndex];
 
                 if (commandType == "execute")
                 {
                     break;
                 }
 
-                if (commandKeyWords.Length < minimumAmountOfArgs)
+                if (commandKeyWords.Length < MinimumAmountOfArgs)
                 {
                     Console.WriteLine(
                         "A command must contain at least two arguments: type of command, type of vehicle, (optional for average_price) brand of vehicle");
@@ -48,7 +46,7 @@ namespace DEV_6
                 }
 
                 // Determine the type of vehicle to process
-                var commandVehicle = commandKeyWords[commandVehicleIndex];
+                var commandVehicle = commandKeyWords[CommandVehicleIndex];
                 List<VehicleInfoStruct> listToProcess;
                 switch (commandVehicle)
                 {
@@ -75,30 +73,30 @@ namespace DEV_6
                     case "average_price":
 
                         // If a brand is entered, run the necessary command
-                        if (commandKeyWords.Length > minimumAmountOfArgs)
+                        if (commandKeyWords.Length > MinimumAmountOfArgs)
                         {
                             // Create a joined string in case of brand having multiple words
-                            var commandBrand = commandKeyWords.Length > minimumAmountOfArgs + 1
-                                ? string.Join(" ", commandKeyWords, commandBrandStartIndex, commandKeyWords.Length-minimumAmountOfArgs)
-                                : commandKeyWords[commandBrandStartIndex];
-                            Console.Write(commandBrand);
-                            Console.Write(commandBrand);
-                            Console.WriteLine(commandBrand);
-                            //Check if the brand exists in the database 
+                            var commandBrand = commandKeyWords.Length > MinimumAmountOfArgs + 1
+                                                   ? string.Join(" ", commandKeyWords, CommandBrandStartIndex, commandKeyWords.Length - MinimumAmountOfArgs)
+                                                   : commandKeyWords[CommandBrandStartIndex];
+
+                            // Check if the brand exists in the database 
                             if (listToProcess.Any(vehicle => vehicle.Brand == commandBrand))
                             {
-                                commandsQueue.Add(new CommandCountAveragePriceOfBrand(new CounterAveragePriceOfBrand(),
-                                    listToProcess, commandBrand));
+                                commandsQueue.Add(
+                                    new CommandCountAveragePriceOfBrand(
+                                        new CounterAveragePriceOfBrand(),
+                                        listToProcess,
+                                        commandBrand));
                             }
                             else
                             {
                                 Console.WriteLine("Unknown brand");
                             }
                         }
-
-                        // If no brand is entered, run the usual command
                         else
                         {
+                            // If no brand is entered, run the usual command
                             commandsQueue.Add(new CommandCountAveragePrice(new CounterAveragePrice(), listToProcess));
                         }
 

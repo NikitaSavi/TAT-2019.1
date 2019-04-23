@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using DEV_6.CommandsReceivers;
-using DEV_6.Database;
 
-namespace DEV_6.Commands
+namespace DEV_6
 {
     /// <summary>
     /// The command to count average price of a certain type.
