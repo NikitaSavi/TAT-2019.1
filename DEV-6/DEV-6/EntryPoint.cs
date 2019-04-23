@@ -20,7 +20,7 @@ namespace DEV_6
             {
                 if (args.Length == 0)
                 {
-                    throw new ArgumentNullException();
+                    throw new ArgumentNullException("No XML doc name recieved");
                 }
 
                 var listOfCars = XmlParser.ParseCarInfo(args[0]);

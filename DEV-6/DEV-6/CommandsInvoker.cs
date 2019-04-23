@@ -21,41 +21,36 @@ namespace DEV_6
             {
                 Console.WriteLine("Input a command:");
                 var command = Console.ReadLine();
-                if (!command.Equals("exit"))
+                switch (command)
                 {
-                    switch (command)
-                    {
-                        case "count types":
+                    case "exit":
+                        break;
+                    case "count types":
+                        Console.WriteLine(
+                            $"The amount of marks is {new CommandCountMarks(new CounterMarks(), listOfCars).Execute()}\n");
+                        continue;
+                    case "count all":
+                        Console.WriteLine(
+                            $"The amount of cars is {new CommandCountAllCars(new CounterAllCars(), listOfCars).Execute()}\n");
+                        continue;
+                    case "average price":
+                        Console.WriteLine(
+                            $"The average price is {new CommandCountAveragePrice(new CounterAveragePrice(), listOfCars).Execute()}\n");
+                        continue;
+                    default:
+                        if (command.Contains("average price")
+                            && listOfCars.Any(car => car.Mark == command.Split(' ')[2]))
+                        {
                             Console.WriteLine(
-                                $"The amount of marks is {new CommandCountMarks(new CounterMarks(), listOfCars).Execute()}\n");
-                            break;
-                        case "count all":
-                            Console.WriteLine(
-                                $"The amount of cars is {new CommandCountAllCars(new CounterAllCars(), listOfCars).Execute()}\n");
-                            break;
-                        case "average price":
-                            Console.WriteLine(
-                                $"The average price is {new CommandCountAveragePrice(new CounterAveragePrice(), listOfCars).Execute()}\n");
-                            break;
-                        default:
-                            if (command.Contains("average price")
-                                && listOfCars.Any(car => car.Mark == command.Split(' ')[2]))
-                            {
-                                Console.WriteLine(
-                                    $"The average price of {command.Split(' ')[2]} is " +
-                                    $"{new CommandCountAveragePriceOfMark(new CounterAveragePriceOfMark(), listOfCars, command.Split(' ')[2]).Execute()}\n");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Unknown input.\n");
-                            }
+                                $"The average price of {command.Split(' ')[2]} is "
+                                + $"{new CommandCountAveragePriceOfMark(new CounterAveragePriceOfMark(), listOfCars, command.Split(' ')[2]).Execute()}\n");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Unknown input.\n");
+                        }
 
-                            break;
-                    }
-                }
-                else
-                {
-                    break;
+                        continue;
                 }
             }
         }
