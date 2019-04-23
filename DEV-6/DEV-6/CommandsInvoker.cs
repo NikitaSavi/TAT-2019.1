@@ -23,8 +23,6 @@ namespace DEV_6
                 var command = Console.ReadLine();
                 switch (command)
                 {
-                    case "exit":
-                        break;
                     case "count types":
                         Console.WriteLine(
                             $"The amount of marks is {new CommandCountMarks(new CounterMarks(), listOfCars).Execute()}\n");
@@ -37,6 +35,8 @@ namespace DEV_6
                         Console.WriteLine(
                             $"The average price is {new CommandCountAveragePrice(new CounterAveragePrice(), listOfCars).Execute()}\n");
                         continue;
+                    case "exit":
+                        break;
                     default:
                         if (command.Contains("average price")
                             && listOfCars.Any(car => car.Mark == command.Split(' ')[2]))
@@ -52,6 +52,8 @@ namespace DEV_6
 
                         continue;
                 }
+
+                break;
             }
         }
     }
