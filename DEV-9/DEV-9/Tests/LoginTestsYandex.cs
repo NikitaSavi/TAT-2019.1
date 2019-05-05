@@ -1,5 +1,5 @@
 ﻿using System;
-using DEV_9.PageObjects.MailRu;
+using DEV_9.PageObjects.Yandex;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -7,10 +7,10 @@ using OpenQA.Selenium.Chrome;
 namespace DEV_9.Tests
 {
     /// <summary>
-    /// Tests for logging in on Mail.ru.
+    /// Tests for logging in on Yandex.
     /// </summary>
     [TestFixture]
-    public class LoginTestsMailRu
+    public class LoginTestsYandex
     {
         /// <summary>
         /// The WebDriver instance for tests.
@@ -23,7 +23,7 @@ namespace DEV_9.Tests
         [SetUp]
         public void StartBrowser()
         {
-            this.driver = new ChromeDriver { Url = "https://mail.ru" };
+            this.driver = new ChromeDriver { Url = "https://yandex.by" };
             this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
         }
 
@@ -44,26 +44,15 @@ namespace DEV_9.Tests
 
         /// <summary>
         /// Negative test for logging in:
-        /// empty input, results in error message.
+        /// wrong id, results in error message.
+        /// Combines test for empty username: impossible to proceed without entering one.
         /// </summary>
         [Test]
         public void Login_EmptyInput_ErrorMessage()
         {
             var homePage = new HomePage(this.driver);
             homePage.Login_ExpectingError(string.Empty, string.Empty);
-            Assert.AreEqual("Введите имя ящика и пароль", homePage.ErrorMessage.Text);
-        }
-
-        /// <summary>
-        /// Negative test for logging in:
-        /// empty username, results in error message.
-        /// </summary>
-        [Test]
-        public void Login_EmptyUsername_ErrorMessage()
-        {
-            var homePage = new HomePage(this.driver);
-            homePage.Login_ExpectingError(string.Empty, "test");
-            Assert.AreEqual("Введите имя ящика", homePage.ErrorMessage.Text);
+            Assert.AreEqual("Логин не указан", homePage.ErrorMessage.Text);
         }
 
         /// <summary>
@@ -74,31 +63,43 @@ namespace DEV_9.Tests
         public void Login_EmptyPassword_ErrorMessage()
         {
             var homePage = new HomePage(this.driver);
-            homePage.Login_ExpectingError("niksa2fff", string.Empty);
-            Assert.AreEqual("Введите пароль", homePage.ErrorMessage.Text);
+            var username = "niksavi84";
+            var password = string.Empty;
+            homePage.Login_ExpectingError(username, password);
+            Assert.AreEqual("Пароль не указан", homePage.ErrorMessage.Text);
         }
 
         /// <summary>
         /// Negative test for logging in:
-        /// wrong id or password, results in error message.
+        /// wrong username, results in error message.
+        /// Combines test for wrong id: login operation won't proceed unless username is correct.
         /// </summary>
-        /// <param name="username">
-        /// The username.
-        /// </param>
-        /// <param name="password">
-        /// The password.
-        /// </param>
-        [TestCase("niksaff34", "testing")]
-        [TestCase("niksavi84", "testing")]
-        public void Login_WrongIdOrPassword_ErrorMessage(string username, string password)
+        [Test]
+        public void Login_WrongUsername_ErrorMessage()
         {
             var homePage = new HomePage(this.driver);
+            var username = "test34554jjjffff";
+            var password = string.Empty; 
             homePage.Login_ExpectingError(username, password);
-            Assert.AreEqual("Неверное имя или пароль", homePage.ErrorMessage.Text);
+            Assert.AreEqual("Такого аккаунта нет", homePage.ErrorMessage.Text);
         }
 
         /// <summary>
-        /// Tear down: close the driver.
+        /// Negative test for logging in:
+        /// wrong password, results in error message.
+        /// </summary>
+        [Test]
+        public void Login_WrongPassword_ErrorMessage()
+        {
+            var homePage = new HomePage(this.driver);
+            var username = "niksavi84";
+            var password = "tes1pas5";
+            homePage.Login_ExpectingError(username, password);
+            Assert.AreEqual("Неверный пароль", homePage.ErrorMessage.Text);
+        }
+
+        /// <summary>
+        /// Tear down: closes the driver.
         /// </summary>
         [TearDown]
         public void CloseBrowser()

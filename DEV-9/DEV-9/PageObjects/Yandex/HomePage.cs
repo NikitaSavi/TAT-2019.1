@@ -1,8 +1,6 @@
-﻿using System;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 
-namespace DEV_9.PageObjects.MailRu
+namespace DEV_9.PageObjects.Yandex
 {
     /// <summary>
     /// The home page.
@@ -16,34 +14,29 @@ namespace DEV_9.PageObjects.MailRu
         private IWebDriver driver;
 
         /// <summary>
+        /// The button to initiate signing in.
+        /// </summary>
+        public IWebElement LoginStartButton => this.driver.FindElement(By.XPath("//a[contains(@class,'button desk-notif-card__login-enter-expanded')]"));
+
+        /// <summary>
         /// The username box.
         /// </summary>
-        public IWebElement UsernameBox => this.driver.FindElement(By.XPath("//input[@id='mailbox:login']"));
+        public IWebElement UsernameBox => this.driver.FindElement(By.XPath("//input[@name='login']"));
 
         /// <summary>
         /// The password box.
         /// </summary>
-        public IWebElement PasswordBox => this.driver.FindElement(By.XPath("//input[@id='mailbox:password']"));
+        public IWebElement PasswordBox => this.driver.FindElement(By.XPath("//input[@name='passwd']"));
 
         /// <summary>
-        /// The login button.
+        /// The button for proceeding with the login procedure.
         /// </summary>
-        public IWebElement LoginButton => this.driver.FindElement(By.XPath("//label[@id='mailbox:submit']"));
+        public IWebElement LoginProceedButton => this.driver.FindElement(By.XPath("//button[@type='submit']"));
 
         /// <summary>
         /// The login error message.
         /// </summary>
-        public IWebElement ErrorMessage => this.driver.FindElement(By.XPath("//div[@id='mailbox:error']"));
-
-        /// <summary>
-        /// Timer for login error messages to appear for testing purposes.
-        /// </summary>
-        /// <remarks>
-        /// Test for empty input can be passed without this timer, but test for wrong input cannot,
-        /// since it takes a small bit of time to check the database and show the error message.
-        /// This timer's purpose is to take this delay into account.
-        /// </remarks>
-        private WebDriverWait errorLoginMsgWait;
+        public IWebElement ErrorMessage => this.driver.FindElement(By.XPath("//div[@class='passp-form-field__error']"));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HomePage"/> class.
@@ -54,7 +47,6 @@ namespace DEV_9.PageObjects.MailRu
         public HomePage(IWebDriver driver)
         {
             this.driver = driver;
-            this.errorLoginMsgWait = new WebDriverWait(this.driver, TimeSpan.FromSeconds(1));
         }
 
         /// <summary>
@@ -71,9 +63,11 @@ namespace DEV_9.PageObjects.MailRu
         /// </returns>
         public MailStartPage Login(string username, string password)
         {
+            this.LoginStartButton.Click();
             this.UsernameBox.SendKeys(username);
+            this.LoginProceedButton.Click();
             this.PasswordBox.SendKeys(password);
-            this.LoginButton.Click();
+            this.LoginProceedButton.Click();
             return new MailStartPage(this.driver);
         }
 
@@ -92,10 +86,15 @@ namespace DEV_9.PageObjects.MailRu
         /// </returns>
         public HomePage Login_ExpectingError(string username, string password)
         {
+            this.LoginStartButton.Click();
             this.UsernameBox.SendKeys(username);
-            this.PasswordBox.SendKeys(password);
-            this.LoginButton.Click();
-            this.errorLoginMsgWait.Until(x => this.ErrorMessage.Displayed);
+            this.LoginProceedButton.Click();
+            if (this.driver.FindElements(By.XPath("//div[@class='passp-form-field__error']")).Count == 0)
+            {
+                this.PasswordBox.SendKeys(password);
+                this.LoginProceedButton.Click();
+            }
+
             return this;
         }
     }

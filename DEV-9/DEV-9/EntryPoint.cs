@@ -1,4 +1,11 @@
-﻿namespace DEV_9
+﻿using System;
+
+using DEV_9.PageObjects.MailRu;
+
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+namespace DEV_9
 {
     /// <summary>
     /// DEV-9: Auto tests for mail services.
@@ -10,7 +17,14 @@
         /// </summary>
         private static void Main()
         {
-            // TODO Delete, change to ClassLibrary
+            try
+            {
+               
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }
