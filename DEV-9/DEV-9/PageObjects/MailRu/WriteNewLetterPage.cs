@@ -58,9 +58,9 @@ namespace DEV_9.PageObjects.MailRu
         /// The text of the letter.
         /// </param>
         /// <returns>
-        /// The <see cref="MailStartPage"/>.
+        /// The <see cref="MailInboxPage"/>.
         /// </returns>
-        public MailStartPage SendLetter(string recipient, string text)
+        public MailInboxPage SendLetter(string recipient, string text)
         {
             this.Recipient.SendKeys(recipient);
             this.driver.SwitchTo().Frame(this.EditorFrame);
@@ -69,7 +69,7 @@ namespace DEV_9.PageObjects.MailRu
             this.driver.SwitchTo().DefaultContent();
             this.SendLetterButton.Click();
             this.ReturnToInboxButton.Click();
-            return new MailStartPage(this.driver);
+            return new MailInboxPage(this.driver);
         }
     }
 }

@@ -7,7 +7,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BC8326C6-5656-4DAA-8F83-DB81E478C8AD}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>DEV_9</RootNamespace>
     <AssemblyName>DEV-9</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="dotMemory.Unit, Version=111.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.dotMemoryUnit.3.0.20171219.105559\lib\net35\dotMemory.Unit.dll</HintPath>
@@ -57,13 +60,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntryPoint.cs" />
     <Compile Include="PageObjects\MailRu\HomePage.cs" />
-    <Compile Include="PageObjects\MailRu\MailStartPage.cs" />
+    <Compile Include="PageObjects\MailRu\MailInboxPage.cs" />
+    <Compile Include="PageObjects\MailRu\MailReadPage.cs" />
+    <Compile Include="PageObjects\MailRu\PersonalDataPage.cs" />
     <Compile Include="PageObjects\MailRu\WriteNewLetterPage.cs" />
     <Compile Include="PageObjects\Yandex\HomePage.cs" />
     <Compile Include="PageObjects\Yandex\MailReadPage.cs" />
-    <Compile Include="PageObjects\Yandex\MailStartPage.cs" />
+    <Compile Include="PageObjects\Yandex\MailInboxPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\SendLetterTests.cs" />
     <Compile Include="Tests\LoginTestsYandex.cs" />

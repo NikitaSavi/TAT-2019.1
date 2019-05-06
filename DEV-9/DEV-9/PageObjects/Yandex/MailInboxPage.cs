@@ -3,9 +3,9 @@
 namespace DEV_9.PageObjects.Yandex
 {
     /// <summary>
-    /// Main mail page.
+    /// Inbox page.
     /// </summary>
-    public class MailStartPage
+    public class MailInboxPage
     {
         /// <summary>
         /// The WebDriver.
@@ -20,21 +20,21 @@ namespace DEV_9.PageObjects.Yandex
         /// <summary>
         /// Locator of the latest mail element.
         /// </summary>
-        public By LatestMailLocatorString => By.XPath("//div[@class='ns-view-container-desc mail-MessagesList js-messages-list']/div[1]");
+        public string LatestMailLocatorString => "//div[@class='ns-view-container-desc mail-MessagesList js-messages-list']/div[1]";
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MailStartPage"/> class.
+       /// <summary>
+        /// Initializes a new instance of the <see cref="MailInboxPage"/> class.
         /// </summary>
         /// <param name="driver">
         /// The WebDriver.
         /// </param>
-        public MailStartPage(IWebDriver driver)
+        public MailInboxPage(IWebDriver driver)
         {
             this.driver = driver;
         }
 
         //// TODO think about removing check methods from here.
-        
+
         /// <summary>
         /// Checks if the mail has the correct sender.
         /// </summary>
@@ -47,10 +47,8 @@ namespace DEV_9.PageObjects.Yandex
         /// <returns>
         /// 'True' if the sender is correct.
         /// </returns>
-        public bool CheckIfSenderIsCorrect(By mailLocator, string sender) =>
-            this.driver.FindElement(By.XPath(
-                    $"{mailLocator.ToString().Split(':')[1].Trim()}"
-                    + $"//span[@class='mail-MessageSnippet-FromText' and @title='{sender}']")) != null;
+        public bool CheckIfSenderIsCorrect(string mailLocator, string sender) =>
+            this.driver.FindElement(By.XPath(mailLocator + $"//span[@class='mail-MessageSnippet-FromText' and @title='{sender}']")) != null;
 
         /// <summary>
         /// Checks if the mail is unread.
@@ -61,10 +59,8 @@ namespace DEV_9.PageObjects.Yandex
         /// <returns>
         /// 'True' if unread.
         /// </returns>
-        public bool CheckIfUnread(By mailLocator) =>
-            this.driver.FindElement(By.XPath(
-                    $"{mailLocator.ToString().Split(':')[1].Trim()}"
-                    + "//span[contains(@class, 'state_toRead')]")) != null;
+        public bool CheckIfUnread(string mailLocator) =>
+            this.driver.FindElement(By.XPath(mailLocator + "//span[contains(@class, 'state_toRead')]")) != null;
 
         /// <summary>
         /// Goes to the reading page for the mail.
@@ -75,9 +71,9 @@ namespace DEV_9.PageObjects.Yandex
         /// <returns>
         /// The <see cref="MailReadPage"/>.
         /// </returns>
-        public MailReadPage ReadMail(By mailLocator)
+        public MailReadPage ReadMail(string mailLocator)
         {
-            this.driver.FindElement(mailLocator).Click();
+            this.driver.FindElement(By.XPath(mailLocator)).Click();
             return new MailReadPage(this.driver);
         }
     }

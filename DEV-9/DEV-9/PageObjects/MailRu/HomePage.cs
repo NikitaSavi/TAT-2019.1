@@ -69,12 +69,12 @@ namespace DEV_9.PageObjects.MailRu
         /// <returns>
         /// The <see cref="HomePage"/>.
         /// </returns>
-        public MailStartPage Login(string username, string password)
+        public MailInboxPage Login(string username, string password)
         {
             this.UsernameBox.SendKeys(username);
             this.PasswordBox.SendKeys(password);
             this.LoginButton.Click();
-            return new MailStartPage(this.driver);
+            return new MailInboxPage(this.driver);
         }
 
         /// <summary>

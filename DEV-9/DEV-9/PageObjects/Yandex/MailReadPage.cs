@@ -13,9 +13,24 @@ namespace DEV_9.PageObjects.Yandex
         private IWebDriver driver;
 
         /// <summary>
-        /// Locator of the letter's text.
+        /// Text of the mail.
         /// </summary>
         public IWebElement MailText => this.driver.FindElement(By.XPath("//div[@class='mail-Message-Body-Content']"));
+
+        /// <summary>
+        /// Activates the quick reply box.
+        /// </summary>
+        public IWebElement QuickReplyBoxInit => this.driver.FindElement(By.XPath("//div[@class='mail-QuickReply-Placeholder_text']"));
+
+        /// <summary>
+        /// The quick reply box element.
+        /// </summary>
+        public IWebElement QuickReplyBoxWrite => this.driver.FindElement(By.XPath("//div[@role='textbox']"));
+
+        /// <summary>
+        /// Button to send the reply.
+        /// </summary>
+        public IWebElement SendReplyButton => this.driver.FindElement(By.XPath("//button[contains(@class, 'js-send-button')]"));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MailReadPage"/> class. 
@@ -26,6 +41,23 @@ namespace DEV_9.PageObjects.Yandex
         public MailReadPage(IWebDriver driver)
         {
             this.driver = driver;
+        }
+
+        /// <summary>
+        /// Reply to the mail.
+        /// </summary>
+        /// <param name="text">
+        /// Text of the reply.
+        /// </param>
+        /// <returns>
+        /// The <see cref="MailReadPage"/>.
+        /// </returns>
+        public MailReadPage ReplyToMail(string text)
+        {
+            this.QuickReplyBoxInit.Click();
+            this.QuickReplyBoxWrite.SendKeys(text);
+            this.SendReplyButton.Click();
+            return this;
         }
     }
 }
