@@ -56,14 +56,12 @@ namespace DEV_9.Tests
             var mailruMailPage = mailruLoginPage.Login(this.mailruAddress, this.password);
             var mailruWriterPage = mailruMailPage.WriteNewLetter();
             mailruWriterPage.SendLetter(this.yandexAddress, letterText);
-            this.CloseBrowser();
 
-            this.StartBrowser();
             this.driver.Url = "https://yandex.by";
             var yandexLoginPage = new PageObjects.Yandex.HomePage(this.driver);
             var yandexMailPage = yandexLoginPage.Login(this.yandexAddress, this.password);
-            Assert.True(yandexMailPage.CheckIfSenderIsCorrect(yandexMailPage.LatestMailLocatorString, this.mailruAddress));
-            Assert.True(yandexMailPage.CheckIfUnread(yandexMailPage.LatestMailLocatorString));
+            Assert.AreEqual(this.mailruAddress, yandexMailPage.SenderOfMail(yandexMailPage.LatestMailLocatorString).GetAttribute("title"));
+            Assert.True(yandexMailPage.UnreadMarkerOfMail(yandexMailPage.LatestMailLocatorString).Displayed);
             var yandexReadPage = yandexMailPage.ReadMail(yandexMailPage.LatestMailLocatorString);
             var letterRecievedText = yandexReadPage.MailText.Text;
             Assert.AreEqual(letterText, letterRecievedText);
@@ -83,9 +81,7 @@ namespace DEV_9.Tests
             var yandexMailPage = yandexLoginPage.Login(this.yandexAddress, this.password);
             var yandexReadPage = yandexMailPage.ReadMail(yandexMailPage.LatestMailLocatorString);
             yandexReadPage.ReplyToMail(newNicknameToSend);
-            this.CloseBrowser();
 
-            this.StartBrowser();
             this.driver.Url = "https://mail.ru";
             var mailruLoginPage = new PageObjects.MailRu.HomePage(this.driver);
             var mailruMailPage = mailruLoginPage.Login(this.mailruAddress, this.password);

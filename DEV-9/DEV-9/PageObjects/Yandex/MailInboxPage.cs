@@ -33,22 +33,16 @@ namespace DEV_9.PageObjects.Yandex
             this.driver = driver;
         }
 
-        //// TODO think about removing check methods from here.
-
         /// <summary>
         /// Checks if the mail has the correct sender.
         /// </summary>
         /// <param name="mailLocator">
         /// The locator of the mail.
         /// </param>
-        /// <param name="sender">
-        /// The sender's full mail.
-        /// </param>
         /// <returns>
         /// 'True' if the sender is correct.
         /// </returns>
-        public bool CheckIfSenderIsCorrect(string mailLocator, string sender) =>
-            this.driver.FindElement(By.XPath(mailLocator + $"//span[@class='mail-MessageSnippet-FromText' and @title='{sender}']")) != null;
+        public IWebElement SenderOfMail(string mailLocator) => this.driver.FindElement(By.XPath(mailLocator + "//span[@class='mail-MessageSnippet-FromText']"));
 
         /// <summary>
         /// Checks if the mail is unread.
@@ -59,8 +53,7 @@ namespace DEV_9.PageObjects.Yandex
         /// <returns>
         /// 'True' if unread.
         /// </returns>
-        public bool CheckIfUnread(string mailLocator) =>
-            this.driver.FindElement(By.XPath(mailLocator + "//span[contains(@class, 'state_toRead')]")) != null;
+        public IWebElement UnreadMarkerOfMail(string mailLocator) => this.driver.FindElement(By.XPath(mailLocator + "//span[contains(@class, 'state_toRead')]"));
 
         /// <summary>
         /// Goes to the reading page for the mail.

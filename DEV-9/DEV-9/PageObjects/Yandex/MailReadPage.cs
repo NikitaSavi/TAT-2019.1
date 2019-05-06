@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace DEV_9.PageObjects.Yandex
 {
@@ -57,6 +59,8 @@ namespace DEV_9.PageObjects.Yandex
             this.QuickReplyBoxInit.Click();
             this.QuickReplyBoxWrite.SendKeys(text);
             this.SendReplyButton.Click();
+            new WebDriverWait(this.driver, TimeSpan.FromSeconds(3)).Until(
+                x => this.driver.FindElement(By.XPath("//div[@data-key='view=quick-reply-done-success']")).Displayed);
             return this;
         }
     }

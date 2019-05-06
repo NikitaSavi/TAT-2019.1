@@ -36,16 +36,6 @@ namespace DEV_9.PageObjects.MailRu
         public IWebElement ErrorMessage => this.driver.FindElement(By.XPath("//div[@id='mailbox:error']"));
 
         /// <summary>
-        /// Timer for login error messages to appear for testing purposes.
-        /// </summary>
-        /// <remarks>
-        /// Test for empty input can be passed without this timer, but test for wrong input cannot,
-        /// since it takes a small bit of time to check the database and show the error message.
-        /// This timer's purpose is to take this delay into account.
-        /// </remarks>
-        private WebDriverWait errorLoginMsgWait;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="HomePage"/> class.
         /// </summary>
         /// <param name="driver">
@@ -54,7 +44,6 @@ namespace DEV_9.PageObjects.MailRu
         public HomePage(IWebDriver driver)
         {
             this.driver = driver;
-            this.errorLoginMsgWait = new WebDriverWait(this.driver, TimeSpan.FromSeconds(1));
         }
 
         /// <summary>
@@ -95,7 +84,9 @@ namespace DEV_9.PageObjects.MailRu
             this.UsernameBox.SendKeys(username);
             this.PasswordBox.SendKeys(password);
             this.LoginButton.Click();
-            this.errorLoginMsgWait.Until(x => this.ErrorMessage.Displayed);
+            
+            // Required for wrong inputs.
+            new WebDriverWait(this.driver, TimeSpan.FromSeconds(1)).Until(x => this.ErrorMessage.Displayed);
             return this;
         }
     }

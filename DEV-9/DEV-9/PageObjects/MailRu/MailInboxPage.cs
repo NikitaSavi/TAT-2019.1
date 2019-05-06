@@ -18,7 +18,7 @@ namespace DEV_9.PageObjects.MailRu
         public IWebElement WriteNewLetterButton => this.driver.FindElement(By.XPath("//a[@data-name='compose']"));
 
         /// <summary>
-        /// Locator of the latest mail element.
+        /// The latest mail in the inbox.
         /// </summary>
         public IWebElement LatestMail => this.driver.FindElement(By.XPath("//div[@class='b-datalist__body']/div[1]"));
 
