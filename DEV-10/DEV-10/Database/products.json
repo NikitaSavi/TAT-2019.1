@@ -1,0 +1,7 @@
+[{
+	"ID":1, "Description":"Best product", "Quantity":1,"ManufacturerID":1,"WarehouseID":1,"DeliveryID":1,"ManufactureDate":"31/12/1999"
+},{
+		"ID":2, "Description":"Worst product", "Quantity":2345,"ManufacturerID":1,"WarehouseID":2,"DeliveryID":3,"ManufactureDate":"1/1/1111"
+},{
+		"ID":3, "Description":"Meh product", "Quantity":11, "ManufacturerID":1,"WarehouseID":2,"DeliveryID":2,"ManufactureDate":"5/3/2015"
+}]

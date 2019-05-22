@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ArrayOfWarehouse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Warehouse>
+    <ID>1</ID>
+    <Name>W1</Name>
+    <AddressID>1</AddressID>
+  </Warehouse>
+  <Warehouse>
+    <ID>2</ID>
+    <Name>F2</Name>
+    <AddressID>2</AddressID>
+  </Warehouse>
+</ArrayOfWarehouse>
