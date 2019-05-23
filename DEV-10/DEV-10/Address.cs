@@ -123,6 +123,32 @@ namespace DEV_10
         /// <inheritdoc />
         public event Action<IShopEntity> EntityChanged;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Address"/> class.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="city">
+        /// The city.
+        /// </param>
+        /// <param name="street">
+        /// The street.
+        /// </param>
+        /// <param name="house">
+        /// The house.
+        /// </param>
+        /// <param name="country">
+        /// The country.
+        /// </param>
+        public Address(int id, string city, string street, int house, string country)
+        {
+            this.Id = id;
+            this.City = city;
+            this.Street = street;
+            this.House = house;
+            this.Country = country;
+        }
         /// <inheritdoc />
         public void ShowInfoToConsole()
         {

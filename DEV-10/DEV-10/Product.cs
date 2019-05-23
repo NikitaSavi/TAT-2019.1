@@ -167,6 +167,37 @@ namespace DEV_10
         /// <inheritdoc />
         public event Action<IShopEntity> EntityChanged;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Product"/> class.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="description">
+        /// The description.
+        /// </param>
+        /// <param name="quantity">
+        /// The quantity.
+        /// </param>
+        /// <param name="manufacturerId">
+        /// The manufacturer id.
+        /// </param>
+        /// <param name="warehouseId">
+        /// The warehouse id.
+        /// </param>
+        /// <param name="deliveryId">
+        /// The delivery id.
+        /// </param>
+        public Product(int id, string description, int quantity, int manufacturerId, int warehouseId, int deliveryId)
+        {
+            this.Id = id;
+            this.Description = description;
+            this.Quantity = quantity;
+            this.ManufacturerId = manufacturerId;
+            this.WarehouseId = warehouseId;
+            this.DeliveryId = deliveryId;
+        }
+
         /// <inheritdoc />
         public void ShowInfoToConsole()
         {

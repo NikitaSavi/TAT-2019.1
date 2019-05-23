@@ -79,6 +79,25 @@ namespace DEV_10
         /// <inheritdoc />
         public event Action<IShopEntity> EntityChanged;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Delivery"/> class.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="description">
+        /// The description.
+        /// </param>
+        /// <param name="date">
+        /// The date.
+        /// </param>
+        public Delivery(int id, string description, string date)
+        {
+            this.Id = id;
+            this.Description = description;
+            this.Date = date;
+        }
+
         /// <inheritdoc />
         public void ShowInfoToConsole()
         {
