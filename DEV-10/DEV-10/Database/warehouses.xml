@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <ArrayOfWarehouse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Warehouse>
-    <ID>1</ID>
+    <Id>0</Id>
     <Name>W1</Name>
-    <AddressID>1</AddressID>
+    <AddressId>0</AddressId>
   </Warehouse>
   <Warehouse>
-    <ID>2</ID>
+    <Id>0</Id>
     <Name>F2</Name>
-    <AddressID>2</AddressID>
+    <AddressId>0</AddressId>
   </Warehouse>
 </ArrayOfWarehouse>

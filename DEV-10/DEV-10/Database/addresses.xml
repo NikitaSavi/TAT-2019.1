@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <ArrayOfAddress xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Address>
-    <ID>1</ID>
+    <Id>0</Id>
     <City>Minsk</City>
     <Street>NorthA</Street>
     <House>12</House>
     <Country>Belarus</Country>
   </Address>
   <Address>
-    <ID>2</ID>
+    <Id>0</Id>
     <City>Moskow</City>
     <Street>Big</Street>
     <House>1</House>

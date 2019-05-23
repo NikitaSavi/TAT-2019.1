@@ -24,6 +24,7 @@ namespace DEV_10
                     item.ShowInfoToConsole();
                 }
 
+                shop.DeliveriesList[0].Description = "New Descr";
                 shop.WriteToXml();
                 return 0;
             }

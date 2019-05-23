@@ -1,30 +1,30 @@
 <?xml version="1.0"?>
 <ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Product>
-    <ID>1</ID>
+    <Id>0</Id>
     <Description>Best product</Description>
     <Quantity>1</Quantity>
-    <ManufacturerID>1</ManufacturerID>
-    <WarehouseID>1</WarehouseID>
-    <DeliveryID>1</DeliveryID>
+    <ManufacturerId>0</ManufacturerId>
+    <WarehouseId>0</WarehouseId>
+    <DeliveryId>0</DeliveryId>
     <ManufactureDate>31/12/1999</ManufactureDate>
   </Product>
   <Product>
-    <ID>2</ID>
+    <Id>0</Id>
     <Description>Worst product</Description>
     <Quantity>2345</Quantity>
-    <ManufacturerID>1</ManufacturerID>
-    <WarehouseID>2</WarehouseID>
-    <DeliveryID>3</DeliveryID>
+    <ManufacturerId>0</ManufacturerId>
+    <WarehouseId>0</WarehouseId>
+    <DeliveryId>0</DeliveryId>
     <ManufactureDate>1/1/1111</ManufactureDate>
   </Product>
   <Product>
-    <ID>3</ID>
+    <Id>0</Id>
     <Description>Meh product</Description>
     <Quantity>11</Quantity>
-    <ManufacturerID>1</ManufacturerID>
-    <WarehouseID>2</WarehouseID>
-    <DeliveryID>2</DeliveryID>
+    <ManufacturerId>0</ManufacturerId>
+    <WarehouseId>0</WarehouseId>
+    <DeliveryId>0</DeliveryId>
     <ManufactureDate>5/3/2015</ManufactureDate>
   </Product>
 </ArrayOfProduct>
