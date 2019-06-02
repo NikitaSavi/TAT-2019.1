@@ -28,7 +28,8 @@ namespace DEV_6
 
                 var xDocCars = XDocument.Load($"../../{args[0]}");
                 var xDocTruck = XDocument.Load($"../../{args[1]}");
-                CommandsInvoker.InvokeCommands(xDocCars, xDocTruck);
+                var invoker = new CommandsInvoker(xDocCars, xDocTruck);
+                invoker.InvokeCommands();
 
                 return 0;
             }

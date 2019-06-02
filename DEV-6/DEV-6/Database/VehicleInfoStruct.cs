@@ -1,4 +1,4 @@
-﻿namespace DEV_6
+﻿namespace DEV_6.Database
 {
     /// <summary>
     /// Struct for vehicle information.

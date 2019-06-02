@@ -2,24 +2,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using DEV_6.Commands;
+using DEV_6.CommandsReceivers;
+using DEV_6.Database;
 
 namespace DEV_6
 {
     /// <summary>
     /// The commands invoker.
     /// </summary>
-    public static class CommandsInvoker
+    public class CommandsInvoker
     {
+        /// <summary>
+        /// XML doc with cars information.
+        /// </summary>
+        private XDocument CarsXDoc { get; set; }
+
+        /// <summary>
+        /// XML doc with trucks information.
+        /// </summary>
+        private XDocument TrucksXDoc { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandsInvoker"/> class.
+        /// </summary>
+        /// <param name="carsXDoc">
+        /// The cars x doc.
+        /// </param>
+        /// <param name="trucksXDoc">
+        /// The trucks x doc.
+        /// </param>
+        public CommandsInvoker(XDocument carsXDoc, XDocument trucksXDoc)
+        {
+            this.CarsXDoc = carsXDoc;
+            this.TrucksXDoc = trucksXDoc;
+        }
+
         /// <summary>
         /// Invokes the commands, based on user's input.
         /// </summary>
-        /// <param name="carsXDoc">
-        /// XML doc with cars information.
-        /// </param>
-        /// <param name="trucksXDoc">
-        /// XML doc with trucks information.
-        /// </param>
-        public static void InvokeCommands(XDocument carsXDoc, XDocument trucksXDoc)
+        public void InvokeCommands()
         {
             var commandsQueue = new List<ICommand>();
             Console.WriteLine(
@@ -60,10 +82,10 @@ namespace DEV_6
                 switch (commandVehicleKey)
                 {
                     case "car":
-                        listToProcess = DatabaseCars.GetDatabaseCars(carsXDoc).ListOfCars;
+                        listToProcess = DatabaseCars.GetDatabaseCars(this.CarsXDoc).ListOfCars;
                         break;
                     case "truck":
-                        listToProcess = DatabaseTrucks.GetDatabaseTrucks(trucksXDoc).ListOfTrucks;
+                        listToProcess = DatabaseTrucks.GetDatabaseTrucks(this.TrucksXDoc).ListOfTrucks;
                         break;
                     default:
                         Console.WriteLine("Unknown vehicle type");
@@ -94,7 +116,8 @@ namespace DEV_6
                                 commandsQueue.Add(
                                     new CommandCountAveragePriceOfBrand(
                                         new CounterAveragePriceOfBrand(),
-                                        listToProcess, commandBrandKey));
+                                        listToProcess,
+                                        commandBrandKey));
                             }
                             else
                             {
