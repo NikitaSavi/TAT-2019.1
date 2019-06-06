@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ArrayOfCurrency xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Currency>
+    <Name>Доллар США</Name>
+    <Rate>2.0985</Rate>
+  </Currency>
+  <Currency>
+    <Name>Евро</Name>
+    <Rate>2.3648</Rate>
+  </Currency>
+  <Currency>
+    <Name>Российский рубль100</Name>
+    <Rate>3.2249</Rate>
+  </Currency>
+  <Currency>
+    <Name>Злотый10</Name>
+    <Rate>5.5347</Rate>
+  </Currency>
+  <Currency>
+    <Name>Гривна100</Name>
+    <Rate>7.7829</Rate>
+  </Currency>
+</ArrayOfCurrency>
