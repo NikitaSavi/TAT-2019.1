@@ -1,27 +1,27 @@
-﻿namespace DEV_6
+﻿namespace DEV_6.Database
 {
     /// <summary>
-    /// Struct for car information.
+    /// Struct for vehicle information.
     /// </summary>
-    internal struct CarInfoStruct
+    public struct VehicleInfoStruct
     {
         /// <summary>
-        /// Mark of the car.
+        /// Brand of the vehicle.
         /// </summary>
-        public string Mark { get; set; }
+        public string Brand { get; set; }
 
         /// <summary>
-        /// Model of the mark.
+        /// Model of the brand.
         /// </summary>
         public string Model { get; set; }
 
         /// <summary>
-        /// Quantity of cars of this model.
+        /// Quantity of vehicles of this model.
         /// </summary>
         public int Quantity { get; set; }
 
         /// <summary>
-        /// Price of an individual car
+        /// Price of an individual vehicle
         /// </summary>
         public int Price { get; set; }
     }

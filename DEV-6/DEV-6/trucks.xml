@@ -3,26 +3,26 @@
 <cars>
   <car>
     <brand>volvo</brand>
-    <model>V40</model>
+    <model>T15</model>
     <quantity>20</quantity>
     <price>200</price>
   </car>
   <car>
-    <brand>volvo</brand>
-    <model>S90</model>
-    <quantity>10</quantity>
+    <brand>ford</brand>
+    <model>1F</model>
+    <quantity>4</quantity>
     <price>250</price>
   </car>
   <car>
     <brand>bmw</brand>
-    <model>X3</model>
+    <model>X4</model>
     <quantity>10</quantity>
-    <price>2200</price>
+    <price>300</price>
   </car>
   <car>
-    <brand>moskvitch</brand>
-    <model>400</model>
+    <brand>maz big</brand>
+    <model>5600</model>
     <quantity>1</quantity>
-    <price>2500</price>
+    <price>150</price>
   </car>
 </cars>
