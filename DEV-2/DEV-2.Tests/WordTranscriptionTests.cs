@@ -124,12 +124,19 @@ namespace DEV_2.Tests
         /// Req 2.: "Soft" vowels sounds after consonants change to their pairs and soften previous sound.
         /// Additional check that not-"soft" vowels don't do such things.
         /// </summary>
-        [TestMethod]
-        public void WorkWithIoatedVowels_IoatedAfterConsonants_PairChanged()
+        /// <param name="input">
+        /// Entered word.
+        /// </param>
+        /// <param name="expected">
+        /// Expected result.
+        /// </param>
+        [DataTestMethod]
+        [DataRow("бибябебёбю", "б'иб'аб'эб'об'у")]
+        public void WorkWithIoatedVowels_IoatedAfterConsonants_PairChanged(string input, string expected)
         {
-            var transcriber = new WordTranscription("бибябебёбю");
+            var transcriber = new WordTranscription(input);
             var actual = transcriber.Transcribe();
-            Assert.AreEqual("б'иб'аб'эб'об'у", actual.ToString());
+            Assert.AreEqual(expected, actual.ToString());
         }
 
         /// <summary>
