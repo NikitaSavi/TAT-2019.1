@@ -136,12 +136,19 @@ namespace DEV_2.Tests
         /// Positive test for WorkWithIoatedVowels method.
         /// Additional check for req.2 that not-"soft" vowels don't change.
         /// </summary>
-        [TestMethod]
-        public void WorkWithIoatedVowels_NonIoatedVowelsAfterConsonants_NothingChanges()
+        /// <param name="input">
+        /// Entered word.
+        /// </param>
+        /// <param name="expected">
+        /// Expected result.
+        /// </param>
+        [DataTestMethod]
+        [DataRow("быбабэбо+бу", "быбабэбобу")]
+        public void WorkWithIoatedVowels_NonIoatedVowelsAfterConsonants_NothingChanges(string input, string expected)
         {
-            var transcriber = new WordTranscription("быбабэбо+бу");
+            var transcriber = new WordTranscription(input);
             var actual = transcriber.Transcribe();
-            Assert.AreEqual("быбабэбобу", actual.ToString());
+            Assert.AreEqual(expected, actual.ToString());
         }
 
         /// <summary>
@@ -168,24 +175,38 @@ namespace DEV_2.Tests
         /// Positive test for CheckVoiceLevelUp method.
         /// Req 4.: Consonants change their voice level: voiceless to voiced - before double voiced consonant sounds.
         /// </summary>
-        [TestMethod]
-        public void CheckVoiceLevelUp_Consonants_VoiceLevelChanges()
+        /// <param name="input">
+        /// Entered word.
+        /// </param>
+        /// <param name="expected">
+        /// Expected result.
+        /// </param>
+        [DataTestMethod]
+        [DataRow("кнн", "гнн")]
+        public void CheckVoiceLevelUp_Consonants_VoiceLevelChanges(string input, string expected)
         {
-            var transcriber = new WordTranscription("кнн");
+            var transcriber = new WordTranscription(input);
             var actual = transcriber.Transcribe();
-            Assert.AreEqual("гнн", actual.ToString());
+            Assert.AreEqual(expected, actual.ToString());
         }
 
         /// <summary>
         /// Positive test for CheckVoiceLevelUp method.
         /// Req 4.: Consonants change their voice level: voiced to voiceless - at the word's end and before voiceless consonant sound.
         /// </summary>
-        [TestMethod]
-        public void CheckVoiceLevelDown_Consonants_VoiceLevelChanges()
+        /// <param name="input">
+        /// Entered word.
+        /// </param>
+        /// <param name="expected">
+        /// Expected result.
+        /// </param>
+        [DataTestMethod]
+        [DataRow("зпг", "спк")]
+        public void CheckVoiceLevelDown_Consonants_VoiceLevelChanges(string input, string expected)
         {
-            var transcriber = new WordTranscription("зпг");
+            var transcriber = new WordTranscription(input);
             var actual = transcriber.Transcribe();
-            Assert.AreEqual("спк", actual.ToString());
+            Assert.AreEqual(expected, actual.ToString());
         }
     }
 }
