@@ -1,32 +1,64 @@
-﻿namespace DEV_2
+﻿using System;
+using System.Linq;
+
+namespace DEV_2
 {
-    struct Vowel
+    /// <summary>
+    /// Struct for vowel letters.
+    /// </summary>
+    public struct Vowel
     {
-        public string sound;
-        public bool isStressed, isIoated, addJSound;
+        /// <summary>
+        /// The sound of the letter.
+        /// </summary>
+        public string Sound { get; set; }
 
         /// <summary>
-        /// Fills the fields with default characteristics 
+        /// Indicates whether the letter is stressed.
         /// </summary>
-        /// <param name="letter">Letter from the received word</param>
+        public bool IsStressed { get; set; }
+
+        /// <summary>
+        /// Indicates whether the letter is ioated.
+        /// </summary>
+        public bool IsIoated { get; }
+
+        /// <summary>
+        /// Indicates whether to add j sound.
+        /// </summary>
+        public bool AddJSound { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Vowel"/> struct. 
+        /// </summary>
+        /// <param name="letter">
+        /// Letter from the received word.
+        /// </param>
         public Vowel(char letter)
         {
-            isStressed = letter == 'ё';
-            isIoated = Letter.vowelIonationEquivalents.ContainsKey(letter);
-            addJSound = true;
-            sound = isIoated ? Letter.vowelIonationEquivalents[letter].ToString() : letter.ToString();
+            if (!Letter.AllVowels.Contains(letter))
+            {
+                throw new Exception("Wrong char received.");
+            }
+
+            this.IsStressed = letter == 'ё';
+            this.IsIoated = Letter.VowelIonationEquivalents.ContainsKey(letter);
+            this.AddJSound = true;
+            this.Sound = this.IsIoated ? Letter.VowelIonationEquivalents[letter].ToString() : letter.ToString();
         }
 
+        /// <summary>
+        /// Updates the sound with necessary changes.
+        /// </summary>
         public void Update()
         {
-            //updates with necessary changes
-            if (sound == "о" && !isStressed)
+            if (this.Sound == "о" && !this.IsStressed)
             {
-                sound = "а";
+                this.Sound = "а";
             }
-            else if (isIoated)
+            else if (this.IsIoated)
             {
-                sound = addJSound ? ("й" + sound) : ("'" + sound);
+                this.Sound = this.AddJSound ? "й'" + this.Sound : "'" + this.Sound;
             }
         }
     }
