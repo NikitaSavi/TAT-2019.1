@@ -5,7 +5,7 @@ namespace DEV_2
     /// <summary>
     /// DEV-2 Task: Transcription of the received console argument
     /// </summary>
-    class EntryPoint
+    public class EntryPoint
     {
         /// <summary>
         /// The entry point to the program
@@ -16,7 +16,7 @@ namespace DEV_2
         /// 0 - OK
         /// 1 - errors
         /// </returns>
-        static int Main(string[] args)
+        private static int Main(string[] args)
         {
             try
             {
@@ -27,8 +27,8 @@ namespace DEV_2
 
                 foreach (var argument in args)
                 {
-                    var transcription = new Transcription(argument);
-                    Console.WriteLine(argument.ToLower() + " -> " + transcription.Transcribe());
+                    var argumentTranscription = new WordTranscription(argument);
+                    Console.WriteLine(argument.ToLower() + " -> " + argumentTranscription.Transcription);
                 }
 
                 return 0;
