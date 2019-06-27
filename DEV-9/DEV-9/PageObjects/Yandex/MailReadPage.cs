@@ -61,6 +61,7 @@ namespace DEV_9.PageObjects.Yandex
             this.SendReplyButton.Click();
             new WebDriverWait(this.driver, TimeSpan.FromSeconds(3)).Until(
                 x => this.driver.FindElement(By.XPath("//div[@data-key='view=quick-reply-done-success']")).Displayed);
+
             return this;
         }
     }

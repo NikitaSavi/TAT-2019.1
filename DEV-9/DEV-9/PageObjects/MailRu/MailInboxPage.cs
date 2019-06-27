@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using System.Collections.Generic;
+using System.Linq;
+using OpenQA.Selenium;
 
 namespace DEV_9.PageObjects.MailRu
 {
@@ -20,7 +22,7 @@ namespace DEV_9.PageObjects.MailRu
         /// <summary>
         /// The latest mail in the inbox.
         /// </summary>
-        public IWebElement LatestMail => this.driver.FindElement(By.XPath("//div[@class='b-datalist__body']/div[1]"));
+        public List<IWebElement> Mails => this.driver.FindElements(By.XPath("//div[@class='b-datalist__body']/div")).ToList();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MailInboxPage"/> class.
@@ -42,6 +44,7 @@ namespace DEV_9.PageObjects.MailRu
         public WriteNewLetterPage WriteNewLetter()
         {
             this.WriteNewLetterButton.Click();
+
             return new WriteNewLetterPage(this.driver);
         }
 
@@ -57,6 +60,7 @@ namespace DEV_9.PageObjects.MailRu
         public MailReadPage ReadMail(IWebElement mail)
         {
             mail.Click();
+
             return new MailReadPage(this.driver);
         }
     }

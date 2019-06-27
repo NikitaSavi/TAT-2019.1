@@ -69,6 +69,7 @@ namespace DEV_9.PageObjects.MailRu
             this.driver.SwitchTo().DefaultContent();
             this.SendLetterButton.Click();
             this.ReturnToInboxButton.Click();
+
             return new MailInboxPage(this.driver);
         }
     }

@@ -67,6 +67,7 @@ namespace DEV_9.PageObjects.Yandex
         public MailReadPage ReadMail(string mailLocator)
         {
             this.driver.FindElement(By.XPath(mailLocator)).Click();
+
             return new MailReadPage(this.driver);
         }
     }

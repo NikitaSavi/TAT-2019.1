@@ -52,6 +52,7 @@ namespace DEV_9.PageObjects.MailRu
         {
             this.ProfileButton.Click();
             this.PersonalDataButton.Click();
+
             return new PersonalDataPage(this.driver);
         }
     }

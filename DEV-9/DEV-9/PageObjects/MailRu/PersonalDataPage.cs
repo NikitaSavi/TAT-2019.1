@@ -47,9 +47,9 @@ namespace DEV_9.PageObjects.MailRu
             this.NicknameBox.Clear();
             this.NicknameBox.SendKeys(newNickname);
             this.SubmitButton.Click();
-            
             // Return to the userdata page
             this.driver.FindElement(By.XPath("//a[@data-name='userinfo']")).Click();
+
             return this;
         }
     }

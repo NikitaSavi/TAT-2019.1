@@ -85,7 +85,7 @@ namespace DEV_9.Tests
             this.driver.Url = "https://mail.ru";
             var mailruLoginPage = new PageObjects.MailRu.HomePage(this.driver);
             var mailruMailPage = mailruLoginPage.Login(this.mailruAddress, this.password);
-            var mailruReadPage = mailruMailPage.ReadMail(mailruMailPage.LatestMail);
+            var mailruReadPage = mailruMailPage.ReadMail(mailruMailPage.Mails[0]);
 
             // Split is needed to separate nickname from everything else in the reply.
             var newNicknameRecieved = mailruReadPage.MailText.Text.Split('\r')[0];

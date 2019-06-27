@@ -68,6 +68,7 @@ namespace DEV_9.PageObjects.Yandex
             this.LoginProceedButton.Click();
             this.PasswordBox.SendKeys(password);
             this.LoginProceedButton.Click();
+
             return new MailInboxPage(this.driver);
         }
 
