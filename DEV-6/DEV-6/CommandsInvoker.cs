@@ -136,6 +136,8 @@ namespace DEV_6
                         Console.WriteLine("Unknown command");
                         break;
                 }
+
+                break;
             }
 
             foreach (var command in commandsQueue)
