@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ArrayOfManufacturer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Manufacturer>
+    <Id>0</Id>
+    <Name>Apple</Name>
+    <RegistrationId>0</RegistrationId>
+    <Country>USA</Country>
+  </Manufacturer>
+</ArrayOfManufacturer>r>
