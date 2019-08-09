@@ -5,12 +5,31 @@ namespace DEV_4
     /// <summary>
     /// Class for lectures
     /// </summary>
-    class Lecture : Material
+    public class Lecture : Material
     {
+        /// <summary>
+        /// Gets or sets the text.
+        /// </summary>
         public string Text { get; set; }
+
+        /// <summary>
+        /// The text max length.
+        /// </summary>
         private const int TextMaxLength = 100000;
-        public List<Seminar> ListOfSeminarsForThisLecture = new List<Seminar>();
-        public List<Labwork> ListOfLabworksForThisLecture = new List<Labwork>();
+
+        /// <summary>
+        /// The list of seminars for this lecture.
+        /// </summary>
+        public List<Seminar> ListOfSeminarsForThisLecture { get; set; }
+
+        /// <summary>
+        /// The list of labworks for this lecture.
+        /// </summary>
+        public List<Labwork> ListOfLabworksForThisLecture { get; set; }
+
+        /// <summary>
+        /// Gets or sets the presentation.
+        /// </summary>
         private Presentation Presentation { get; set; }
 
         /// <summary>
@@ -19,8 +38,11 @@ namespace DEV_4
         /// <param name="text">Text of the lecture</param>
         /// <param name="presentation">Presentation material for the lecture</param>
         /// <param name="description">Description, null by default</param>
-        public Lecture(string text, Presentation presentation, string description = null) : base(description)
+        public Lecture(string text, Presentation presentation, string description = null)
+            : base(description)
         {
+            this.ListOfSeminarsForThisLecture = new List<Seminar>();
+            this.ListOfLabworksForThisLecture = new List<Labwork>();
             this.Presentation = presentation;
             this.Text = text.WithMaxLength(TextMaxLength);
         }
@@ -30,22 +52,22 @@ namespace DEV_4
         {
             var seminarsListCopy = new List<Seminar>();
             var labworksListCopy = new List<Labwork>();
-            foreach (var material in ListOfSeminarsForThisLecture)
+            foreach (var material in this.ListOfSeminarsForThisLecture)
             {
                 seminarsListCopy.Add(material);
             }
 
-            foreach (var material in ListOfLabworksForThisLecture)
+            foreach (var material in this.ListOfLabworksForThisLecture)
             {
                 labworksListCopy.Add(material);
             }
 
-            return new Lecture(Text, Presentation)
-            {
-                ListOfSeminarsForThisLecture = seminarsListCopy,
-                ListOfLabworksForThisLecture = labworksListCopy,
-                Data = {Description = Data.Description, EntityGuid = Data.EntityGuid}
-            };
+            return new Lecture(this.Text, Presentation)
+                       {
+                           ListOfSeminarsForThisLecture = seminarsListCopy,
+                           ListOfLabworksForThisLecture = labworksListCopy,
+                           Data = { Description = Data.Description, EntityGuid = Data.EntityGuid }
+                       };
         }
     }
 }

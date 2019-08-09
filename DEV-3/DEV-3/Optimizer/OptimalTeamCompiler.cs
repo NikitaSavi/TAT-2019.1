@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace DEV_3
+using DEV_3.Employees;
+
+namespace DEV_3.Optimizer
 {
     /// <summary>
     /// Abstract parent class for optimization
     /// </summary>
-    abstract class OptimalTeamCompiler
+    public abstract class OptimalTeamCompiler
     {
         /// <summary>
         /// Compiles the list according to the criterion. Overriden in derived classes.

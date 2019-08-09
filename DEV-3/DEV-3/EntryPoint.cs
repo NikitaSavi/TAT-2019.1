@@ -1,11 +1,13 @@
 ﻿using System;
 
+using DEV_3.Optimizer;
+
 namespace DEV_3
 {
     /// <summary>
     /// DEV-3: optimize staff using one of the 3 criteria
     /// </summary>
-    class EntryPoint
+    public class EntryPoint
     {
         /// <summary>
         /// Entry point to the program
@@ -19,7 +21,7 @@ namespace DEV_3
         /// 0 - OK
         /// 1 - error
         /// </returns>
-        static int Main(string[] args)
+        private static int Main(string[] args)
         {
             try
             {
@@ -33,7 +35,6 @@ namespace DEV_3
                 OptimalTeamCompiler optimalTeamCompiler;
                 switch (criterion)
                 {
-                    //Call for appropriate method, depending on the criterion entered
                     case 1:
                         int.TryParse(args[1], out var availableMoney);
                         optimalTeamCompiler = new CriterionMaxProductivity(availableMoney);
@@ -50,8 +51,8 @@ namespace DEV_3
                         throw new Exception("Unknown criteria entered");
                 }
 
-                var listOfFoundEmployees = company.GetEmployees(optimalTeamCompiler); //Found staff will be in this list
-                Company.ShowNumberOfFoundEmployees(listOfFoundEmployees);
+                var listOfFoundEmployees = company.GetEmployees(optimalTeamCompiler);
+                new Company().ShowNumberOfFoundEmployees(listOfFoundEmployees);
                 return 0;
             }
             catch (Exception ex)

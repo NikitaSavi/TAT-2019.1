@@ -85,7 +85,7 @@ namespace DEV_9.PageObjects.MailRu
             this.UsernameBox.SendKeys(username);
             this.PasswordBox.SendKeys(password);
             this.LoginButton.Click();
-            // Required for wrong inputs.
+            //// Required for wrong inputs.
             new WebDriverWait(this.driver, TimeSpan.FromSeconds(1)).Until(x => this.ErrorMessage.Displayed);
 
             return this;

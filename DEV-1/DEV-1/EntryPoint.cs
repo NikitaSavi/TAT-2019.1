@@ -3,21 +3,21 @@
 namespace DEV_1
 {
     /// <summary>
-    /// DEV-1 Task: a program recieves a string (2+ characters) as a console argument, searches for all subsequences in which there are no two consecutive repeated characters
+    /// DEV-1 Task: a program receives a string (2+ characters) as a console argument, searches for all subsequences in which there are no two consecutive repeated characters
     /// </summary>
-    class EntryPoint
+    public class EntryPoint
     {
         /// <summary>
         /// The entry point to the program
         /// </summary>
-        /// <param name="args">Program recieves a string as an console argument</param>
+        /// <param name="args">Program receives a string as an console argument</param>
         /// <returns>
         /// Exit codes:
         /// 0 - OK
-        /// 1 - issue with the recieved argument
+        /// 1 - issue with the received argument
         /// 2 - other errors
         /// </returns>
-        static int Main(string[] args)
+        private static int Main(string[] args)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace DEV_1
                 }
 
                 Console.WriteLine("Argument: " + args[0]);
-                UniqueSymbolsSearcher uniqueSymbolsSearcher = new UniqueSymbolsSearcher(args[0]);
+                var uniqueSymbolsSearcher = new UniqueSymbolsSearcher(args[0]);
                 foreach (var sequence in uniqueSymbolsSearcher.CompileList())
                 {
                     Console.WriteLine(sequence);

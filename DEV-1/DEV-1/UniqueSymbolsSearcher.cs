@@ -7,22 +7,26 @@ namespace DEV_1
     /// <summary>
     /// This class looks for sequences with unique symbols in it
     /// </summary>
-    class UniqueSymbolsSearcher
+    public class UniqueSymbolsSearcher
     {
-        private StringBuilder inputLine = new StringBuilder();
+        /// <summary>
+        /// The input line.
+        /// </summary>
+        private StringBuilder inputLine;
 
         /// <summary>
-        /// Constructor, validates recieved StringBuilder
+        /// Constructor, validates received StringBuilder
         /// </summary>
-        /// <param name="recievedArgument">String recieved as an console argument</param>
-        public UniqueSymbolsSearcher(string recievedArgument)
+        /// <param name="receivedArgument">String received as an console argument</param>
+        public UniqueSymbolsSearcher(string receivedArgument)
         {
-            if (recievedArgument.Length < 2)
+            this.inputLine = new StringBuilder();
+            if (receivedArgument.Length < 2)
             {
                 throw new FormatException();
             }
 
-            inputLine.Append(recievedArgument);
+            this.inputLine.Append(receivedArgument);
         }
 
         /// <summary>
@@ -31,20 +35,17 @@ namespace DEV_1
         /// <returns>List that contains all required sequences</returns>
         public IEnumerable<string> CompileList()
         {
-            var sequenceList = new List<string>(); //list for sequences
+            var sequenceList = new List<string>();
             var sequence = new StringBuilder();
 
-            for (int indexFirst = 0; indexFirst < inputLine.Length - 1; indexFirst++)
+            for (int indexFirst = 0; indexFirst < this.inputLine.Length - 1; indexFirst++)
             {
-                //pick each symbol and look for all sequences staring with it 
-                sequence.Append(inputLine[indexFirst]);
-
-                for (int indexLast = indexFirst + 1; indexLast < inputLine.Length; indexLast++)
+                sequence.Append(this.inputLine[indexFirst]);
+                for (int indexLast = indexFirst + 1; indexLast < this.inputLine.Length; indexLast++)
                 {
-                    sequence.Append(inputLine[indexLast]);
-                    if (inputLine[indexLast] != inputLine[indexLast - 1])
+                    sequence.Append(this.inputLine[indexLast]);
+                    if (this.inputLine[indexLast] != this.inputLine[indexLast - 1])
                     {
-                        //add sequences to the list until we either reach the end of the string or encounter two identical symbols
                         sequenceList.Add(sequence.ToString());
                     }
                     else

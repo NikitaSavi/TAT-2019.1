@@ -2,42 +2,64 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using DEV_3.Employees;
+using DEV_3.Optimizer;
+
 namespace DEV_3
 {
     /// <summary>
     /// Class for keeping info about the employees and for calling methods for optimization
     /// </summary>
-    class Company
+    public class Company
     {
+        /// <summary>
+        /// Gets the list of employees.
+        /// </summary>
         private List<Employee> ListOfEmployees { get; } = new List<Employee>();
-        private int _numOfJuniors = 50;
-        private int _numOfMids = 30;
-        private int _numOfSeniors = 10;
-        private int _numOfLeads = 3;
+
+        /// <summary>
+        /// The num of juniors.
+        /// </summary>
+        private readonly int numOfJuniors = 50;
+
+        /// <summary>
+        /// The num of mids.
+        /// </summary>
+        private readonly int numOfMids = 30;
+
+        /// <summary>
+        /// The num of seniors.
+        /// </summary>
+        private readonly int numOfSeniors = 10;
+
+        /// <summary>
+        /// The num of leads.
+        /// </summary>
+        private readonly int numOfLeads = 3;
 
         /// <summary>
         /// Constructor fills the list of all employees
         /// </summary>
         public Company()
         {
-            for (int i = 0; i < _numOfLeads; i++)
+            for (int i = 0; i < this.numOfLeads; i++)
             {
-                ListOfEmployees.Add(new Lead());
+                this.ListOfEmployees.Add(new Lead());
             }
 
-            for (int i = 0; i < _numOfSeniors; i++)
+            for (int i = 0; i < this.numOfSeniors; i++)
             {
-                ListOfEmployees.Add(new Senior());
+                this.ListOfEmployees.Add(new Senior());
             }
 
-            for (int i = 0; i < _numOfMids; i++)
+            for (int i = 0; i < this.numOfMids; i++)
             {
-                ListOfEmployees.Add(new Middle());
+                this.ListOfEmployees.Add(new Middle());
             }
 
-            for (int i = 0; i < _numOfJuniors; i++)
+            for (int i = 0; i < this.numOfJuniors; i++)
             {
-                ListOfEmployees.Add(new Junior());
+                this.ListOfEmployees.Add(new Junior());
             }
         }
 
@@ -48,14 +70,14 @@ namespace DEV_3
         /// <returns>List of found according to the criteria employees</returns>
         public List<Employee> GetEmployees(OptimalTeamCompiler optimalTeamCompiler)
         {
-            return optimalTeamCompiler.Choose(ListOfEmployees);
+            return optimalTeamCompiler.Choose(this.ListOfEmployees);
         }
 
         /// <summary>
         /// Shows the number of employees in the provided list
         /// </summary>
         /// <param name="listOfFoundEmployees">List that contains the employees</param>
-        public static void ShowNumberOfFoundEmployees(List<Employee> listOfFoundEmployees)
+        public void ShowNumberOfFoundEmployees(List<Employee> listOfFoundEmployees)
         {
             Console.WriteLine("The number of employees you'll need:");
             Console.WriteLine(

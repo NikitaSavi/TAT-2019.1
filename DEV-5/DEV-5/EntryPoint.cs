@@ -6,7 +6,7 @@ namespace DEV_5
     /// <summary>
     /// DEV-5: Calculate flight time of different objects
     /// </summary>
-    class EntryPoint
+    public class EntryPoint
     {
         /// <summary>
         /// Entry point to the program
@@ -16,14 +16,14 @@ namespace DEV_5
         /// 0 - OK
         /// 1 - Error
         /// </returns>
-        static int Main(string[] args)
+        private static int Main()
         {
             try
             {
-                var flyables = new List<IFlyable> {new Bird(), new Plane(), new SpaceShip()};
+                var flyables = new List<IFlyable> { new Bird(), new Plane(), new SpaceShip() };
                 foreach (var flyable in flyables)
                 {
-                    //Subscribe to the event - object changes coordinates -> get time of the flight
+                    // Subscribe to the event - object changes coordinates -> get time of the flight
                     flyable.ObjectFlewAway += FlightTimeLog.GetFlyTime;
                     flyable.FlyTo(new Point(100, 200, 800));
                 }

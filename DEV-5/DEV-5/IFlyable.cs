@@ -22,7 +22,7 @@ namespace DEV_5
         /// Calculates time that took the object to fly
         /// </summary>
         /// <returns>Time of the flight</returns>
-        double GetFlyTime(); //TODO parameters in reqs were not specified. Deliberately? Is it allowed to send distance as a parameter?
+        double GetFlyTime();
 
         /// <summary>
         /// Returns a reference to the current object

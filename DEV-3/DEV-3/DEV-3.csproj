@@ -44,17 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Company.cs" />
-    <Compile Include="CriterionMinStaff.cs" />
-    <Compile Include="CriterionMinCost.cs" />
-    <Compile Include="CriterionMaxProductivity.cs" />
-    <Compile Include="Employee.cs" />
+    <Compile Include="Optimizer\CriterionMinStaff.cs" />
+    <Compile Include="Optimizer\CriterionMinCost.cs" />
+    <Compile Include="Optimizer\CriterionMaxProductivity.cs" />
+    <Compile Include="Employees\Employee.cs" />
     <Compile Include="EntryPoint.cs" />
-    <Compile Include="Junior.cs" />
-    <Compile Include="Lead.cs" />
-    <Compile Include="Middle.cs" />
-    <Compile Include="OptimalTeamCompiler.cs" />
+    <Compile Include="Employees\Junior.cs" />
+    <Compile Include="Employees\Lead.cs" />
+    <Compile Include="Employees\Middle.cs" />
+    <Compile Include="Optimizer\OptimalTeamCompiler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Senior.cs" />
+    <Compile Include="Employees\Senior.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

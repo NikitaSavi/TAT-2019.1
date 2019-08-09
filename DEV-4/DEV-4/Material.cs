@@ -5,21 +5,24 @@ namespace DEV_4
     /// <summary>
     /// Parent class for all materials
     /// </summary>
-    abstract class Material : ICloneable
+    public abstract class Material : ICloneable
     {
+        /// <summary>
+        /// Gets or sets the data.
+        /// </summary>
         public EntityData Data { get; set; }
 
         /// <summary>
         /// Base constructor for materials, sets general data
         /// </summary>
         /// <param name="description">Description of an entity, null by default</param>
-        protected Material(string description = null) => Data = new EntityData(description);
+        protected Material(string description = null) => this.Data = new EntityData(description);
 
         /// <summary>
         /// Override method to return description of an entity
         /// </summary>
         /// <returns>Description of an entity</returns>
-        public override string ToString() => string.IsNullOrEmpty(Data.Description)
+        public override string ToString() => string.IsNullOrEmpty(this.Data.Description)
             ? "No description available"
             : $"Description: {Data.Description}";
 
@@ -28,15 +31,7 @@ namespace DEV_4
         /// </summary>
         /// <param name="obj">An entity to check equality with</param>
         /// <returns>True if received entity has the same GUID</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj is Material material)
-            {
-                return (Data.EntityGuid == material.Data.EntityGuid);
-            }
-
-            return false;
-        }
+        public override bool Equals(object obj) => obj is Material material && this.Data.EntityGuid == material.Data.EntityGuid;
 
         /// <summary>
         /// Performs deep cloning of an entity

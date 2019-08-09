@@ -5,19 +5,32 @@ namespace DEV_4
     /// <summary>
     /// Class for seminars
     /// </summary>
-    class Seminar : Material
+    public class Seminar : Material
     {
+        /// <summary>
+        /// Gets or sets the tasks list.
+        /// </summary>
         public List<string> TasksList { get; set; }
+
+        /// <summary>
+        /// Gets or sets the questions.
+        /// </summary>
         public Dictionary<string, string> Questions { get; set; }
 
         /// <summary>
-        /// Constructor for seminars
+        /// Initializes a new instance of the <see cref="Seminar"/> class.
         /// </summary>
-        /// <param name="tasksList">List of tasks for the seminars</param>
-        /// <param name="questions"></param>
-        /// <param name="description"></param>
-        public Seminar(List<string> tasksList, Dictionary<string, string> questions, string description = null) :
-            base(description)
+        /// <param name="tasksList">
+        /// The tasks list.
+        /// </param>
+        /// <param name="questions">
+        /// The questions.
+        /// </param>
+        /// <param name="description">
+        /// The description.
+        /// </param>
+        public Seminar(List<string> tasksList, Dictionary<string, string> questions, string description = null)
+            : base(description)
         {
             this.TasksList = tasksList;
             this.Questions = questions;
@@ -28,20 +41,20 @@ namespace DEV_4
         {
             var tasksListCopy = new List<string>();
             var questionsCopy = new Dictionary<string, string>();
-            foreach (var task in TasksList)
+            foreach (var task in this.TasksList)
             {
                 tasksListCopy.Add(task);
             }
 
-            foreach (var task in Questions)
+            foreach (var task in this.Questions)
             {
                 questionsCopy.Add(task.Key, task.Value);
             }
 
             return new Seminar(tasksListCopy, questionsCopy)
-            {
-                Data = {Description = Data.Description, EntityGuid = Data.EntityGuid}
-            };
+                       {
+                           Data = { Description = Data.Description, EntityGuid = Data.EntityGuid }
+                       };
         }
     }
 }

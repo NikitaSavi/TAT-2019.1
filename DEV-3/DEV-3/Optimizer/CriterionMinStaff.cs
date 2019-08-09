@@ -2,38 +2,49 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DEV_3
+using DEV_3.Employees;
+
+namespace DEV_3.Optimizer
 {
     /// <inheritdoc />
     /// <summary>
-    /// Criterion 2: Minimum cost for required productivity
+    /// Criterion 3: Minimum number of staff higher than Junior for required productivity
     /// </summary>
-    class CriterionMinCost : OptimalTeamCompiler
+    public class CriterionMinStaff : OptimalTeamCompiler
     {
+        /// <summary>
+        /// Gets or sets the required productivity.
+        /// </summary>
         private int RequiredProductivity { get; set; }
 
-        public CriterionMinCost(int requiredProductivity)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CriterionMinStaff"/> class.
+        /// </summary>
+        /// <param name="requiredProductivity">
+        /// The required productivity.
+        /// </param>
+        public CriterionMinStaff(int requiredProductivity)
         {
-            RequiredProductivity = requiredProductivity;
+            this.RequiredProductivity = requiredProductivity;
         }
 
         /// <summary>
-        /// Sorts employees by their valuation (product./salary), those with higher valuation go to the final list
+        /// Sorts employees by their productivity, those with higher productivity go to the final list
         /// </summary>
         /// <param name="listOfEmployees">List of all employees</param>
         /// <returns>Compiled list of employees</returns>
         public override List<Employee> Choose(List<Employee> listOfEmployees)
         {
             var sortedListOfEmployees =
-                listOfEmployees.OrderByDescending(i => i.Valuation).ToList(); //list sorted by employees valuation
+                listOfEmployees.OrderByDescending(i => i.Productivity).ToList();
             var listOfFoundEmployees = new List<Employee>();
-           
+
             foreach (var employee in sortedListOfEmployees)
             {
-                if (RequiredProductivity >= employee.Productivity)
+                if (this.RequiredProductivity >= employee.Productivity && employee.GetType() != typeof(Junior))
                 {
                     listOfFoundEmployees.Add(employee);
-                    RequiredProductivity -= employee.Productivity;
+                    this.RequiredProductivity -= employee.Productivity;
                 }
             }
 

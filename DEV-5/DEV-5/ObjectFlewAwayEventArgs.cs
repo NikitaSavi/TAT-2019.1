@@ -3,12 +3,19 @@
 namespace DEV_5
 {
     /// <inheritdoc />
-    ///  <summary>
-    ///  Class contains arguments for the ObjectFlewAway event: time and speed
-    ///  </summary>
+    /// <summary>
+    /// Class contains arguments for the ObjectFlewAway event: time and speed
+    /// </summary>
     public class ObjectFlewAwayEventArgs : EventArgs
     {
+        /// <summary>
+        /// Gets or sets the time.
+        /// </summary>
         public double Time { get; set; }
+
+        /// <summary>
+        /// Gets or sets the speed.
+        /// </summary>
         public double Speed { get; set; }
 
         /// <inheritdoc />

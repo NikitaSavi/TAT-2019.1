@@ -3,20 +3,22 @@
     /// <summary>
     /// Class for labworks
     /// </summary>
-    class Labwork : Material
+    public class Labwork : Material
     {
         /// <summary>
         /// Constructor for labworks
         /// </summary>
         /// <param name="description">Description, null by default</param>
-        public Labwork(string description = null) : base(description)
+        public Labwork(string description = null)
+            : base(description)
         {
         }
 
         /// <inheritdoc />
-        public override object Clone() => new Labwork
-        {
-            Data = {Description = Data.Description, EntityGuid = Data.EntityGuid}
-        };
+        public override object Clone() =>
+            new Labwork
+                {
+                    Data = { Description = Data.Description, EntityGuid = Data.EntityGuid }
+                };
     }
 }
