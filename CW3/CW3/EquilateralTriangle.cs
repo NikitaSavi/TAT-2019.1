@@ -13,9 +13,6 @@ namespace CW3
         }
 
         /// <inheritdoc />
-        public override double GetSquare()
-        {
-            return Math.Sqrt(3) * LengthAB * LengthAB / 4;
-        }
+        public override double GetSquare() => Math.Sqrt(3) * this.LengthAB * this.LengthAB / 4;
     }
 }

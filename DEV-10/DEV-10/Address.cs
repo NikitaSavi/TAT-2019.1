@@ -149,6 +149,7 @@ namespace DEV_10
             this.House = house;
             this.Country = country;
         }
+
         /// <inheritdoc />
         public void ShowInfoToConsole()
         {

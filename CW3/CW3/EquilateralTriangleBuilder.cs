@@ -18,14 +18,10 @@ namespace CW3
         }
 
         /// <inheritdoc />
-        public override Triangle Build(Point a, Point b, Point c)
-        {
-            if (Math.Abs(a.GetDistance(b) - b.GetDistance(c)) < Tolerance && Math.Abs(a.GetDistance(b) - a.GetDistance(c)) < Tolerance)
-            {
-                return new EquilateralTriangle(a, b, c);
-            }
-
-            return Successor?.Build(a, b, c);
-        }
+        public override Triangle Build(Point a, Point b, Point c) =>
+            Math.Abs(a.GetDistance(b) - b.GetDistance(c)) < Tolerance
+            && Math.Abs(a.GetDistance(b) - a.GetDistance(c)) < Tolerance
+                ? new EquilateralTriangle(a, b, c)
+                : this.Successor?.Build(a, b, c);
     }
 }

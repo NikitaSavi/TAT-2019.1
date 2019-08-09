@@ -28,8 +28,8 @@ namespace CW3
         /// </param>
         public Point(double x = 0, double y = 0)
         {
-            X = x;
-            Y = y;
+            this.X = x;
+            this.Y = y;
         }
 
         /// <summary>
@@ -41,9 +41,7 @@ namespace CW3
         /// <returns>
         /// Distance to another point
         /// </returns>
-        public double GetDistance(Point anotherPoint)
-        {
-            return Math.Sqrt(Math.Pow(X - anotherPoint.X, 2) + Math.Pow(Y - anotherPoint.Y, 2));
-        }
+        public double GetDistance(Point anotherPoint) =>
+            Math.Sqrt(Math.Pow(this.X - anotherPoint.X, 2) + Math.Pow(this.Y - anotherPoint.Y, 2));
     }
 }

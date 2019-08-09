@@ -10,7 +10,7 @@ namespace CW_7
     /// <summary>
     /// Handles download from a provided FTP server.
     /// </summary>
-    public class FTPDownloader
+    public class FtpDownloader
     {
         /// <summary>
         /// Path to the directory.
@@ -33,12 +33,12 @@ namespace CW_7
         public TimeSpan NonParallelDownloadTime { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FTPDownloader"/> class.
+        /// Initializes a new instance of the <see cref="FtpDownloader"/> class.
         /// </summary>
         /// <param name="path">
         /// Path to the directory.
         /// </param>
-        public FTPDownloader(string path)
+        public FtpDownloader(string path)
         {
             this.Path = path;
         }

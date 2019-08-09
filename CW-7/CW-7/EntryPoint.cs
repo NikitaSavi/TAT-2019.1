@@ -14,7 +14,7 @@ namespace CW_7
         {
             try
             {
-                var downloader = new FTPDownloader("ftp://ftp.pagat.com/adjogos/");
+                var downloader = new FtpDownloader("ftp://ftp.pagat.com/adjogos/");
                 downloader.GetFiles();
                 downloader.NonParallelDownload();
                 downloader.ParallelDownload();

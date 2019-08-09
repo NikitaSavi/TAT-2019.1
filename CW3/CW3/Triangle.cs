@@ -5,14 +5,25 @@
     /// </summary>
     public abstract class Triangle
     {
+        /// <summary>
+        /// Gets or sets the A point.
+        /// </summary>
         public Point A { get; set; }
+
+        /// <summary>
+        /// Gets or sets the B point.
+        /// </summary>
         public Point B { get; set; }
+
+        /// <summary>
+        /// Gets or sets the C point.
+        /// </summary>
         public Point C { get; set; }
 
         /// <summary>
         /// The length of AB line
         /// </summary>
-        public double LengthAB => A.GetDistance(B);
+        public double LengthAB => this.A.GetDistance(B);
 
         /// <summary>
         /// The length of BC line
@@ -27,7 +38,7 @@
         /// <summary>
         /// The perimeter
         /// </summary>
-        public double Perimeter => LengthAB + LengthBC + LengthAC;
+        public double Perimeter => this.LengthAB + this.LengthBC + this.LengthAC;
 
         /// <summary>
         /// Tolerance for float numbers comparison
@@ -48,9 +59,9 @@
         /// </param>
         protected Triangle(Point a, Point b, Point c)
         {
-            A = a;
-            B = b;
-            C = c;
+            this.A = a;
+            this.B = b;
+            this.C = c;
         }
 
         /// <summary>

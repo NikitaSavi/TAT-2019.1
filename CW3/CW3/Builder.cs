@@ -23,7 +23,7 @@
         /// </param>
         protected Builder(Builder successor)
         {
-            Successor = successor;
+            this.Successor = successor;
         }
 
         /// <summary>

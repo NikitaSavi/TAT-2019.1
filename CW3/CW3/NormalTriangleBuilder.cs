@@ -23,13 +23,10 @@ namespace CW3
         /// </exception>
         public override Triangle Build(Point a, Point b, Point c)
         {
-            if ((Math.Abs(a.X - b.X) < Tolerance && Math.Abs(b.X - c.X) < Tolerance)
-                || (Math.Abs(a.Y - b.Y) < Tolerance && Math.Abs(b.Y - c.Y) < Tolerance))
-            {
-                throw new ArgumentException("Not a triangle");
-            }
-
-            return new NormalTriangle(a, b, c);
+            return (Math.Abs(a.X - b.X) < Tolerance && Math.Abs(b.X - c.X) < Tolerance)
+                   || (Math.Abs(a.Y - b.Y) < Tolerance && Math.Abs(b.Y - c.Y) < Tolerance)
+                       ? throw new ArgumentException("Not a triangle")
+                       : new NormalTriangle(a, b, c);
         }
     }
 }

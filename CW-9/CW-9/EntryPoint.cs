@@ -26,7 +26,7 @@ namespace CW_9
                     args = Console.ReadLine()?.ToLower().Split(' ');
                 }
                 while (args.Length != 2);
-                
+
                 var driver = new DriverSelector().GetDriver(args[1]).Create();
                 var myfinPage = new MyfinPage(driver);
                 var currencies = myfinPage.GetCurrencies();

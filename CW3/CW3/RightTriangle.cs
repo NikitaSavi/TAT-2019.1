@@ -8,14 +8,15 @@ namespace CW3
     public class RightTriangle : Triangle
     {
         /// <inheritdoc />
-        public RightTriangle(Point a, Point b, Point c) : base(a, b, c)
+        public RightTriangle(Point a, Point b, Point c)
+            : base(a, b, c)
         {
         }
 
         /// <inheritdoc />
-        public override double GetSquare()
-        {
-            return 0.5 * LengthAB * LengthAC * LengthBC / Math.Max(LengthAB, Math.Max(LengthAC, LengthBC));
-        }
+        public override double GetSquare() =>
+            0.5 * this.LengthAB * this.LengthAC * this.LengthBC / Math.Max(
+                this.LengthAB,
+                Math.Max(this.LengthAC, this.LengthBC));
     }
 }
