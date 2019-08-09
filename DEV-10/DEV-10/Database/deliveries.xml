@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<ArrayOfDelivery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Delivery>
+    <Id>0</Id>
+    <Description>Delivery1</Description>
+    <Date>2.3.1984</Date>
+  </Delivery>
+  <Delivery>
+    <Id>0</Id>
+    <Description>Delivery2</Description>
+    <Date>21.12.2014</Date>
+  </Delivery>
+  <Delivery>
+    <Id>0</Id>
+    <Description>Delivery13</Description>
+    <Date>1.1.1111</Date>
+  </Delivery>
+</ArrayOfDelivery>

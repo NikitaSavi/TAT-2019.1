@@ -1,15 +1,16 @@
 ﻿using System.Reflection;
+// ReSharper disable once RedundantUsingDirective
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DEV-2")]
+[assembly: AssemblyTitle("DEV-10")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DEV-2")]
+[assembly: AssemblyProduct("DEV-10")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("027a64b1-521e-4c38-b3b3-8938faf898e7")]
+[assembly: Guid("feef738e-1580-413c-9380-447c89d672e2")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -34,5 +35,3 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: InternalsVisibleTo("DEV-2.Tests1")]
-[assembly: InternalsVisibleTo("DEV-2.Explorables")]

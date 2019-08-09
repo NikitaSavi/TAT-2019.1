@@ -1,32 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace DEV_2
 {
     /// <summary>
-    /// Additional class for storing the features of the letters
+    /// Additional class for storing the features of the letters.
     /// </summary>
-    class Letter
+    public class Letter
     {
-        public string sound; //for quick access when displaying transcription
-        public Vowel VowelStruct;
-        public Consonant ConsonantStruct;
-        public Special SpecialStruct;
+        /// <summary>
+        /// For quick access when displaying transcription.
+        /// </summary>
+        public string Sound { get; set; }
 
-        public readonly bool isVowel;
-        public readonly bool isConsonant;
-        private static readonly char[] vowels = {'а', 'о', 'у', 'ы', 'э', 'я', 'е', 'ё', 'ю', 'и'};
+        /// <summary>
+        /// The vowel struct.
+        /// </summary>
+        public Vowel vowelStruct;
 
-        private static readonly char[] consonants =
-            {'б', 'в', 'г', 'д', 'й', 'ж', 'з', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ'};
+        /// <summary>
+        /// The consonant struct.
+        /// </summary>
+        public Consonant consonantStruct;
 
-        public static readonly char[] alwaysVoiced = {'й', 'л', 'м', 'н', 'р'};
-        static char[] special = {'ь', 'ъ', '+'};
+        /// <summary>
+        /// The special letters struct.
+        /// </summary>
+        public SpecialLetter specialStruct;
 
-        internal static readonly Dictionary<char, char> vowelIonationEquivalents = new Dictionary<char, char>
+        /// <summary>
+        /// Indicates whether the letter is a vowel.
+        /// </summary>
+        public bool IsVowel { get; }
+
+        /// <summary>
+        /// Indicates whether the letter is a consonant.
+        /// </summary>
+        public bool IsConsonant { get; }
+
+        /// <summary>
+        /// The vowels.
+        /// </summary>
+        public static readonly char[] AllVowels =
+            {
+                'а', 'о', 'у', 'ы', 'э', 'я', 'е', 'ё', 'ю', 'и'
+            };
+
+        /// <summary>
+        /// The consonants.
+        /// </summary>
+        public static readonly char[] AllConsonants =
+            {
+                'б', 'в', 'г', 'д', 'й', 'ж', 'з', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ'
+            };
+
+        /// <summary>
+        /// The special letters.
+        /// </summary>
+        public static readonly char[] AllSpecials =
+            {
+                'ь', 'ъ', '+'
+            };
+
+        /// <summary>
+        /// The always voiced consonants.
+        /// </summary>
+        public static readonly char[] AlwaysVoiced =
+            {
+                'й', 'л', 'м', 'н', 'р'
+            };
+
+        /// <summary>
+        /// The vowel ionation equivalents.
+        /// </summary>
+        public static readonly Dictionary<char, char> VowelIonationEquivalents = new Dictionary<char, char>
         {
             ['е'] = 'э',
             ['ё'] = 'о',
@@ -34,7 +82,10 @@ namespace DEV_2
             ['я'] = 'а'
         };
 
-        internal static readonly Dictionary<char, char> consonantPhonationEquivalents = new Dictionary<char, char>
+        /// <summary>
+        /// The consonant phonation equivalents.
+        /// </summary>
+        public static readonly Dictionary<char, char> ConsonantPhonationEquivalents = new Dictionary<char, char>
         {
             ['б'] = 'п',
             ['в'] = 'ф',
@@ -45,42 +96,51 @@ namespace DEV_2
         };
 
         /// <summary>
-        /// Constructor: checks the type of the letter
+        /// Initializes a new instance of the <see cref="Letter"/> class. 
+        /// Checks the type of the letter.
         /// </summary>
-        /// <param name="letter">Letter from the received word</param>
+        /// <param name="letter">
+        /// Letter from the received word.
+        /// </param>
         public Letter(char letter)
         {
-            if (vowels.Contains(letter))
+            if (AllVowels.Contains(letter))
             {
-                VowelStruct = new Vowel(letter);
-                isVowel = true;
-                sound = VowelStruct.sound;
+                this.vowelStruct = new Vowel(letter);
+                this.IsVowel = true;
+                this.Sound = this.vowelStruct.Sound;
             }
-            else if (consonants.Contains(letter))
+            else if (AllConsonants.Contains(letter))
             {
-                ConsonantStruct = new Consonant(letter);
-                isConsonant = true;
-                sound = ConsonantStruct.sound;
+                this.consonantStruct = new Consonant(letter);
+                this.IsConsonant = true;
+                this.Sound = this.consonantStruct.Sound;
+            }
+            else if (AllSpecials.Contains(letter))
+            {
+                this.specialStruct = new SpecialLetter(letter);
+                this.Sound = this.specialStruct.Sound;
             }
             else
             {
-                SpecialStruct = new Special(letter);
-                sound = SpecialStruct.sound;
+                throw new Exception("Unknown char received.");
             }
         }
 
+        /// <summary>
+        /// Calls appropriate update functions.
+        /// </summary>
         public void Update()
         {
-            //calls appropriate update functions
-            if (isVowel)
+            if (this.IsVowel)
             {
-                VowelStruct.Update();
-                sound = VowelStruct.sound;
+                this.vowelStruct.Update();
+                this.Sound = this.vowelStruct.Sound;
             }
-            else if (isConsonant)
+            else if (this.IsConsonant)
             {
-                ConsonantStruct.Update();
-                sound = ConsonantStruct.sound;
+                this.consonantStruct.Update();
+                this.Sound = this.consonantStruct.Sound;
             }
         }
     }

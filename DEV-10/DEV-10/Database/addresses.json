@@ -1,0 +1,5 @@
+[{
+	"ID":1, "City":"Minsk","Street":"NorthA","House":12, "Country":"Belarus"
+},{
+		"ID":2, "City":"Moskow","Street":"Big","House":1, "Country":"Minsk"
+}]
