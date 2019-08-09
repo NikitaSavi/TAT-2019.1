@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<cars>
+  <car>
+    <brand>volvo</brand>
+    <model>V40</model>
+    <quantity>20</quantity>
+    <price>200</price>
+  </car>
+  <car>
+    <brand>volvo</brand>
+    <model>S90</model>
+    <quantity>10</quantity>
+    <price>250</price>
+  </car>
+  <car>
+    <brand>bmw</brand>
+    <model>X3</model>
+    <quantity>10</quantity>
+    <price>2200</price>
+  </car>
+  <car>
+    <brand>moskvitch</brand>
+    <model>400</model>
+    <quantity>1</quantity>
+    <price>2500</price>
+  </car>
+</cars>
