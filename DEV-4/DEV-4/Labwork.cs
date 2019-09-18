@@ -15,10 +15,12 @@
         }
 
         /// <inheritdoc />
-        public override object Clone() =>
-            new Labwork
-                {
-                    Data = { Description = Data.Description, EntityGuid = Data.EntityGuid }
-                };
+        public override object Clone()
+        {
+            return new Labwork
+            {
+                Data = {Description = Data.Description, EntityGuid = Data.EntityGuid}
+            };
+        }
     }
 }

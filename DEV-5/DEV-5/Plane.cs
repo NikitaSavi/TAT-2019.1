@@ -41,7 +41,7 @@ namespace DEV_5
         {
             this.Mileage += this.CurrentPoint.GetDistanceToPoint(newPoint);
             this.ObjectFlewAway?.Invoke(
-                this.WhoAmI(),
+                this,
                 new ObjectFlewAwayEventArgs(this.GetFlyTime(), StartingSpeed + (int)this.Mileage));
             this.CurrentPoint = newPoint;
         }
@@ -53,8 +53,5 @@ namespace DEV_5
             var finalSpeed = StartingSpeed + (int)this.Mileage;
             return 2 * this.Mileage / (finalSpeed + StartingSpeed);
         }
-
-        /// <inheritdoc />
-        public IFlyable WhoAmI() => this;
     }
 }

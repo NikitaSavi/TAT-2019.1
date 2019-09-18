@@ -40,14 +40,14 @@ namespace DEV_5
         public void FlyTo(Point newPoint)
         {
             this.Mileage += this.CurrentPoint.GetDistanceToPoint(newPoint);
-            this.ObjectFlewAway?.Invoke(this.WhoAmI(), new ObjectFlewAwayEventArgs(this.GetFlyTime(), Speed));
+            this.ObjectFlewAway?.Invoke(this, new ObjectFlewAwayEventArgs(this.GetFlyTime(), Speed));
             this.CurrentPoint = newPoint;
         }
 
         /// <inheritdoc />
-        public double GetFlyTime() => this.Mileage / Speed;
-
-        /// <inheritdoc />
-        public IFlyable WhoAmI() => this;
+        public double GetFlyTime()
+        {
+            return this.Mileage / Speed;
+        }
     }
 }

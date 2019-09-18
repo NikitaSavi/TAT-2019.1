@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace DEV_4
 {
@@ -50,24 +51,15 @@ namespace DEV_4
         /// <inheritdoc />
         public override object Clone()
         {
-            var seminarsListCopy = new List<Seminar>();
-            var labworksListCopy = new List<Labwork>();
-            foreach (var material in this.ListOfSeminarsForThisLecture)
-            {
-                seminarsListCopy.Add(material);
-            }
-
-            foreach (var material in this.ListOfLabworksForThisLecture)
-            {
-                labworksListCopy.Add(material);
-            }
+            var seminarsListCopy = this.ListOfSeminarsForThisLecture.ToList();
+            var labworksListCopy = this.ListOfLabworksForThisLecture.ToList();
 
             return new Lecture(this.Text, Presentation)
-                       {
-                           ListOfSeminarsForThisLecture = seminarsListCopy,
-                           ListOfLabworksForThisLecture = labworksListCopy,
-                           Data = { Description = Data.Description, EntityGuid = Data.EntityGuid }
-                       };
+            {
+                ListOfSeminarsForThisLecture = seminarsListCopy,
+                ListOfLabworksForThisLecture = labworksListCopy,
+                Data = {Description = Data.Description, EntityGuid = Data.EntityGuid}
+            };
         }
     }
 }

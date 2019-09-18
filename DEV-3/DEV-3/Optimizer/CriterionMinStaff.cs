@@ -39,13 +39,10 @@ namespace DEV_3.Optimizer
                 listOfEmployees.OrderByDescending(i => i.Productivity).ToList();
             var listOfFoundEmployees = new List<Employee>();
 
-            foreach (var employee in sortedListOfEmployees)
+            foreach (var employee in sortedListOfEmployees.Where(employee => this.RequiredProductivity >= employee.Productivity && employee.GetType() != typeof(Junior)))
             {
-                if (this.RequiredProductivity >= employee.Productivity && employee.GetType() != typeof(Junior))
-                {
-                    listOfFoundEmployees.Add(employee);
-                    this.RequiredProductivity -= employee.Productivity;
-                }
+                listOfFoundEmployees.Add(employee);
+                this.RequiredProductivity -= employee.Productivity;
             }
 
             if (listOfFoundEmployees.Count == listOfEmployees.Count)

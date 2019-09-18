@@ -39,13 +39,10 @@ namespace DEV_3.Optimizer
                 listOfEmployees.OrderByDescending(i => i.Valuation).ToList();
             var listOfFoundEmployees = new List<Employee>();
 
-            foreach (var employee in sortedListOfEmployees)
+            foreach (var employee in sortedListOfEmployees.Where(employee => this.AvailableMoney >= employee.Salary))
             {
-                if (this.AvailableMoney >= employee.Salary)
-                {
-                    listOfFoundEmployees.Add(employee);
-                    this.AvailableMoney -= employee.Salary;
-                }
+                listOfFoundEmployees.Add(employee);
+                this.AvailableMoney -= employee.Salary;
             }
 
             if (listOfFoundEmployees.Count == listOfEmployees.Count)

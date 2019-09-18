@@ -23,11 +23,5 @@ namespace DEV_5
         /// </summary>
         /// <returns>Time of the flight</returns>
         double GetFlyTime();
-
-        /// <summary>
-        /// Returns a reference to the current object
-        /// </summary>
-        /// <returns>Reference to the current object</returns>
-        IFlyable WhoAmI();
     }
 }

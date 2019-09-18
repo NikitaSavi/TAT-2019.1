@@ -30,6 +30,10 @@ namespace DEV_5
                         ? $"{Math.Round(args.Time * secondsToHoursConvertTime, 3)} seconds, reaching {args.Speed / secondsToHoursConvertTime} km/s"
                         : $"{Math.Round(args.Time, 3)} hours, reaching {args.Speed} km/h");
             }
+            else
+            {
+                throw new Exception("oh no");
+            }
         }
     }
 }

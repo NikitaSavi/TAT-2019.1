@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DEV_4
 {
@@ -70,7 +71,10 @@ namespace DEV_4
         /// Adds lecture to the discipline
         /// </summary>
         /// <param name="lecture">Lecture to add</param>
-        public void AddLecture(Lecture lecture) => this.ListOfLectures.Add(lecture);
+        public void AddLecture(Lecture lecture)
+        {
+            this.ListOfLectures.Add(lecture);
+        }
 
         /// <summary>
         /// Adds seminar to the discipline (and to a lecture if necessary)
@@ -106,15 +110,22 @@ namespace DEV_4
         /// Override method to return description of an entity
         /// </summary>
         /// <returns>Description of an entity</returns>
-        public override string ToString() =>
-            string.IsNullOrEmpty(this.Data.Description) ? "No description available" : $"Description: {this.Data.Description}";
+        public override string ToString()
+        {
+            return string.IsNullOrEmpty(this.Data.Description)
+                ? "No description available"
+                : $"Description: {this.Data.Description}";
+        }
 
         /// <summary>
         /// Override method for comparing entities. Entities are equal if their GUIDs are equal
         /// </summary>
         /// <param name="obj">An entity to check equality with</param>
         /// <returns>True if received entity has the same GUID</returns>
-        public override bool Equals(object obj) => obj is Discipline discipline && this.Data.EntityGuid == discipline.Data.EntityGuid;
+        public override bool Equals(object obj)
+        {
+            return obj is Discipline discipline && this.Data.EntityGuid == discipline.Data.EntityGuid;
+        }
 
         /// <summary>
         /// Performs deep cloning of an entity
@@ -122,32 +133,17 @@ namespace DEV_4
         /// <returns>A clone of an entity</returns>
         public object Clone()
         {
-            var lecturesCopy = new List<Lecture>();
-            var seminarsCopy = new List<Seminar>();
-            var labworksCopy = new List<Labwork>();
-
-            foreach (var material in this.ListOfLectures)
-            {
-                lecturesCopy.Add(material);
-            }
-
-            foreach (var material in this.ListOfSeminars)
-            {
-                seminarsCopy.Add(material);
-            }
-
-            foreach (var material in this.ListOfLabworks)
-            {
-                labworksCopy.Add(material);
-            }
+            var lecturesCopy = this.ListOfLectures.ToList();
+            var seminarsCopy = this.ListOfSeminars.ToList();
+            var labworksCopy = this.ListOfLabworks.ToList();
 
             return new Discipline
-                       {
-                           Data = { Description = this.Data.Description, EntityGuid = this.Data.EntityGuid },
-                           ListOfLectures = lecturesCopy,
-                           ListOfSeminars = seminarsCopy,
-                           ListOfLabworks = labworksCopy,
-                       };
+            {
+                Data = {Description = this.Data.Description, EntityGuid = this.Data.EntityGuid},
+                ListOfLectures = lecturesCopy,
+                ListOfSeminars = seminarsCopy,
+                ListOfLabworks = labworksCopy,
+            };
         }
     }
 }

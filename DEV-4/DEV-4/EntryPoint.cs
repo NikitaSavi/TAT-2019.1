@@ -44,11 +44,11 @@ namespace DEV_4
                     new Lecture("Text of nameless lecture", new Presentation("uri1.com"), "simple lecture"));
                 //// Create seminars
                 var mathSeminar = new Seminar(
-                    new List<string> { "task1", "task2" },
+                    new List<string> {"task1", "task2"},
                     new Dictionary<string, string>(),
                     "first seminar");
                 var notMathSeminar = new Seminar(
-                    new List<string> { "task1", "task2" },
+                    new List<string> {"task1", "task2"},
                     new Dictionary<string, string>(),
                     "some other seminar");
                 //// Add seminar to math disp. and connect it to math.analysis lecture
@@ -57,7 +57,7 @@ namespace DEV_4
                 math.AddSeminar(notMathSeminar);
                 math.AddLabwork(new Labwork("lab for math"), mathAnalysis);
                 //// Additional check for req.6: create a copy (2 seminars in math), delete a seminar in the original, copy must still have 2 seminars
-                var mathCopy = (Discipline)math.Clone();
+                var mathCopy = (Discipline) math.Clone();
                 math.ListOfSeminars.RemoveAt(1);
                 //// Should return only mathSeminar's description
                 Console.WriteLine("\nAll seminars in Math:");
